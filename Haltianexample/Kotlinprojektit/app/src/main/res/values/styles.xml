@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Tekstityyli" parent="TextAppearance.AppCompat">
+    </style>
+    <style name="Button.Cyan" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="colorAccent">@color/teal_700</item>
+    </style>
+
+</resources>
