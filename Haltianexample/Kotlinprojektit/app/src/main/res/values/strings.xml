@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Haltianexample</string>
+    <string name="bu_sijaintiA">Parkit A</string>
+    <string name="bu_sijaintiB">Parkit B</string>
+    <string name="bu_sijaintiC">Parkit C</string>
+    <string name="tv_sijaintiA">Sijainti A</string>
+    <string name="tv_sijaintiB">Sijainti B</string>
+    <string name="tv_sijaintiC">Sijainti C</string>
+</resources>
