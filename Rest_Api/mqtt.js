@@ -1,17 +1,23 @@
-const { json } = require('body-parser')
+const fs = require('fs')
 const mqtt = require('mqtt')
+const key = fs.readFileSync('./sales-cloudext-prfi00parking/sales-cloudext-prfi00parking.key')
+const cert = fs.readFileSync('./sales-cloudext-prfi00parking/sales-cloudext-prfi00parking.pem')
+const parkit = require('./model/parkit')
+
 const options = {
-    Port:1883,
+    Port:8883,
+    cert:cert,
+    key:key,
     Password:'none',
-    topic:'cloudext/json/pr/fi/office/XXXX04E2E84100933/#'
+    topic:'cloudext/json/pr/fi/prfi00parking/#'
 }
 
-const client = mqtt.connect('mqtt://live-data.haltian.com',options)
-var ResMessage={}
+const client = mqtt.connect('mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
 
 client.on('connect',()=>{
     console.log('connected')
     client.subscribe(options.topic)
+    console.log(client.connected)
 })
 
 client.on('message',(message,topic,packet)=>{
@@ -38,12 +44,8 @@ client.on('message',(message,topic,packet)=>{
     c.push(d)
     var res = JSON.parse(c)
     console.log('message received')
-    ResMessage=res
+    console.log(res)
+    if(res.tsmId==17200){
+        parkit.updatedist(res.tsmTuid,res.dist)
+    }
 })
-
-const mqttt={
-get:function(){
-    return ResMessage
-}
-}
-module.exports = mqttt

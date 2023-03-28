@@ -1,8 +1,9 @@
 const mysql = require('mysql')
+const cert = require('./db.json')
 const connection = mysql.createPool({
-    host:'localhost',
-    user:'apuri',
-    password:'apuri',
-    database:'parkkiapuri'
+    host:'parkkiapuri.c8b4oczahqbe.eu-north-1.rds.amazonaws.com',
+    user:cert.user,
+    password:cert.password,
+    database:'ParkkiApuri'
 })
 module.exports = connection
