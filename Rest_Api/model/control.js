@@ -4,8 +4,8 @@ const db =require('../database')
 const control={
     //Models for parking garages
     //Get parking garages
-    Pget:function(callback){
-        return db.query('select * from ParkkiTalo')
+    getP:function(callback){
+        return db.query('select * from ParkkiTalo',callback)
     },
     //Get parking garage by name
     Pgetbyname:function(name,callback){
@@ -46,3 +46,4 @@ const control={
         return db.query('delete from Parkit where ParkkiTalo_id=? and sensor=?',[data.id,data.sensor],callback)
     }
 }
+module.exports = control

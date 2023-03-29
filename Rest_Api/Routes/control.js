@@ -5,7 +5,7 @@ const control = require('../model/control')
 //Parking garage Rest API database controls
 //Get all parking garages
 router.get('/garage',function(req,res){
-    control.Pget(function(err,result){
+    control.getP(function(err,result){
         if(err){
             res.json(err)
         }else{
