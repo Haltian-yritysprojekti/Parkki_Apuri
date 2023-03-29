@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const parkit = require('../model/parkit')
 
-
-
-router.get('/test',function(request,response){
+//Rest API functions for front-ends
+//Get Parking garages and number of free spaces
+router.get('/',function(request,response){
     parkit.get(function(err,result){
         if(err){
             response.json(err)
@@ -13,7 +13,8 @@ router.get('/test',function(request,response){
         }
     })
 })
-router.get('/test2/:id?',function(request,response){
+//Get parking slot statuses of parking garage
+router.get('/:id?',function(request,response){
     parkit.getbyid(request.params.id,function(err,result){
         if(err){
             response.json(err)

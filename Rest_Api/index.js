@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyparser = require('body-parser');
 const sensorRouter = require('./Routes/sensor');
+const controlRouter = require('./Routes/control')
+const mqtt = require('./mqtt')
 
 
 const app = express();
@@ -11,5 +13,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use('/', sensorRouter);
+app.use('/con', controlRouter)
 
 module.exports = app;

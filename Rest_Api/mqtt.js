@@ -12,7 +12,7 @@ const options = {
     topic:'cloudext/json/pr/fi/prfi00parking/#'
 }
 
-const client = mqtt.connect('mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
+const client = mqtt.connect('mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
 
 client.on('connect',()=>{
     console.log('connected')
