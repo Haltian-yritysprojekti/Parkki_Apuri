@@ -1,3 +1,4 @@
+const { json } = require('body-parser')
 const express = require('express')
 const router = express.Router()
 const parkit = require('../model/parkit')
@@ -9,7 +10,26 @@ router.get('/',function(request,response){
         if(err){
             response.json(err)
         }else{
-            response.json(result)
+            var res = JSON.parse(JSON.stringify(result))
+            var a = res.reduce(function(r, o){
+                var k = o.sijainti;
+                if(o.varattu != 0 || o.etaisyys<500){
+                    r[k] = (r[k])? (r[k]+0) : 0;
+                }else{
+                    r[k] = (r[k])? (r[k]+1) : 1;
+                }
+                return r;
+            }, {});
+            res=[]
+            for ([key,value] of Object.entries(a)){
+                if(a.hasOwnProperty(key)){
+                    res.push({
+                        sijainti:key,
+                        vapaa:value
+                    })
+                }
+            }
+            response.json(res)
         }
     })
 })
@@ -33,6 +53,9 @@ router.get('/:id?',function(request,response){
             response.json(res)
         }
     })
+})
+router.get('/hello',function(request,response){
+    response.send('hello world')
 })
 
 

@@ -9,8 +9,7 @@ const control={
     },
     //Get parking garage by name
     Pgetbyname:function(name,callback){
-        var a = db.query('select id from ParkkiTalo where sijainti=?',[name],callback)
-        console.log(a)
+        db.query('select * from ParkkiTalo where sijainti=?',[name],callback)
     },
     //Add parking garage
     Padd:function(name,callback){
@@ -22,7 +21,7 @@ const control={
     },
     //Delete parking garage
     Pdelete:function(name,callback){
-        return db.query('delete from ParkkiTalo where sijainti=?'[name],callback)
+        return db.query('delete from ParkkiTalo where sijainti=?',[name],callback)
     },
     //Models for parking garage sensors
     //Get parking garage sensors
@@ -30,8 +29,8 @@ const control={
         return db.query('select * from Parkit where ParkkiTalo_id=?',[id],callback)
     },
     //Get parking garage sensor
-    Sgetbyid:function(id,sensor,callback){
-        return db.query('select * from Parkit where ParkkiTalo_id=? and sensor=?',[id,sensor],callback)
+    Sgetbyid:function(data,callback){
+        return db.query('select * from Parkit where ParkkiTalo_id=? and sensor=?',[data.id,data.sensor],callback)
     },
     //Add sensor to parking garage
     Sadd:function(data,callback){

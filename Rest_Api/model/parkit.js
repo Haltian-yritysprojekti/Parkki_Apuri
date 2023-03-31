@@ -5,7 +5,7 @@ const db = require('../database')
 const parkit={
     //Get count of free spaces and name of parking garages
     get:function(callback){
-        return db.query('select count(varattu),sijainti from ParkkiTalo join Parkit on ParkkiTalo.id=Parkit.ParkkiTalo_id where varattu=0 and etaisyys > 500 group by sijainti',callback)
+        return db.query('select sijainti,etaisyys,varattu from ParkkiTalo join Parkit on ParkkiTalo.id=Parkit.ParkkiTalo_id',callback)
     },
     //Get parking garages parking slots data
     getbyid:function(id,callback){
