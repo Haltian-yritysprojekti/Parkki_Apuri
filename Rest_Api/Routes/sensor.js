@@ -35,6 +35,11 @@ router.get('/',function(request,response){
         }
     })
 })
+//network test
+router.get('/hello',function(req,res){
+    console.log('hello')
+    res.send('hello')
+})
 //Get parking slot statuses of parking garage
 router.get('/:id?',function(request,response){
     parkit.getbyid(request.params.id,function(err,result){
@@ -60,11 +65,12 @@ router.get('/:id?',function(request,response){
 router.put('/',function(request,response){
     parkit.getSlot(request.body.id,function(err,res){
         if(err){
-            response.json(err)
+            console.log('error happened')
         }else{
-            if(res.etaisyys<500 || res.varattu==1){
+            if(res.length!=0){
+            if(res[0].etaisyys<500 || res[0].varattu==1){
                 console.log('Paikka käytössä tai varattu')
-                response.json(res)
+                response.status(404).send('Already in use')
             }else{
                 parkit.addvaraus(request.body.id,function(err,result){
                     if(err){
@@ -72,13 +78,18 @@ router.put('/',function(request,response){
                     }else{
                         console.log(res[0].idParkit)
                         resv.push({id:res[0].idParkit,count:0})
-                        response.json(result)
+                        response.send('succesfull')
                     }
                 })
             }
+        }else{
+            console.log('no such slot')
+            response.status(404).send('no such slot')
+        }
         }
     })
 })
+
 //Free parking reservations when reserved space in use
 function checkReservation(){
     parkit.check(function(err,result){
@@ -118,10 +129,7 @@ function checkReservation(){
 }
 }
 
-//network test
-router.get('/hello',function(request,response){
-    response.status(200).json('works')
-})
+
 const checkTime = 1000*60*1
 setInterval(checkReservation, checkTime)
 module.exports = router;
