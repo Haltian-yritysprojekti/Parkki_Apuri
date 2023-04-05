@@ -1,13 +1,21 @@
 var app = require('../index');
 var debug = require('debug')('Api:server')
-var http = require('http');
+var http = require('https');
+const fs = require('fs')
+const key = fs.readFileSync('./server/server.key')
+const cert = fs.readFileSync('./server/server.cert')
+
+options={
+  key:key,
+  cert:cert
+}
 
 //get port and store to express
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port',port);
 
 //create http server
-var server = http.createServer(app);
+var server = http.createServer(options,app);
 
 //listen to port
 server.listen(port);
