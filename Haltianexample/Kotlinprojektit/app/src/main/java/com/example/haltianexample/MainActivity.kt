@@ -29,9 +29,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if(supportActionBar != null){
+            supportActionBar!!.hide()
+        }
         val myButtonA:Button = findViewById(R.id.bu_sijaintiA)
         val myButtonB:Button = findViewById(R.id.bu_sijaintiB)
         val myButtonC:Button = findViewById(R.id.bu_sijaintiC)
+        val textView1:TextView=findViewById(R.id.tv_sA)
+        val textView2:TextView=findViewById(R.id.tv_vapaana_A)
         dataTextView = findViewById(R.id.dataa)
 
         myButtonA.setOnClickListener{
@@ -94,16 +99,21 @@ class MainActivity : AppCompatActivity() {
 
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,
-            Response.Listener<JSONArray> { response ->
+            { response ->
                 try {
                     val jsonObject = response.getJSONObject(0)
-                    val languageName = jsonObject.getString("sijainti")
-                    dataTextView.text = languageName
+                    val jsonObject1 = response.getJSONObject(1)
+                    val vapaana = jsonObject.getString("vapaa")
+                    val sijainti = jsonObject.getString("sijainti")
+                    textView1.text=sijainti
+                    textView2.text=vapaana
+                    val sijainti1 = jsonObject.getString("sijainti")
+                    dataTextView.text = jsonObject.toString()
                 } catch (e: Exception) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                 }
             },
-            Response.ErrorListener { error ->
+            { error ->
                 Toast.makeText(this, "Error retrieving data:${error.message}", Toast.LENGTH_LONG).show()
                 Log.e("Error retrieving data", error.toString())
 
