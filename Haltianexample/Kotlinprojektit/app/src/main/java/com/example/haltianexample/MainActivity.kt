@@ -13,12 +13,19 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 class MainActivity : AppCompatActivity() {
     var laskuri = true
     private lateinit var dataTextView: TextView
-    private val url = "https://www.jsonkeeper.com/b/0RH6"
+    private val url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -62,12 +69,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        // Create a trust manager that does not validate certificate chains
+        val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                return arrayOf()
+            }
+
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+            }
+
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+            }
+        })
+
+        // Install the all-trusting trust manager
+        val sslContext = SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, SecureRandom())
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.socketFactory)
+
+        // Create an ssl socket factory with our all-trusting manager
+        val hostnameVerifier = HostnameVerifier { _, _ -> true }
+        HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
+
         val request = JsonArrayRequest(
             Request.Method.GET, url, null,
             Response.Listener<JSONArray> { response ->
                 try {
                     val jsonObject = response.getJSONObject(0)
-                    val languageName = jsonObject.getString("languageName")
+                    val languageName = jsonObject.getString("sijainti")
                     dataTextView.text = languageName
                 } catch (e: Exception) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
