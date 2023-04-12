@@ -14,6 +14,7 @@
         android:background="?attr/colorSecondaryVariant"
         android:cropToPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/parkkilogomuokattu" />
@@ -74,7 +75,7 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:autoSizeTextType="uniform"
-                android:text="@string/tv_sijaintiA"
+                android:text=""
                 tools:targetApi="o" />
 
             <TextView
@@ -99,24 +100,24 @@
             android:layout_height="150dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/vapaana6" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/tv_vapaana_A"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/vapaana12" />
+                android:text="" />
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/vapaana5" />
+                android:text="TextView" />
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView" />
         </LinearLayout>
 
         <LinearLayout
