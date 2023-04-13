@@ -83,7 +83,7 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:autoSizeTextType="uniform"
-                android:text="@string/tv_sijaintiB"
+                android:text=""
                 tools:targetApi="o" />
 
             <TextView
@@ -91,7 +91,7 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:autoSizeTextType="uniform"
-                android:text="@string/tv_sijaintiC"
+                android:text=""
                 tools:targetApi="o" />
         </LinearLayout>
 
@@ -102,19 +102,19 @@
 
 
             <TextView
-                android:id="@+id/tv_vapaana_A"
+                android:id="@+id/tv_free_A"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_free_B"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_free_C"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="TextView" />

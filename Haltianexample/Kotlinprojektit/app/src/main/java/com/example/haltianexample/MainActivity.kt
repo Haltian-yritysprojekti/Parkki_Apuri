@@ -24,7 +24,7 @@ import javax.net.ssl.X509TrustManager
 
 class MainActivity : AppCompatActivity() {
     var laskuri = true
-    private lateinit var dataTextView: TextView
+    //private lateinit var dataTextView: TextView
     private val url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,15 @@ class MainActivity : AppCompatActivity() {
         val myButtonB:Button = findViewById(R.id.bu_sijaintiB)
         val myButtonC:Button = findViewById(R.id.bu_sijaintiC)
         val textView1:TextView=findViewById(R.id.tv_sA)
-        val textView2:TextView=findViewById(R.id.tv_vapaana_A)
-        dataTextView = findViewById(R.id.dataa)
+        val textView2:TextView=findViewById(R.id.tv_free_A)
+        val textView3:TextView=findViewById(R.id.tv_sB)
+        val textView4:TextView=findViewById(R.id.tv_free_B)
+        val textView5:TextView=findViewById(R.id.tv_sC)
+        val textView6:TextView=findViewById(R.id.tv_free_C)
+        val dataTextView1:TextView=findViewById(R.id.dataa)
+        val textViews = mutableListOf<TextView>(textView1,textView3,textView5)
+        val textViews1 = mutableListOf<TextView>(textView2,textView4,textView6)
+        //dataTextView = findViewById(R.id.dataa)
 
         myButtonA.setOnClickListener{
             laskuri = !laskuri
@@ -101,14 +108,11 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET, url, null,
             { response ->
                 try {
-                    val jsonObject = response.getJSONObject(0)
-                    val jsonObject1 = response.getJSONObject(1)
-                    val vapaana = jsonObject.getString("vapaa")
-                    val sijainti = jsonObject.getString("sijainti")
-                    textView1.text=sijainti
-                    textView2.text=vapaana
-                    val sijainti1 = jsonObject.getString("sijainti")
-                    dataTextView.text = jsonObject.toString()
+                    for(i in 0 until response.length()){
+                        val jsonObject = response.getJSONObject(i)
+                        textViews[i].text = jsonObject.getString("sijainti")
+                        textViews1[i].text = jsonObject.getString("vapaa")
+                        }
                 } catch (e: Exception) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                 }
