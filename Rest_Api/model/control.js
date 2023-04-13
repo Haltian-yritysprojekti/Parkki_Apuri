@@ -44,6 +44,22 @@ const control={
     //Delete sensor from parking garage
     Sdelete:function(data,callback){
         return db.query('delete from Parkit where ParkkiTalo_id=? and sensor=?',[data.id,data.sensor],callback)
+    },
+    //Get all reserved spots from Varaukset
+    Vget:function(callback){
+        return db.query('select * from Varaukset',callback)
+    },
+    //Add reserve parking slot
+    Vadd:function(data,callback){
+        return db.query('insert into Varaukset values(?,0)',[data.id],callback)
+    },
+    //Update Varaukset
+    Vupdate:function(data,callback){
+        return db.query('update Varaukset set count=? where id=?',[data.count,data.id],callback)
+    },
+    //Delete reserve from Varaukset
+    Vdelete:function(data,callback){
+        return db.query('delete from Varaukset where id=?',[data.id],callback)
     }
 }
 module.exports = control

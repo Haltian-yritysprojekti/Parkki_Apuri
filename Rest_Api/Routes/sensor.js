@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const parkit = require('../model/parkit')
 
+//Rest API functions for front-ends
 
-
-router.get('/test',function(request,response){
+//Get Parking garages and number of free spaces
+router.get('/',function(request,response){
     parkit.get(function(err,result){
         if(err){
             response.json(err)
@@ -55,7 +56,13 @@ router.put('/',function(request,response){
                         response.json(err)
                     }else{
                         console.log(res[0].idParkit)
-                        resv.push({id:res[0].idParkit,count:0})
+                        parkit.varauksetAdd(request.body.id,function(err,result){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                console.log(result)
+                            }
+                        })
                         response.send('succesfull')
                     }
                 })
@@ -82,29 +89,54 @@ function checkReservation(){
                             console.log('Could not change park '+e.idParkit)
                         }else{
                             console.log("Park with id"+e.idParkit+" reservation freed")
+                            parkit.varauksetDel(e.idParkit,function(err,result){
+                                if(err){
+                                    console.log(err)
+                                }else{
+                                    console.log('Park with id'+e.idParkit+' reservation freed')
+                                }
+                            })
                         }
                     })
                 }
             });
         }
     })
-    if(resv.length>0){
-    resv.forEach(element => {
-        if(element.count>2){
-            parkit.freevaraus(element.id,function(err,res){
-                if(err){
-                    console.log('Could not change park '+element.id)
-                }else{
-                    resv.splice(resv.indexOf(element.id),1)
-                    console.log(resv)
-                    console.log("Park with id"+element.id+" reservation freed")
-                }
-            })
+    parkit.varauksetGet(function(err,result){
+        if(err){
+            console.log(err)
         }else{
-            element.count+=1
+            let resv = JSON.parse(JSON.stringify(result))
+            if(resv.length>0){
+                resv.forEach(element => {
+                    if(element.count>2){
+                        parkit.freevaraus(element.id,function(err,res){
+                            if(err){
+                                console.log('Could not change park '+element.id)
+                            }else{
+                                console.log("Park with id"+element.id+" reservation freed")
+                                    parkit.varauksetDel(element.id,function(err,result){
+                                        if(err){
+                                            console.log(err)
+                                        }else{
+                                            console.log("Park with id"+element.id+" reservation freed")
+                                        }
+                                    })
+                            }
+                        })
+                    }else{
+                        parkit.varauksetUp(element.id,element.count+1,function(err,result){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                console.log("Park with id"+element.id+" reservation updated")
+                            }
+                        })
+                    }
+                });
+            }
         }
-    });
-}
+    })
 }
 
 

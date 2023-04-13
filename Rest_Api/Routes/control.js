@@ -75,5 +75,45 @@ router.post('/sensor',function(req,res){
 router.delete('/sensor',function(req,res){
 
 })
+//Get reserved spots
+router.get('/reserve',function(req,res){
+    control.Vget(function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
+    })
+})
+//Add reserved spot
+router.post('/reserve',function(req,res){
+    control.Vadd(req.body,function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
+    })
+})
+//Update reserved spot
+router.put('/reserve',function(req,res){
+    control.Vupdate(req.body,function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
+    })
+})
+//Delete reserved spot
+router.delete('/reserve',function(req,res){
+    control.Vdelete(req.body,function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+            res.json(result)
+        }
+    })
+})
 
 module.exports = router

@@ -19,6 +19,26 @@ const parkit={
     },
     updatedist:function(id,dist,callback){
         return db.query('update Parkit set etaisyys = ? where sensor=?',[dist,id],callback)
+    },
+    //Check parking reservation spaces
+    check:function(callback){
+        return db.query('select * from Parkit',callback)
+    },
+    //Get Varaukset
+    varauksetGet:function(callback){
+        return db.query('select * from Varaukset',callback)
+    },
+    //Add reservation to Varaukset
+    varauksetAdd:function(id,callback){
+        return db.query('insert into Varaukset values(?,0)',[id],callback)
+    },
+    //Update reservation count in Varaukset
+    varauksetUp:function(id,count,callback){
+        return db.query('update Varaukset set count=? where id=?',[count,id],callback)
+    },
+    //Delete reservation from Varaukset
+    varauksetDel:function(id,callback){
+        return db.query('delete from Varaukset where id=?',[id],callback)
     }
 }
 
