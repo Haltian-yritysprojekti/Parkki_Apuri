@@ -132,11 +132,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#009688"
-
                 android:onClick="onClicksijaintiA"
                 android:text="@string/bu_sijaintiA"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:iconTint="#009688" />
+                app:iconTint="#009688"
+                />
 
             <Button
                 android:id="@+id/bu_sijaintiB"
