@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import java.net.URL
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HostnameVerifier
@@ -22,14 +23,12 @@ import javax.net.ssl.X509TrustManager
 
 class MainActivity : AppCompatActivity() {
     var laskuri = true
-    private var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
-    //private var url2 = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
+    var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
+    private val originalUrl = url
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (supportActionBar != null) {
-            supportActionBar!!.hide()
-        }
+        //var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
         val myButtonA: Button = findViewById(R.id.bu_sijaintiA)
         val myButtonB: Button = findViewById(R.id.bu_sijaintiB)
         val myButtonC: Button = findViewById(R.id.bu_sijaintiC)
@@ -43,8 +42,8 @@ class MainActivity : AppCompatActivity() {
         val textViews = mutableListOf<TextView>(textView1, textView3, textView5)
         val textViews1 = mutableListOf<TextView>(textView2, textView4, textView6)
 
-        //makeJsonRequest(textViews1, textViews)
         makeJsonRequest(dataTextView1,textViews1, textViews)
+        //makeJsonRequest(textViews1, textViews)
 
 
         myButtonA.setOnClickListener {
@@ -56,8 +55,8 @@ class MainActivity : AppCompatActivity() {
                 myImageViewA.visibility = View.VISIBLE
                 myImageViewB.visibility = View.GONE
                 myImageViewC.visibility = View.GONE
-                url = url + "sijainti%20A"
-                //makeJsonRequest(dataTextView1,textViews, textViews1)
+                url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
+                makeJsonRequest(dataTextView1,textViews, textViews1)
                 //makeJsonRequest(textViews, textViews1)
             } else {
                 val myImageViewA: ImageView = findViewById(R.id.ivParkA)
@@ -87,8 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-private fun makeJsonRequest(dataTextView1:TextView,textViews1:MutableList<TextView>,textViews:MutableList<TextView>) {
-
+private fun makeJsonRequest(dataTextView1:TextView, textViews1:MutableList<TextView>,textViews:MutableList<TextView>) {
 
     // Create a trust manager that does not validate certificate chains
     val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
@@ -117,16 +115,18 @@ private fun makeJsonRequest(dataTextView1:TextView,textViews1:MutableList<TextVi
         Request.Method.GET, url, null,
         { response ->
             try {
-
-                for (i in 0 until response.length()) {
-                    val jsonObject = response.getJSONObject(i)
-                    textViews[i].text = jsonObject.getString("sijainti")
-                    textViews1[i].text = jsonObject.getString("vapaa")
+                if(url==originalUrl) {
+                    for (i in 0 until response.length()) {
+                        val jsonObject = response.getJSONObject(i)
+                        textViews[i].text = jsonObject.getString("sijainti")
+                        textViews1[i].text = jsonObject.getString("vapaa")
+                    }
                 }
-
+                else{
                 Log.i("Update URL", url)
                 val jsonObject = response.getJSONObject(0)
                 dataTextView1.text=jsonObject.getString("idParkit")
+                }
 
 
             } catch (e: Exception) {
@@ -137,12 +137,10 @@ private fun makeJsonRequest(dataTextView1:TextView,textViews1:MutableList<TextVi
             Toast.makeText(this, "Error retrieving data:${error.message}", Toast.LENGTH_LONG)
                 .show()
             Log.e("Error retrieving data", error.toString())
-
         }
     )
     Volley.newRequestQueue(this).add(request)
 
 }
-
 
 }
