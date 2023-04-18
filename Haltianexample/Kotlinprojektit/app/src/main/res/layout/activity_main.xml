@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logoView"
         android:layout_width="wrap_content"
         android:layout_height="136dp"
         android:adjustViewBounds="false"
@@ -20,123 +20,127 @@
         app:srcCompat="@drawable/parkkilogomuokattu" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="333dp"
-        android:layout_height="347dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginEnd="116dp"
+        android:id="@+id/cardView_A"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataa"
-        app:layout_constraintVertical_bias="0.369" >
+        app:layout_constraintTop_toBottomOf="@+id/clickableLayout3">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerInParent="true"
-                android:text="A">
-            </TextView>
-
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:id="@+id/tv_1"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_green"
+                    android:text="1" />
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:id="@+id/tv_2"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_green"
+                    android:text="2" />
 
                 <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:id="@+id/tv_3"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_green"
+                    android:text="3" />
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:id="@+id/tv_4"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_green"
+                    android:text="4" />
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:id="@+id/tv_5"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_green"
+                    android:text="5" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_gravity="center"
+                    android:text="@string/a"
+                    android:textAlignment="center"
+                    android:textSize="50sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tv_6"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_red"
+                    android:text="6" />
+
+                <TextView
+                    android:id="@+id/tv_7"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_red"
+                    android:text="7" />
+
+                <TextView
+                    android:id="@+id/tv_8"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_red"
+                    android:text="8" />
+
+                <TextView
+                    android:id="@+id/tv_9"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_red"
+                    android:text="9" />
+
+                <TextView
+                    android:id="@+id/tv_10"
+                    style="@style/cardView_textViewstyle"
+                    android:background="@drawable/parking_red"
+                    android:text="10" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/ivParkB"
         android:layout_width="323dp"
         android:layout_height="392dp"
-        android:layout_marginTop="32dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/sijainti_b" />
 
     <ImageView
@@ -147,127 +151,131 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:srcCompat="@drawable/sijainti_c" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="411dp"
-        android:layout_height="147dp"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="152dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_sA"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:autoSizeTextType="uniform"
-                android:text="Parkki A"
-                tools:targetApi="o" />
-
-            <TextView
-                android:id="@+id/tv_sB"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:autoSizeTextType="uniform"
-                android:text="Parkki B"
-                tools:targetApi="o" />
-
-            <TextView
-                android:id="@+id/tv_sC"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:autoSizeTextType="uniform"
-                android:text="Parkki C"
-                tools:targetApi="o" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tv_free_A"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/tv_free_B"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/tv_free_C"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="TextView" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/bu_sijaintiA"
-                style="@style/Button.Cyan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#009688"
-                android:onClick="onClicksijaintiA"
-                android:text="@string/bu_sijaintiA"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:iconTint="#009688"
-                />
-
-            <Button
-                android:id="@+id/bu_sijaintiB"
-                style="@style/Widget.Material3.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#009688"
-                android:onClick="onClicksijaintiB"
-                android:text="@string/bu_sijaintiB"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-            <Button
-                android:id="@+id/bu_sijaintiC"
-                style="@style/Widget.Material3.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#009688"
-                android:onClick="onClicksijaintiC"
-                android:text="@string/bu_sijaintiC"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/dataa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="192dp"
         android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/clickableLayout1"
+        android:clickable="true"
+        android:layout_width="405dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/corners"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/logoView"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tv_sA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:text="Parkki A"
+            android:textAlignment="viewEnd"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp"
+            tools:targetApi="o" />
+
+        <TextView
+            android:id="@+id/tv_free_A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="5"
+            android:textAlignment="center"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/clickableLayout2"
+        android:clickable="true"
+        android:layout_width="405dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/corners"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clickableLayout1"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tv_sB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:text="Parkki B"
+            android:textAlignment="viewEnd"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp"
+            tools:targetApi="o"/>
+
+        <TextView
+            android:id="@+id/tv_free_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="7"
+            android:textAlignment="center"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/clickableLayout3"
+        android:layout_width="405dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/corners"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clickableLayout2">
+
+        <TextView
+            android:id="@+id/tv_sC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:text="Parkki C"
+            android:textAlignment="viewEnd"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp"
+            tools:targetApi="o" />
+
+        <TextView
+            android:id="@+id/tv_free_C"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="9"
+            android:textAlignment="center"
+            android:textColor="#FBFBFB"
+            android:textSize="25sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

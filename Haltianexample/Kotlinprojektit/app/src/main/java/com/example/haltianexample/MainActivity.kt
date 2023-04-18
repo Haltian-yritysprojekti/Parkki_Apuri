@@ -1,13 +1,15 @@
 package com.example.haltianexample
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -25,13 +27,16 @@ class MainActivity : AppCompatActivity() {
     var laskuri = true
     var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
     private val originalUrl = url
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
-        val myButtonA: Button = findViewById(R.id.bu_sijaintiA)
-        val myButtonB: Button = findViewById(R.id.bu_sijaintiB)
-        val myButtonC: Button = findViewById(R.id.bu_sijaintiC)
+
+        val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
+        val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
+        val myClickLayoutC : LinearLayout = findViewById(R.id.clickableLayout3)
+
         val textView1: TextView = findViewById(R.id.tv_sA)
         val textView2: TextView = findViewById(R.id.tv_free_A)
         val textView3: TextView = findViewById(R.id.tv_sB)
@@ -46,25 +51,26 @@ class MainActivity : AppCompatActivity() {
         //makeJsonRequest(textViews1, textViews)
 
 
-        myButtonA.setOnClickListener {
+        myClickLayoutA.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 val myImageViewC: ImageView = findViewById(R.id.ivParkC)
                 val myImageViewB: ImageView = findViewById(R.id.ivParkB)
-                val myImageViewA: ImageView = findViewById(R.id.ivParkA)
-                myImageViewA.visibility = View.VISIBLE
+
+                myCardViewA.visibility = View.VISIBLE
                 myImageViewB.visibility = View.GONE
                 myImageViewC.visibility = View.GONE
                 url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
                 makeJsonRequest(dataTextView1,textViews, textViews1)
                 //makeJsonRequest(textViews, textViews1)
             } else {
-                val myImageViewA: ImageView = findViewById(R.id.ivParkA)
-                myImageViewA.visibility = View.GONE
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                myCardViewA.visibility = View.GONE
             }
 
         }
-        myButtonB.setOnClickListener {
+        myClickLayoutB.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
                 val myImageViewB: ImageView = findViewById(R.id.ivParkB)
@@ -74,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 myImageViewB.visibility = View.GONE
             }
         }
-        myButtonC.setOnClickListener {
+        myClickLayoutC.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
                 val myImageViewC: ImageView = findViewById(R.id.ivParkC)
