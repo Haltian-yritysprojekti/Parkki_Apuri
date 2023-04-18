@@ -34,6 +34,16 @@ router.get('/',function(request,response){
         }
     })
 })
+//Get user parking reservation
+router.get('/res',function(request,response){
+    parkit.varausUser(request.body,function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+            response.json(result)
+        }
+    })
+})
 //network test
 router.get('/hello',function(req,res){
     console.log('hello')
@@ -71,7 +81,7 @@ router.put('/',function(request,response){
                 console.log('Paikka käytössä tai varattu')
                 response.status(404).send('Already in use')
             }else{
-                parkit.addvaraus(request.body.id,function(err,result){
+                parkit.addvaraus(request.body,function(err,result){
                     if(err){
                         response.json(err)
                     }else{

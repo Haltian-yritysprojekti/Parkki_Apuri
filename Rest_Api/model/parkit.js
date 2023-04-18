@@ -16,12 +16,12 @@ const parkit={
         return db.query('select * from Parkit where idParkit=?',[id],callback)
     },
     //Adding reservation to parking slot in parking garage
-    addvaraus:function(id,callback){
-        return db.query('update Parkit set varattu = 1 where idParkit=?',[id],callback)
+    addvaraus:function(data,callback){
+        return db.query('update Parkit set varattu = 1, rekisteri=? where idParkit=?',[data.rekisteri,data.id],callback)
     },
     //Freeing reservation to parking slot in parking garage
     freevaraus:function(id,callback){
-        return db.query('update Parkit set varattu = 0 where idParkit=?',[id],callback)
+        return db.query('update Parkit set varattu = 0,rekisteri=null where idParkit=?',[id],callback)
     },
     //Rest API updating parking slots distance status from sensor data
     updatedist:function(id,dist,callback){
@@ -34,6 +34,10 @@ const parkit={
     //Get Varaukset
     varauksetGet:function(callback){
         return db.query('select * from Varaukset',callback)
+    },
+    //Get user reservation with register
+    varausUser:function(data,callback){
+        return db.query('select * from Parkit where rekisteri=?',[data.rekisteri],callback)
     },
     //Add reservation to Varaukset
     varauksetAdd:function(id,callback){
