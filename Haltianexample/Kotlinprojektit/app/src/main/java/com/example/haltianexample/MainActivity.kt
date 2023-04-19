@@ -1,6 +1,7 @@
 package com.example.haltianexample
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -22,10 +24,9 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-
 class MainActivity : AppCompatActivity() {
     var laskuri = true
-    var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
+    var url = "https://ec2-16-16-142-198.eu-north-1.compute.amazonaws.com:3000/"
     private val originalUrl = url
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +44,21 @@ class MainActivity : AppCompatActivity() {
         val textView4: TextView = findViewById(R.id.tv_free_B)
         val textView5: TextView = findViewById(R.id.tv_sC)
         val textView6: TextView = findViewById(R.id.tv_free_C)
-        val dataTextView1: TextView = findViewById(R.id.dataa)
-        val textViews = mutableListOf<TextView>(textView1, textView3, textView5)
-        val textViews1 = mutableListOf<TextView>(textView2, textView4, textView6)
+        val p1:TextView = findViewById(R.id.tv_1)
+        val p2:TextView = findViewById(R.id.tv_2)
+        val p3:TextView = findViewById(R.id.tv_3)
+        val p4:TextView = findViewById(R.id.tv_4)
+        val p5:TextView = findViewById(R.id.tv_5)
+        val p6:TextView = findViewById(R.id.tv_6)
+        val p7:TextView = findViewById(R.id.tv_7)
+        val p8:TextView = findViewById(R.id.tv_8)
+        val p9:TextView = findViewById(R.id.tv_9)
+        val p10:TextView = findViewById(R.id.tv_10)
+        val parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
+        val freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
+        val parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
 
-        makeJsonRequest(dataTextView1,textViews1, textViews)
+        makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
         //makeJsonRequest(textViews1, textViews)
 
 
@@ -61,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                 myCardViewA.visibility = View.VISIBLE
                 myImageViewB.visibility = View.GONE
                 myImageViewC.visibility = View.GONE
-                url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
-                makeJsonRequest(dataTextView1,textViews, textViews1)
+                url = "https://ec2-16-16-142-198.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
+                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 //makeJsonRequest(textViews, textViews1)
             } else {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
@@ -92,8 +103,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-private fun makeJsonRequest(dataTextView1:TextView, textViews1:MutableList<TextView>,textViews:MutableList<TextView>) {
-
+@SuppressLint("ResourceType")
+private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
+    var isFree = false
     // Create a trust manager that does not validate certificate chains
     val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
         override fun getAcceptedIssuers(): Array<X509Certificate> {
@@ -129,14 +141,25 @@ private fun makeJsonRequest(dataTextView1:TextView, textViews1:MutableList<TextV
                     }
                 }
                 else{
-                Log.i("Update URL", url)
-                val jsonObject = response.getJSONObject(0)
-                dataTextView1.text=jsonObject.getString("idParkit")
+                    Log.i("Update URL", url)
+                    for(i in 0 until response.length()){
+                        val jsonObject = response.getJSONObject(i)
+                        parkingSpots[i].text=jsonObject.getString("idParkit")
+                        isFree = jsonObject.getBoolean("vapaa")
+                        if(isFree){
+                            parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
+                        }
+                        else{
+                            parkingSpots[i].setBackgroundResource(R.drawable.parking_red)
+                        }
+                        Log.i("vapaa", isFree.toString())
+                    }
                 }
 
 
             } catch (e: Exception) {
                 Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Error message", e)
             }
         },
         { error ->
