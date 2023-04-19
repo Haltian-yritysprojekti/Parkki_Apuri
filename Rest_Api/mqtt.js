@@ -17,8 +17,8 @@ const client = mqtt.connect('mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',
 debug('mqtt trying connection to mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com')
 
 
-client.on('error',()=>{
-    debug()
+client.on('error',(...arg)=>{
+    debug(arg)
 })
 
 client.on('connect',()=>{
