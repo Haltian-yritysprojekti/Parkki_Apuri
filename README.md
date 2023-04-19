@@ -1,3 +1,4 @@
 # Parkki_Apuri
-Muutostesti
-Testilehtola
+Tämän projektin tavoitteena on hakea dataa käyttäen Haltianin sensoreita ja näyttää se jonkinlaisessa sovelluksessa.
+
+TODO: Dokumentaatio
