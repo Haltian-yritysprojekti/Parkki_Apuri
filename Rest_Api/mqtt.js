@@ -7,16 +7,14 @@ const parkit = require('./model/parkit')
 const options = {
     Port:8883,
     cert:cert,
-    key:key,
-    Password:'none',
-    topic:'cloudext/json/pr/fi/prfi00parking/#'
+    key:key
 }
 
 const client = mqtt.connect('mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
 
 client.on('connect',()=>{
     console.log('connected')
-    client.subscribe(options.topic)
+    client.subscribe('cloudext/json/pr/fi/prfi00parking/#')
     console.log(client.connected)
 })
 
