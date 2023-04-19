@@ -1,8 +1,10 @@
 const fs = require('fs')
+const debug = require('debug')('mqtt')
 const mqtt = require('mqtt')
 const key = fs.readFileSync('./sales-cloudext-prfi00parking/sales-cloudext-prfi00parking.key')
 const cert = fs.readFileSync('./sales-cloudext-prfi00parking/sales-cloudext-prfi00parking.pem')
 const parkit = require('./model/parkit')
+const { error } = require('console')
 
 const options = {
     Port:8883,
@@ -12,10 +14,24 @@ const options = {
 
 const client = mqtt.connect('mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
 
+debug('mqtt trying connection to mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com')
+
+
+client.on('error',()=>{
+    debug()
+})
+
 client.on('connect',()=>{
     console.log('connected')
-    client.subscribe('cloudext/json/pr/fi/prfi00parking/#')
-    console.log(client.connected)
+    debug(client.connected)
+    client.subscribe('cloudext/json/pr/fi/prfi00parking/#',function(err){
+        if(!err){
+            debug('subscribed')
+        }else{
+            debug('subscribe failed')
+        }
+    })
+    
 })
 
 client.on('message',(message,topic,packet)=>{
@@ -47,3 +63,19 @@ client.on('message',(message,topic,packet)=>{
         parkit.updatedist(res.tsmTuid,res.dist)
     }
 })
+
+function checkconnection(){
+    if(client.connected){
+        debug(' client is connected')
+    }else{
+        client.reconnect()
+        if(client.connected){
+            debug('client reconnected')
+        }else{
+            debug('reconnection failed')
+        }
+    }
+}
+
+const checkTime = 1000*60*1
+setInterval(checkconnection,checkTime)

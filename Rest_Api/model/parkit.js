@@ -5,7 +5,7 @@ const parkit={
         return db.query('select count(varattu),sijainti from ParkkiTalo join Parkit on ParkkiTalo.id=Parkit.ParkkiTalo_id where varattu=0 group by sijainti',callback)
     },
     getbyid:function(id,callback){
-        return db.query('select idParkit,etaisyys,varattu from Parkit join ParkkiTalo on Parkit.ParkkiTalo_id=ParkkiTalo.id where sijainti=?',[id],callback)
+        return db.query('select idParkit,etaisyys,varattu,rekisteri from Parkit join ParkkiTalo on Parkit.ParkkiTalo_id=ParkkiTalo.id where sijainti=?',[id],callback)
     },
     //Get parking slot info with id
     getSlot:function(id,callback){
