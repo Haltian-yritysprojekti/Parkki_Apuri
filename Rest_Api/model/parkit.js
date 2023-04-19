@@ -9,7 +9,7 @@ const parkit={
     },
     //Get parking garages parking slots data
     getbyid:function(id,callback){
-        return db.query('select idParkit,etaisyys,varattu from Parkit join ParkkiTalo on Parkit.ParkkiTalo_id=ParkkiTalo.id where sijainti=?',[id],callback)
+        return db.query('select idParkit,etaisyys,varattu,rekisteri from Parkit join ParkkiTalo on Parkit.ParkkiTalo_id=ParkkiTalo.id where sijainti=?',[id],callback)
     },
     //Get parking slot info with id
     getSlot:function(id,callback){

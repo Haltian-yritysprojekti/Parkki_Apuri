@@ -13,7 +13,7 @@ router.get('/',function(request,response){
         }
     })
 })
-//Sing up user
+//Sign up user
 router.post('/',function(request,response){
     user.getUser(function(err,result){
         if(err){
