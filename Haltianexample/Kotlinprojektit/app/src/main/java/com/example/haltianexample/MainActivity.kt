@@ -44,16 +44,16 @@ class MainActivity : AppCompatActivity() {
         val textView4: TextView = findViewById(R.id.tv_free_B)
         val textView5: TextView = findViewById(R.id.tv_sC)
         val textView6: TextView = findViewById(R.id.tv_free_C)
-        val p1:TextView = findViewById(R.id.tv_1)
-        val p2:TextView = findViewById(R.id.tv_2)
-        val p3:TextView = findViewById(R.id.tv_3)
-        val p4:TextView = findViewById(R.id.tv_4)
-        val p5:TextView = findViewById(R.id.tv_5)
-        val p6:TextView = findViewById(R.id.tv_6)
-        val p7:TextView = findViewById(R.id.tv_7)
-        val p8:TextView = findViewById(R.id.tv_8)
-        val p9:TextView = findViewById(R.id.tv_9)
-        val p10:TextView = findViewById(R.id.tv_10)
+        val p1:TextView = findViewById(R.id.tv_1a)
+        val p2:TextView = findViewById(R.id.tv_2a)
+        val p3:TextView = findViewById(R.id.tv_3a)
+        val p4:TextView = findViewById(R.id.tv_4a)
+        val p5:TextView = findViewById(R.id.tv_5a)
+        val p6:TextView = findViewById(R.id.tv_6a)
+        val p7:TextView = findViewById(R.id.tv_7a)
+        val p8:TextView = findViewById(R.id.tv_8a)
+        val p9:TextView = findViewById(R.id.tv_9a)
+        val p10:TextView = findViewById(R.id.tv_10a)
         val parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
         val freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
         val parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
@@ -66,12 +66,12 @@ class MainActivity : AppCompatActivity() {
             laskuri = !laskuri
             if (!laskuri) {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                val myImageViewC: ImageView = findViewById(R.id.ivParkC)
-                val myImageViewB: ImageView = findViewById(R.id.ivParkB)
+                val myCardViewB: CardView = findViewById(R.id.cardView_B)
+                val myCardViewC: CardView = findViewById(R.id.cardView_C)
 
                 myCardViewA.visibility = View.VISIBLE
-                myImageViewB.visibility = View.GONE
-                myImageViewC.visibility = View.GONE
+                myCardViewB.visibility = View.GONE
+                myCardViewC.visibility = View.GONE
                 url = "https://ec2-16-16-142-198.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 //makeJsonRequest(textViews, textViews1)
@@ -84,21 +84,33 @@ class MainActivity : AppCompatActivity() {
         myClickLayoutB.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
-                val myImageViewB: ImageView = findViewById(R.id.ivParkB)
-                myImageViewB.visibility = View.VISIBLE
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                val myCardViewB: CardView = findViewById(R.id.cardView_B)
+                val myCardViewC: CardView = findViewById(R.id.cardView_C)
+
+                myCardViewA.visibility = View.GONE
+                myCardViewB.visibility = View.VISIBLE
+                myCardViewC.visibility = View.GONE
+
+
             } else {
-                val myImageViewB: ImageView = findViewById(R.id.ivParkB)
-                myImageViewB.visibility = View.GONE
+                val myCardViewB: CardView = findViewById(R.id.cardView_B)
+                myCardViewB.visibility = View.GONE
             }
         }
         myClickLayoutC.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
-                val myImageViewC: ImageView = findViewById(R.id.ivParkC)
-                myImageViewC.visibility = View.VISIBLE
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                val myCardViewB: CardView = findViewById(R.id.cardView_B)
+                val myCardViewC: CardView = findViewById(R.id.cardView_C)
+
+                myCardViewA.visibility = View.GONE
+                myCardViewB.visibility = View.GONE
+                myCardViewC.visibility = View.VISIBLE
             } else {
-                val myImageViewC: ImageView = findViewById(R.id.ivParkC)
-                myImageViewC.visibility = View.GONE
+                val myCardViewC: CardView = findViewById(R.id.cardView_C)
+                myCardViewC.visibility = View.GONE
             }
         }
 
