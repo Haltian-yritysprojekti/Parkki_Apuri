@@ -7,7 +7,7 @@ const controlRouter = require('./Routes/control')
 const userRouter = require('./Routes/user')
 const mqtt = require('./mqtt')
 
-
+//Setting what express server uses
 const app = express();
 app.use(bodyparser.json());
 app.use(express.urlencoded({extended: false}));

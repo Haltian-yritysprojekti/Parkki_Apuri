@@ -6,21 +6,23 @@ const cert = fs.readFileSync('./sales-cloudext-prfi00parking/sales-cloudext-prfi
 const parkit = require('./model/parkit')
 const { error } = require('console')
 
+//Setting MQTT options for connection
 const options = {
     Port:8883,
     cert:cert,
     key:key
 }
 
+//Making MQTT connection to desired url
 const client = mqtt.connect('mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
 
 debug('mqtt trying connection to mqtt://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com')
 
-
+//Debug if something wrong with connection
 client.on('error',(...arg)=>{
     debug(arg)
 })
-
+//On connection subcribing to wanted topic
 client.on('connect',()=>{
     console.log('connected')
     debug(client.connected)
@@ -33,7 +35,7 @@ client.on('connect',()=>{
     })
     
 })
-
+//Handling message and changing data to database on specific sensor 
 client.on('message',(message,topic,packet)=>{
     var a = Buffer.from(packet.payload.buffer)
     var b = a.toJSON()
@@ -63,19 +65,3 @@ client.on('message',(message,topic,packet)=>{
         parkit.updatedist(res.tsmTuid,res.dist)
     }
 })
-
-function checkconnection(){
-    if(client.connected){
-        debug(' client is connected')
-    }else{
-        client.reconnect()
-        if(client.connected){
-            debug('client reconnected')
-        }else{
-            debug('reconnection failed')
-        }
-    }
-}
-
-const checkTime = 1000*60*1
-setInterval(checkconnection,checkTime)
