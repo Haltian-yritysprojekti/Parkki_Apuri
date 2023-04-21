@@ -25,8 +25,12 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 class MainActivity : AppCompatActivity() {
-    var laskuri = true
-    var url = "https://192.168.98.215:3000/"
+
+    private var isCardViewAVisible = false
+    private var isCardViewBVisible = false
+    private var isCardViewCVisible = false
+
+    private var url = "https://192.168.98.215:3000/"
     private val originalUrl = url
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         val textView4: TextView = findViewById(R.id.tv_free_B)
         val textView5: TextView = findViewById(R.id.tv_sC)
         val textView6: TextView = findViewById(R.id.tv_free_C)
+        val locationId: TextView = findViewById(R.id.textView11a)
         val p1:TextView = findViewById(R.id.tv_1a)
         val p2:TextView = findViewById(R.id.tv_2a)
         val p3:TextView = findViewById(R.id.tv_3a)
@@ -54,42 +59,48 @@ class MainActivity : AppCompatActivity() {
         val p8:TextView = findViewById(R.id.tv_8a)
         val p9:TextView = findViewById(R.id.tv_9a)
         val p10:TextView = findViewById(R.id.tv_10a)
-        var parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
-        var freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
-        var parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
+        val parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
+        val freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
+        val parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
 
         makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
 
-
         myClickLayoutA.setOnClickListener {
-            laskuri = !laskuri
-            if (!laskuri) {
+            isCardViewAVisible = !isCardViewAVisible
+            if (isCardViewAVisible) {
+                Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
-                myCardViewA.visibility = View.VISIBLE
+                locationId.text = "A"
                 url = "https://192.168.98.215:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+                myCardViewA.visibility = View.VISIBLE
             } else {
+                Log.i("else A isCardViewAVisible", isCardViewAVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
             }
 
         }
         myClickLayoutB.setOnClickListener {
-            laskuri = !laskuri
-            if (!laskuri) {
+            isCardViewBVisible = !isCardViewBVisible
+            if (isCardViewBVisible) {
+                Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
-                myCardViewA.visibility = View.VISIBLE
+                locationId.text = "B"
                 url = "https://192.168.98.215:3000/sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+                myCardViewA.visibility = View.VISIBLE
             } else {
+                Log.i("else B isCardViewAVisible", isCardViewBVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
             }
         }
         myClickLayoutC.setOnClickListener {
-            laskuri = !laskuri
-            if (!laskuri) {
+            isCardViewCVisible = !isCardViewCVisible
+            if (isCardViewCVisible) {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
                 url = "https://192.168.98.215:3000/sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
