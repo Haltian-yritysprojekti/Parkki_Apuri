@@ -7,6 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="parking_green">#00FF00</color>
-    <color name="parking_red">#F44336</color>
+    <color name="parking_green">#009000</color>
+    <color name="parking_red">#CC0000</color>
 </resources>
