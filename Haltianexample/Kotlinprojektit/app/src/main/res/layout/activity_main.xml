@@ -136,239 +136,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_B"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@android:color/transparent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clickableLayout3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_1b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="1" />
-
-                <TextView
-                    android:id="@+id/tv_2b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="2" />
-
-                <TextView
-                    android:id="@+id/tv_3b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="3" />
-
-                <TextView
-                    android:id="@+id/tv_4b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="4" />
-
-                <TextView
-                    android:id="@+id/tv_5b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11b"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/a"
-                    android:textAlignment="center"
-                    android:textSize="50sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_6b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="6" />
-
-                <TextView
-                    android:id="@+id/tv_7b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="7" />
-
-                <TextView
-                    android:id="@+id/tv_8b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="8" />
-
-                <TextView
-                    android:id="@+id/tv_9b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="9" />
-
-                <TextView
-                    android:id="@+id/tv_10b"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="10" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_C"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@android:color/transparent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clickableLayout3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_1c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="1" />
-
-                <TextView
-                    android:id="@+id/tv_2c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="2" />
-
-                <TextView
-                    android:id="@+id/tv_3c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="3" />
-
-                <TextView
-                    android:id="@+id/tv_4c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="4" />
-
-                <TextView
-                    android:id="@+id/tv_5c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView11c"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/a"
-                    android:textAlignment="center"
-                    android:textSize="50sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_6c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="6" />
-
-                <TextView
-                    android:id="@+id/tv_7c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="7" />
-
-                <TextView
-                    android:id="@+id/tv_8c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="8" />
-
-                <TextView
-                    android:id="@+id/tv_9c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_red"
-                    android:text="9" />
-
-                <TextView
-                    android:id="@+id/tv_10c"
-                    style="@style/cardView_textViewstyle"
-                    android:background="@drawable/parking_green"
-                    android:text="10" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
     <TextView
         android:id="@+id/dataa"
         android:layout_width="wrap_content"
@@ -379,31 +146,29 @@
 
     <LinearLayout
         android:id="@+id/clickableLayout1"
-        android:clickable="true"
         android:layout_width="405dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/corners"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoView"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/logoView">
 
         <TextView
             android:id="@+id/tv_sA"
             style="@style/clickable_tvLocStyle"
-            android:text="Parkki A"
-            />
+            android:text="Parkki A" />
 
         <TextView
             android:id="@+id/tv_free_A"
             style="@style/clickable_tvFreeStyle"
-            android:text="5"
-            />
+            android:text="5" />
     </LinearLayout>
 
     <LinearLayout
