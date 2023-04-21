@@ -40,17 +40,18 @@ const Login = ({ setIsLoggedIn }) => {
     event.preventDefault();
     setLoginProcessState("processing");
     try {
-      const result = await axios.post('https://localhost:4000/user/login', null, {
+      const result = await axios.post('https://localhost:4000/user/login', {
           email: event.target.email.value,
           salasana: event.target.password.value
         }
       );
       console.log(result);
-      console.log(result.data);
+      console.log(result.data[0]);
       setLoginProcessState("success");
       setTimeout(() => {
         setLoginProcessState("idle")
-        localStorage.setItem("rekisteri", result.data.rekisteri);
+        localStorage.setItem("rekisteri", result.data[0].rekisteri);
+        localStorage.setItem("email", result.data[0].email);
         navigate("/", { replace: true });
       }, 1500);
     } catch (error) {
