@@ -10,17 +10,19 @@ export default function Reservation () {
   const [ parkingSpot, setParkingSpot ] = useState('');
   const [ licensePlate, setLicensePlate ] = useState('');
 
-  // Signup ottaa parametrit email, salasana ja rekisteri ja postaa ne.
+  // reserve ottaa parametrit idParkit sekä rekisteri ja postaa ne.
   const reserve = () => {
+    const rekisteri = localStorage.getItem("rekisteri");
     axios({
         method: "put",
         data: {
-            idParkit: parkingSpot,
-            rekisteri: licensePlate,
+            id: parkingSpot,
+            rekisteri: rekisteri,
         },
         url: "https://localhost:4000/",
     })
     .then((res) => console.log(res));
+    // localStorage.setItem("id", rekisteri.data[0].id);
     navigate('/')
 };
 
@@ -30,7 +32,7 @@ export default function Reservation () {
         <div className="signupcsssubtitleText">Täytä tiedot ja tee varaus paikasta</div>
         <div>
             <input className="signupcsstextField1" placeholder="parkkipaikan numero*" onChange={e => setParkingSpot(e.target.value)} />
-            <input className="signupcsstextField3" placeholder="Rekisterinumero*" onChange={e => setLicensePlate(e.target.value)} />
+            {/* <input className="signupcsstextField3" placeholder="Rekisterinumero*" onChange={e => setLicensePlate(e.target.value)} /> */}
             <button onClick={reserve} className="signupcsssignUpButton">Tee varaus</button>
         </div>
       </div>

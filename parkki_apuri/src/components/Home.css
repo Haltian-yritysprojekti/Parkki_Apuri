@@ -6,6 +6,37 @@
     margin-top: 15px;
     margin-left: 1550px;
   }
+
+.reservation {
+    font-size: large;
+}
+
+.buttonLogout {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    margin-top: -250px;
+    margin-left: 180px;
+}
+
+.loginInformation {
+    font-size: large;
+    margin-top: -242px;
+    margin-left: -500px;
+    position: absolute;
+}
+
+.resInformation {
+    font-size: large;
+    margin-top: -150px;
+    position: absolute;
+}
   
   /* Set width and center the table */
   table {
@@ -205,7 +236,8 @@
   
   .login-btn:hover,
   .signup-btn:hover,
-  .res-btn:hover {
+  .res-btn:hover,
+  .buttonLogout:hover {
     background-color: #000000;
     color: #FFFFFF;
   }
