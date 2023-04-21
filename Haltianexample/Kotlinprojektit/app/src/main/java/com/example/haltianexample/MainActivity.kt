@@ -26,9 +26,9 @@ import javax.net.ssl.X509TrustManager
 
 class MainActivity : AppCompatActivity() {
     var laskuri = true
-    var url = "https://ec2-16-16-142-198.eu-north-1.compute.amazonaws.com:3000/"
+    var url = "https://192.168.98.215:3000/"
     private val originalUrl = url
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,27 +54,20 @@ class MainActivity : AppCompatActivity() {
         val p8:TextView = findViewById(R.id.tv_8a)
         val p9:TextView = findViewById(R.id.tv_9a)
         val p10:TextView = findViewById(R.id.tv_10a)
-        val parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
-        val freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
-        val parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
+        var parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
+        var freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
+        var parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
 
         makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
-        //makeJsonRequest(textViews1, textViews)
 
 
         myClickLayoutA.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                val myCardViewB: CardView = findViewById(R.id.cardView_B)
-                val myCardViewC: CardView = findViewById(R.id.cardView_C)
-
+                var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.VISIBLE
-                myCardViewB.visibility = View.GONE
-                myCardViewC.visibility = View.GONE
-                url = "https://ec2-16-16-142-198.eu-north-1.compute.amazonaws.com:3000/sijainti%20A"
+                url = "https://192.168.98.215:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
-                //makeJsonRequest(textViews, textViews1)
             } else {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
@@ -84,38 +77,30 @@ class MainActivity : AppCompatActivity() {
         myClickLayoutB.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                val myCardViewB: CardView = findViewById(R.id.cardView_B)
-                val myCardViewC: CardView = findViewById(R.id.cardView_C)
-
-                myCardViewA.visibility = View.GONE
-                myCardViewB.visibility = View.VISIBLE
-                myCardViewC.visibility = View.GONE
-
-
+                var myCardViewA: CardView = findViewById(R.id.cardView_A)
+                myCardViewA.visibility = View.VISIBLE
+                url = "https://192.168.98.215:3000/sijainti%20B"
+                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
             } else {
-                val myCardViewB: CardView = findViewById(R.id.cardView_B)
-                myCardViewB.visibility = View.GONE
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                myCardViewA.visibility = View.GONE
             }
         }
         myClickLayoutC.setOnClickListener {
             laskuri = !laskuri
             if (!laskuri) {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                val myCardViewB: CardView = findViewById(R.id.cardView_B)
-                val myCardViewC: CardView = findViewById(R.id.cardView_C)
-
-                myCardViewA.visibility = View.GONE
-                myCardViewB.visibility = View.GONE
-                myCardViewC.visibility = View.VISIBLE
+                myCardViewA.visibility = View.VISIBLE
+                url = "https://192.168.98.215:3000/sijainti%20C"
+                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
             } else {
-                val myCardViewC: CardView = findViewById(R.id.cardView_C)
-                myCardViewC.visibility = View.GONE
+                val myCardViewA: CardView = findViewById(R.id.cardView_A)
+                myCardViewA.visibility = View.GONE
             }
         }
 
     }
-@SuppressLint("ResourceType")
+
 private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
     var isFree = false
     // Create a trust manager that does not validate certificate chains
@@ -158,6 +143,7 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
                         val jsonObject = response.getJSONObject(i)
                         parkingSpots[i].text=jsonObject.getString("idParkit")
                         isFree = jsonObject.getBoolean("vapaa")
+                        Log.i("vapaa", isFree.toString())
                         if(isFree){
                             parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
                         }
