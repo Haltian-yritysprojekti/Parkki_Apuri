@@ -1,103 +1,131 @@
-/* .signupcssheaderContainer {
-    background-color: whitesmoke;
-    font-family: Arial, Helvetica, sans-serif;
+.reservationContainer {
     display: flex;
-    gap: 50px;
-    height: 70px;
-    font-size: 20px;
+    justify-content: center;
     align-items: center;
-    margin-right: auto;
-    padding-top: 13px;
-    border-bottom-color: black;
-    border-bottom-width: 2px;
-}
+    height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .spotListContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    height: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .spotListTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .hallSelector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .hallArrow {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1e98d7;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .hallArrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .hallNumber {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+  }
 
-.signupcssbrandText {
-    background-color: rgba(255, 255, 255, 0);
-    width: 300px;
-    font-size: 32px;
-    font-family: "Merriweather", sans-serif;
-    color: #333333;
-    text-align: left;
-    line-height: normal;
-    margin: 70px;
-} */
-
-.signupcsscontainer {
-    width: 500px;
-    height: 500px;
-    padding: 2px 2px 2px 2px;
-    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.18);
-    border-radius: 4px;
-    box-sizing: border-box;
-    position: absolute;
-    left: 690px;
-    top: 190px;
-}
-
-.signupcsstitleText {
+  .selectedHallNumber {
+    color: #1e98d7;
+  }
+  
+  .spotsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+  }
+  
+  .spotBox {
     display: flex;
     justify-content: center;
-    font-size: 26px;
-    font-weight: 700;
-    padding-bottom: 14px;
-    padding-top: 45px;
-}
-
-.signupcsssubtitleText {
-    display: flex;
-    justify-content: center;
-    font-size: 17px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.signupcsslowerText {
-    display: flex;
-    justify-content: center;
-    padding-top: 35px;
-    gap: 6px;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: grey;
-}
-
-.signupcsstextField1 {
-    position: absolute;
-    top: 165px;
-    margin-left: 85px;
-    height: 30px;
-    width: 300px;
-}
-
-.signupcsstextField2 {
-    position: absolute;
-    top: 230px;
-    height: 30px;
-    width: 300px;
-    margin-left: 85px;
-}
-
-.signupcsstextField3 {
-    position: absolute;
-    top: 295px;
-    margin-left: 85px;
-    height: 30px;
-    width: 300px;
-}
-
-.signupcsssignUpButton {
-    position: absolute;
-    margin-top: 260px;
-    left: 87px;
-    width: 310px;
-    height: 45px;
-    padding: 2px 2px 2px 2px;
-    border-radius: 4px;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
     background-color: #1e98d7;
-    box-sizing: border-box;
-    font-size: 19px;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
-    text-align: center;
-    line-height: normal;
-}
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .spotBox:hover {
+    background-color: #0f6ca5;
+  }
+  
+  .reservedSpot {
+    background-color: #f44336;
+  }
+
+  .selectedSpot {
+    background-color: #f44336;
+  }
+  
+  .reservedSpot:hover {
+    background-color: #d32f2f;
+    cursor: not-allowed;
+  }
+  
+  .freeSpot {
+    background-color: #1e98d7;
+  }
+  
+  .freeSpot:hover {
+    background-color: #0f6ca5;
+  }
+  
+  .reserveButton {
+    position: absolute;
+    margin-left: -520px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1e98d7;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .reserveButton:hover {
+    background-color: #0f6ca5;
+  }

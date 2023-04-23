@@ -37,8 +37,16 @@
     margin-top: -150px;
     position: absolute;
 }
-  
-  /* Set width and center the table */
+
+.resInformationNull {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
   table {
     margin: 0 auto;
     margin-top: 20px;
@@ -46,7 +54,6 @@
     border-collapse: collapse;
   }
   
-  /* Style table header */
   th {
     background-color: #333;
     color: white;
@@ -57,19 +64,16 @@
     font-size: large;
   }
   
-  /* Style table rows */
   td {
     padding: 8px;
     text-align: left;
     border: 1px solid #ddd;
   }
   
-  /* Set color for available spaces */
   td.available {
     background-color: #8bc34a;
   }
   
-  /* Set color for full spaces */
   td.full {
     background-color: #f44336;
   }
@@ -81,8 +85,7 @@
   .parking-spots-table td.full {
     background-color: #f44336;
   }
-  
-  /* Style the parking halls */
+
   .parking-halls {
     margin: 0 auto;
     display: flex;
