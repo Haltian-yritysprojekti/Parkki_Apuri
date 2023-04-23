@@ -33,7 +33,6 @@ function Home() {
   }
 
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-  // const isLoggedInNow = localStorage.getItem('rekisteri') !== null;
   const [ info, setInfo ] = useState([]);
   const [ parkingInfo, setParkingInfo ] = useState([]);
   const [ activeParkingHall, setActiveParkingHall ] = useState(null);
@@ -46,36 +45,6 @@ function Home() {
   const varattu = localStorage.getItem("varattu");
   const sensor = localStorage.getItem("sensor");
   const Parkkitalo_id = localStorage.getItem("Parkkitalo_id");
-  // const [ tiedot, setTiedot ] = useState('');
-
-  // useEffect(() => {
-  //   const items = localStorage.getItem('email');
-  //   if (items) {
-  //    setTiedot(items);
-  //   }
-  // }, []);
-
-  // const getReservations = async () => {
-  //   const rekisteriVaraus = localStorage.getItem("rekisteri");
-  //   try {
-  //     const response = await axios.get(`https://localhost:4000/res`) ;
-  //     setReservations(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // const getReservations = () => {
-  //   const rekisteriVaraus = localStorage.getItem("rekisteri");
-  //   axios({
-  //       method: "get",
-  //       data: {
-  //           rekisteri: rekisteriVaraus
-  //       },
-  //       url: "https://localhost:4000/res",
-  //   })
-  //   .then((res) => console.log(res));
-  // };
 
   const getReservations = async () => {
     try {
@@ -83,11 +52,6 @@ function Home() {
         "https://localhost:4000/res",
         {
           rekisteri: rekisteri
-          // id: id,
-          // etaisyys: etaisyys,
-          // varattu: varattu,
-          // sensor: sensor,
-          // Parkkitalo_id: Parkkitalo_id,
         }
       );
       setReservations(response.data);
@@ -102,21 +66,6 @@ function Home() {
     }
   };
 
-  // const getReservations = async () => {
-  //   const rekisteriVaraus = localStorage.getItem("rekisteri");
-  //   try {
-  //     const results = await axios.get('https://localhost:4000/res', {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         rekisteri: rekisteriVaraus
-  //         }
-  //     });
-
-  //     setReservations(results.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   useEffect(() => {
     if (isLoggedIn==true) {
@@ -135,6 +84,7 @@ function Home() {
   const handleLogout = () => {
     localStorage.removeItem('rekisteri');
     localStorage.removeItem('email');
+    localStorage.removeItem('id');
     setIsLoggedIn(false);
   };
 
@@ -197,12 +147,17 @@ function Home() {
 
           <div className='loginInformation'> {localStorage.getItem("rekisteri") &&
           <span>Kirjauduttu sisään käyttäjällä: {email}</span>} </div>
-
-          <div className='resInformation'> {localStorage.getItem("rekisteri") &&
-          <span>Sinut varaukset: {email} {id} {etaisyys} {varattu} {sensor} {Parkkitalo_id} </span>} </div>
-
           {isLoggedIn ? (
           <div>
+            {localStorage.getItem("id") ? (
+            <div className='resInformation'>
+              <span>Aktiivinen varaukset: Autopaikka {localStorage.getItem("id")} </span>
+            </div>
+          ) : (
+            <div className='resInformationNull'>
+              Ei varauksia.
+            </div>
+          )}
             <Link to="/reservation" className='res-btn'>Tee paikkavaraus</Link>
             <button onClick={handleLogout} className='buttonLogout'>Kirjaudu ulos</button>
           </div>
