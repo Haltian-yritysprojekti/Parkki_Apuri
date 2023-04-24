@@ -61,7 +61,7 @@ export default function Reservation () {
         <div
           className={`spotBox ${spotClass}`}
           key={`spot-${spotNumber}`}
-          onClick={() => setSelectedSpot(spotNumber)}
+          onClick={() => handleSpotClick(spotNumber)}
         >
           {spotText}
         </div>
