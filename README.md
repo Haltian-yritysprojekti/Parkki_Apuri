@@ -2,7 +2,8 @@
 
 Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia sovelluksen eri osista selaimessa.
 
-Asennus
+
+# Asennus
 
 1. Kloonaa repositorio
 
@@ -13,7 +14,7 @@ Asennus
     npm install
 
 
-Käyttö
+# Käyttö
 
 1. Käynnistä sovellus
 
@@ -22,7 +23,7 @@ Käyttö
 2. Avaa selain ja siirry osoitteeseen http://localhost:3000
 
 
-Toiminnot
+# Toiminnot
 
 - Valitse jokin kolmesta parkkihallista
 - Selaa eri hallien autopaikkoja (10 per sijainti)
@@ -32,30 +33,30 @@ Toiminnot
 - Kirjaudu ulos käyttäjältä
 
 
-Teknologiat
+# Teknologiat
 
 - ReactJS
 - HTML
 - CSS
 
-Käytetyt React.js kirjastot
+# Käytetyt React.js kirjastot
 
 -Axios
 - React-router-dom
 
 
-Kehitysympäristö
+# Kehitysympäristö
 
 - Node.js versio 14.16.0
 - Npm versio 6.14.11
 
 
-Lisenssi
+# Lisenssi
 
 Tämä projekti on lisensioitu MIT-lisenssillä.
 
 
-Yhteydenotto
+# Yhteydenotto
 
 Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
 
