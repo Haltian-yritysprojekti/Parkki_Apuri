@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/logoView"
         android:layout_width="wrap_content"
-        android:layout_height="136dp"
+        android:layout_height="135dp"
         android:adjustViewBounds="false"
         android:background="?attr/colorSecondaryVariant"
         android:cropToPadding="true"
@@ -27,7 +27,6 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:background="@android:color/transparent"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,16 +137,7 @@
 
     <LinearLayout
         android:id="@+id/clickableLayout1"
-        android:layout_width="405dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/corners"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
+        style="@style/layout_buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoView">
@@ -155,55 +145,44 @@
         <TextView
             android:id="@+id/tv_sA"
             style="@style/clickable_tvLocStyle"
-            android:text="Parkki A" />
+            android:text="Parkki A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_free_A"
             style="@style/clickable_tvFreeStyle"
-            android:text="5" />
+            android:text="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/clickableLayout2"
-        android:clickable="true"
-        android:layout_width="405dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/corners"
-        android:gravity="center"
-        android:orientation="horizontal"
+        style="@style/layout_buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clickableLayout1"
-        android:focusable="true">
+        >
 
         <TextView
             android:id="@+id/tv_sB"
             style="@style/clickable_tvLocStyle"
             android:text="Parkki B"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_free_B"
             style="@style/clickable_tvFreeStyle"
             android:text="5"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/clickableLayout3"
-        android:layout_width="405dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/corners"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
+        style="@style/layout_buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clickableLayout2">
@@ -212,13 +191,15 @@
             android:id="@+id/tv_sC"
             style="@style/clickable_tvLocStyle"
             android:text="Parkki C"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_free_C"
             style="@style/clickable_tvFreeStyle"
             android:text="2"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

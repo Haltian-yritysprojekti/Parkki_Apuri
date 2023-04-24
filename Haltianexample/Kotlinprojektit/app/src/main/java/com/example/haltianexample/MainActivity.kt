@@ -1,21 +1,18 @@
 package com.example.haltianexample
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import java.net.URL
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HostnameVerifier
@@ -36,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
+
         //var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
 
         val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
@@ -74,10 +73,25 @@ class MainActivity : AppCompatActivity() {
                 url = "https://192.168.98.215:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
+                myClickLayoutB.visibility = View.GONE
+                myClickLayoutC.visibility = View.GONE
+
+                val topToBottomCardViewA = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewA.topToBottom = R.id.clickableLayout1
+                myCardViewA.layoutParams = topToBottomCardViewA
+
+
+
             } else {
                 Log.i("else A isCardViewAVisible", isCardViewAVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
+                myClickLayoutB.visibility = View.VISIBLE
+                myClickLayoutC.visibility = View.VISIBLE
+
+                val topToBottomCardViewA = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewA.topToBottom = R.id.clickableLayout3
+                myCardViewA.layoutParams = topToBottomCardViewA
             }
 
         }
@@ -90,10 +104,24 @@ class MainActivity : AppCompatActivity() {
                 url = "https://192.168.98.215:3000/sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
+                myClickLayoutA.visibility = View.GONE
+                myClickLayoutC.visibility = View.GONE
+
+                val topToBottomCardViewB = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewB.topToBottom = R.id.logoView
+                myCardViewA.layoutParams = topToBottomCardViewB
+
+
             } else {
                 Log.i("else B isCardViewAVisible", isCardViewBVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
+                myClickLayoutA.visibility = View.VISIBLE
+                myClickLayoutC.visibility = View.VISIBLE
+
+                val topToBottomCardViewB = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewB.topToBottom = R.id.clickableLayout1
+                myCardViewA.layoutParams = topToBottomCardViewB
             }
         }
         myClickLayoutC.setOnClickListener {
@@ -104,9 +132,23 @@ class MainActivity : AppCompatActivity() {
                 myCardViewA.visibility = View.VISIBLE
                 url = "https://192.168.98.215:3000/sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+                myClickLayoutA.visibility = View.GONE
+                myClickLayoutB.visibility = View.GONE
+
+                val topToBottomCardViewC = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewC.topToBottom = R.id.logoView
+                myCardViewA.layoutParams = topToBottomCardViewC
+
+
             } else {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
+                myClickLayoutA.visibility = View.VISIBLE
+                myClickLayoutB.visibility = View.VISIBLE
+
+                val topToBottomCardViewC = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
+                topToBottomCardViewC.topToBottom = R.id.clickableLayout2
+                myCardViewA.layoutParams = topToBottomCardViewC
             }
         }
 
