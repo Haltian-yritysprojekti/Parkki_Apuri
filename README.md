@@ -61,7 +61,7 @@ Tämä projekti on lisensioitu MIT-lisenssillä.
 Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
 
 
-Kuvia sovelluksen eri osista
+# Kuvia sovelluksen eri osista
 
 - Home.js: Sovelluksen pääsivu.
 
