@@ -27,15 +27,13 @@ class MainActivity : AppCompatActivity() {
     private var isCardViewBVisible = false
     private var isCardViewCVisible = false
 
-    private var url = "https://192.168.98.215:3000/"
+    private var url = "https://192.168.124.215:3000/"
     private val originalUrl = url
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-
-        //var url = "https://ec2-13-49-138-78.eu-north-1.compute.amazonaws.com:3000/"
 
         val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
         val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
@@ -70,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "A"
-                url = "https://192.168.98.215:3000/sijainti%20A"
+                url = "https://192.168.124.215:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutB.visibility = View.GONE
@@ -101,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "B"
-                url = "https://192.168.98.215:3000/sijainti%20B"
+                url = "https://192.168.124.215:3000/sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutA.visibility = View.GONE
@@ -130,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
-                url = "https://192.168.98.215:3000/sijainti%20C"
+                url = "https://192.168.124.215:3000/sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myClickLayoutA.visibility = View.GONE
                 myClickLayoutB.visibility = View.GONE
@@ -191,22 +189,18 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
                     }
                 }
                 else{
-                    Log.i("Update URL", url)
                     for(i in 0 until response.length()){
                         val jsonObject = response.getJSONObject(i)
                         parkingSpots[i].text=jsonObject.getString("idParkit")
                         isFree = jsonObject.getBoolean("vapaa")
-                        Log.i("vapaa", isFree.toString())
                         if(isFree){
                             parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
                         }
                         else{
                             parkingSpots[i].setBackgroundResource(R.drawable.parking_red)
                         }
-                        Log.i("vapaa", isFree.toString())
                     }
                 }
-
 
             } catch (e: Exception) {
                 Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
