@@ -41,7 +41,7 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 
 # Käytetyt React.js kirjastot
 
--Axios
+- Axios
 - React-router-dom
 
 
@@ -64,13 +64,17 @@ Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
 Kuvia sovelluksen eri osista
 
 - Home.js: Sovelluksen pääsivu.
+
 ![pa](https://user-images.githubusercontent.com/78751694/234013390-cec99419-1b9d-48cd-9a41-20da5e7ac669.png)
 
 - Login.js: Käyttäjän kirjautumissivu.
+
 ![ks](https://user-images.githubusercontent.com/78751694/234013523-29fa54f6-4b4b-4ae7-b9a2-e9a96c7dc239.png)
 
 - SignUp.js: Käyttäjän rekisteröitymissivu.
+
 ![rk](https://user-images.githubusercontent.com/78751694/234013582-47779849-151d-4d0a-9a82-b6b75ad8776a.png)
 
 - Reservation.js: Parkkipaikan varaussivu.
+
 ![va](https://user-images.githubusercontent.com/78751694/234013654-ce179947-c300-4b55-915f-8febc7ff66c0.png)
