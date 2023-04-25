@@ -8,9 +8,12 @@ const { error } = require('console')
 
 //Setting MQTT options for connection
 const options = {
-    Port:8883,
+    host:'a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',
+    port:'8883',
+    protocol:'mqtt',
     cert:cert,
-    key:key
+    key:key,
+    rejectUnauthorized:false
 }
 
 //Making MQTT connection to desired url
