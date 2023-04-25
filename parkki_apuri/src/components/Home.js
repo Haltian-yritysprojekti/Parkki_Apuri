@@ -49,7 +49,7 @@ function Home() {
   const getReservations = async () => {
     try {
       const response = await axios.get(
-        "https://localhost:4000/res",
+        "https://13.51.255.38:3000/res",
         {
           rekisteri: rekisteri
         }
@@ -108,7 +108,7 @@ function Home() {
   // Getinfo hakee parkkihallien nimet ja vapaat paikat tietokannasta rest apin kautta.
   const getInfo = async () => {
     try {
-      const results = await axios.get('https://localhost:4000', {
+      const results = await axios.get('https://13.51.255.38:3000', {
         headers: {
           'Content-Type': 'application/json',
           // 'Authorization': 'Bearer ' + UserAuthContextValue.jwt  // Tämä voidaan ottaa käyttöön jos sivulla on kirjautuminen käytössä.
@@ -126,7 +126,7 @@ function Home() {
     try {
       setParkingInfo([]);
 
-      const results = await axios.get(`https://localhost:4000/${parkingHallName}`, {
+      const results = await axios.get(`https://13.51.255.38:3000/${parkingHallName}`, {
         headers: {
           'Content-Type': 'application/json',
           }

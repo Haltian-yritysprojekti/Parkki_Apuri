@@ -35,7 +35,7 @@ export default function Reservation () {
             id: parkingSpot,
             rekisteri: rekisteri,
         },
-        url: "https://localhost:4000/",
+        url: "https://13.51.255.38:3000/",
     })
     .then((res) => {
         localStorage.setItem("id", parkingSpot);
