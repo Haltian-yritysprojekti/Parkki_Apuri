@@ -51,15 +51,9 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 - Node.js versio 14.16.0
 - Npm versio 6.14.11
 
+# Tekijä
 
-# Lisenssi
-
-Tämä projekti on lisensioitu MIT-lisenssillä.
-
-
-# Yhteydenotto
-
-Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
+GitHub: https://github.com/Alenkaara
 
 
 # Kuvia sovelluksen eri osista
@@ -82,4 +76,69 @@ Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
 
 
 \React.js frontend-osio loppuu/
+------------------------------
+\Rest API alkaa/
+
+Rest API hallitsee liikenteen frontend applikaatioille tietokannasta ja päivittää uusia tietoa tietokantaan sensoreista saaduista viesteistä MQTT protokollaa käyttäen.
+Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taulu. Parkkitalo sisältää tiedot parkkihalleista, parkit sisältävät tietoa parkki ruutujen tilanteesta ja siihen kuuluvasta sensorista, varaukset pitää sisällään varattujen paikkojen tietoja ja käyttäjä taulussa on rekisteröidyn käyttäjän tiedot.
+
+# Asennus
+
+1. Kloonaa repositorio
+
+    git clone https://github.com/Haltian-yritysprojekti/Parkki_Apuri.git
+
+2. Asenna tarvittavat riippuvuudet
+
+    npm install
+    
+# Käyttö
+
+1. Tarvittavat osat
+
+    -Server kansioon lisättävä sertifikaatti ja avain
+    -MQTT tiedostolle antaa tarvittavat sertifikaatit ja avaimet suojattuun MQTT yhdistämiseen
+    -Luoda db.json tiedosto jossa tarvittavat käyttäjä ja salasana tietokannan yhdistämiseen
+
+2. Käynnistäminen
+
+    node server/www.js
+
+3. Avaa selain ja siirry osoitteeseen http://localhost:3000
+
+# Toiminnot
+
+- Kontrolloi tietokantaa POSTMAN pyyntöjen avulla
+- Hae parkkihallien tiedot ja avointen paikkojen määrä
+- Hae käyttäjän varaukset rekisterillä
+- Hae parkkihallin parkkien tila
+- Varaa parkki ruutu
+- Tarkistaa käytttämättömien varausten poistamisen
+- Rekisteröi käyttäjä
+- Kirjaudu sisään käyttäjällä
+
+# Teknologiat
+
+- JavaScript
+
+# Käytetyt Node.js kirjastot
+
+- Body-parser
+- Cors
+- Debug
+- Express
+- MQTT
+- Mysql
+- Nodemon
+
+# Kehitysympäristö
+
+- Node.js versio 14.15.4
+- Npm versio 6.14.10
+
+# Tekijä
+
+GitHub: https://github.com/RamM21
+
+\Node.js osio loppuu/
 ------------------------------
