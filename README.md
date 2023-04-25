@@ -17,11 +17,15 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 
 # Käyttö
 
-1. Käynnistä sovellus
+1. Aloitus
+
+    Rest API serveri päälle
+
+2. Käynnistä sovellus
 
     npm start
 
-2. Avaa selain ja siirry osoitteeseen http://localhost:3000
+3. Avaa selain ja siirry osoitteeseen http://localhost:3000
 
 
 # Toiminnot
@@ -104,7 +108,7 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
     node server/www.js
 
-3. Avaa selain ja siirry osoitteeseen https://localhost:3000
+3. Avaa selain ja siirry osoitteeseen https://localhost:4000
 
 # Toiminnot
 
