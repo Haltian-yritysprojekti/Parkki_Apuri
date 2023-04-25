@@ -7,9 +7,12 @@ const parkit = require('./model/parkit')
 const { error } = require('console')
 
 const options = {
-    Port:8883,
+    host:'a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',
+    port:'8883',
+    protocol:'mqtt',
     cert:cert,
-    key:key
+    key:key,
+    rejectUnauthorized:false
 }
 
 const client = mqtt.connect('mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com',options)
