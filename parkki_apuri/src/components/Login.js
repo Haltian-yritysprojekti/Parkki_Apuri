@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn }) => {
     event.preventDefault();
     setLoginProcessState("processing");
     try {
-      const result = await axios.post('https://localhost:4000/user/login', {
+      const result = await axios.post('https://13.51.255.38:3000/user/login', {
           email: event.target.email.value,
           salasana: event.target.password.value
         }

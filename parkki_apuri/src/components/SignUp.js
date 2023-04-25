@@ -20,7 +20,7 @@ export default function Signup () {
             salasana: password,
             rekisteri: licensePlate,
         },
-        url: "https://localhost:4000/user//",
+        url: "https://13.51.255.38:3000/user//",
     })
     .then((res) => console.log(res));
     navigate('/login')
