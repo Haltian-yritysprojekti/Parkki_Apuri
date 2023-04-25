@@ -1,6 +1,6 @@
 # Parkki_Apuri
 
-## React.js frontend-osio alkaa
+# React.js frontend-osio
 
 Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia websovelluksen eri osista selaimessa.
 
@@ -25,7 +25,7 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 2. Avaa selain ja siirry osoitteeseen http://localhost:3000
 
 
-# Toiminnot
+## Toiminnot
 
 - Valitse jokin kolmesta parkkihallista
 - Selaa eri hallien autopaikkoja (10 per sijainti)
@@ -35,29 +35,29 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 - Kirjaudu ulos käyttäjältä
 
 
-# Teknologiat
+## Teknologiat
 
 - ReactJS
 - HTML
 - CSS
 
-# Käytetyt React.js kirjastot
+## Käytetyt React.js kirjastot
 
 - Axios
 - React-router-dom
 
 
-# Kehitysympäristö
+## Kehitysympäristö
 
 - Node.js versio 14.16.0
 - Npm versio 6.14.11
 
-# Tekijä
+## Tekijä
 
-GitHub: https://github.com/Alenkaara
+Aleksi Lehtola. GitHub: https://github.com/Alenkaara
 
 
-# Kuvia sovelluksen eri osista
+## Kuvia sovelluksen eri osista
 
 - Home.js: Sovelluksen pääsivu.
 
@@ -76,14 +76,13 @@ GitHub: https://github.com/Alenkaara
 ![va](https://user-images.githubusercontent.com/78751694/234013654-ce179947-c300-4b55-915f-8febc7ff66c0.png)
 
 
-\React.js frontend-osio loppuu/
 ------------------------------
-\Rest API alkaa/
+# Rest API osio
 
 Rest API hallitsee liikenteen frontend applikaatioille tietokannasta ja päivittää uusia tietoa tietokantaan sensoreista saaduista viesteistä MQTT protokollaa käyttäen.
 Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taulu. Parkkitalo sisältää tiedot parkkihalleista, parkit sisältävät tietoa parkki ruutujen tilanteesta ja siihen kuuluvasta sensorista, varaukset pitää sisällään varattujen paikkojen tietoja ja käyttäjä taulussa on rekisteröidyn käyttäjän tiedot.
 
-# Asennus
+## Asennus
 
 1. Kloonaa repositorio
 
@@ -93,7 +92,7 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
     npm install
     
-# Käyttö
+## Käyttö
 
 1. Tarvittavat osat
 
@@ -107,7 +106,7 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
 3. Avaa selain ja siirry osoitteeseen https://localhost:3000
 
-# Toiminnot
+## Toiminnot
 
 - Kontrolloi tietokantaa POSTMAN pyyntöjen avulla
 - Hae parkkihallien tiedot ja avointen paikkojen määrä
@@ -118,11 +117,11 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 - Rekisteröi käyttäjä
 - Kirjaudu sisään käyttäjällä
 
-# Teknologiat
+## Teknologiat
 
 - JavaScript
 
-# Käytetyt Node.js kirjastot
+## Käytetyt Node.js kirjastot
 
 - Body-parser
 - Cors
@@ -132,37 +131,37 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 - Mysql
 - Nodemon
 
-# Kehitysympäristö
+## Kehitysympäristö
 
 - Node.js versio 14.15.4
 - Npm versio 6.14.10
 
-# Tekijä
+## Tekijä
 
 GitHub: https://github.com/RamM21
 
-\Node.js osio loppuu/
-------------------------------
-\Android-osio alkaa/
 
-# Tarvittavat asiat
+------------------------------
+# Android-osio
+
+## Tarvittavat asiat
 
 - Android Studio Code
 - Android puhelin debug-moodissa ja usb-yhteydessä tietokoneeseen
 - Puhelin ja kone saman LAN-yhteyden alla
 - Asennusohjeet Rest-Api kohdasta tietokantayhteyttä varten
 
-# Teknologiat
+## Teknologiat
 - Kotlin-kieli
 
-# Käytetyt android-kirjastot
+## Käytetyt android-kirjastot
 
 - com.android.volley
 - javax.net.ssl
 - android.widget
 - android.view
 
-# Toiminta (Mock data)
+## Toiminta (Mock data)
 
 - Sovellus käynnistyy kolmen napin näkymään, jotka sisältävät API:lta luetut sijaintitiedot ja paikan tiedot.
 ![Menu](https://user-images.githubusercontent.com/79058877/234205460-85808ede-57c8-46a9-8d06-2bb3aed7afbf.jpg)
@@ -170,7 +169,7 @@ GitHub: https://github.com/RamM21
 ![A](https://user-images.githubusercontent.com/79058877/234205817-b7db1f93-df44-4d84-beba-5d2f7e4300ab.jpg)
 - Muut napit katoavat painettaessa nappia, uudelleenpainallus ylimpään nappiin tuo takaisin menu-näkymän.
 
-# Tekijät
+## Tekijät
 
 Eliel Latvala & Lassi Tihinen
 
@@ -183,5 +182,4 @@ Eliel Latvala
 
 - Sovelluksen logiikan ja datan käsittely, pääosin MainActivity.kt
 
-\Android-osio loppuu/
-------------------------------
+-----------------------------
