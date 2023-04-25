@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -27,13 +28,14 @@ class MainActivity : AppCompatActivity() {
     private var isCardViewBVisible = false
     private var isCardViewCVisible = false
 
-    private var url = "https://192.168.124.215:3000/"
+    private var url = "https://your_ip_adress:3000/"
     private val originalUrl = url
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        //val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
         val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
         val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
@@ -62,13 +64,26 @@ class MainActivity : AppCompatActivity() {
 
         makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
 
+        // Swipe refresh to refresh data in freeParkingSpots
+        /*
+        swipeRefreshLayout.setOnRefreshListener {
+            makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+            swipeRefreshLayout.postDelayed({
+                swipeRefreshLayout.isRefreshing = false
+            }, 1000)
+        }
+        */
+
+        // Gets the data from server in to variables parkingSpots when clicked
+        // and shows it in cardview
         myClickLayoutA.setOnClickListener {
             isCardViewAVisible = !isCardViewAVisible
+
             if (isCardViewAVisible) {
                 Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "A"
-                url = "https://192.168.124.215:3000/sijainti%20A"
+                url = "https://your_ip_adress:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutB.visibility = View.GONE
@@ -77,10 +92,8 @@ class MainActivity : AppCompatActivity() {
                 val topToBottomCardViewA = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
                 topToBottomCardViewA.topToBottom = R.id.clickableLayout1
                 myCardViewA.layoutParams = topToBottomCardViewA
-
-
-
-            } else {
+            }
+            else {
                 Log.i("else A isCardViewAVisible", isCardViewAVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
@@ -91,15 +104,15 @@ class MainActivity : AppCompatActivity() {
                 topToBottomCardViewA.topToBottom = R.id.clickableLayout3
                 myCardViewA.layoutParams = topToBottomCardViewA
             }
-
         }
+
         myClickLayoutB.setOnClickListener {
             isCardViewBVisible = !isCardViewBVisible
             if (isCardViewBVisible) {
                 Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "B"
-                url = "https://192.168.124.215:3000/sijainti%20B"
+                url = "https://your_ip_adress:3000/sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutA.visibility = View.GONE
@@ -108,9 +121,8 @@ class MainActivity : AppCompatActivity() {
                 val topToBottomCardViewB = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
                 topToBottomCardViewB.topToBottom = R.id.logoView
                 myCardViewA.layoutParams = topToBottomCardViewB
-
-
-            } else {
+            }
+            else {
                 Log.i("else B isCardViewAVisible", isCardViewBVisible.toString())
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
@@ -128,7 +140,7 @@ class MainActivity : AppCompatActivity() {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
-                url = "https://192.168.124.215:3000/sijainti%20C"
+                url = "https://your_ip_adress:3000/sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myClickLayoutA.visibility = View.GONE
                 myClickLayoutB.visibility = View.GONE
@@ -136,9 +148,9 @@ class MainActivity : AppCompatActivity() {
                 val topToBottomCardViewC = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
                 topToBottomCardViewC.topToBottom = R.id.logoView
                 myCardViewA.layoutParams = topToBottomCardViewC
+            }
 
-
-            } else {
+            else {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 myCardViewA.visibility = View.GONE
                 myClickLayoutA.visibility = View.VISIBLE
@@ -152,9 +164,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // This function handles jsoRequest to ge the data
 private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
     var isFree = false
     // Create a trust manager that does not validate certificate chains
+    // This method is not secure, and should be used only testing!
     val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
         override fun getAcceptedIssuers(): Array<X509Certificate> {
             return arrayOf()
@@ -176,7 +190,7 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
     val hostnameVerifier = HostnameVerifier { _, _ -> true }
     HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
 
-
+    // Makes the request based on url
     val request = JsonArrayRequest(
         Request.Method.GET, url, null,
         { response ->
