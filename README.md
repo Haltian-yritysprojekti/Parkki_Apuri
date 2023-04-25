@@ -1,4 +1,5 @@
 # Parkki_Apuri
+\React.js frontend-osio alkaa/
 
 Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia sovelluksen eri osista selaimessa.
 
@@ -78,3 +79,7 @@ Sähköposti: t0leal01@students.oamk.fi GitHub: https://github.com/Alenkaara
 - Reservation.js: Parkkipaikan varaussivu.
 
 ![va](https://user-images.githubusercontent.com/78751694/234013654-ce179947-c300-4b55-915f-8febc7ff66c0.png)
+
+
+\React.js frontend-osio loppuu/
+------------------------------
