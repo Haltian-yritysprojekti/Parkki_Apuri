@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        //val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
         val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
         val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
@@ -64,14 +65,15 @@ class MainActivity : AppCompatActivity() {
         makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
 
         // Swipe refresh to refresh data in freeParkingSpots
-        /*
+
         swipeRefreshLayout.setOnRefreshListener {
+            url=originalUrl
             makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
             swipeRefreshLayout.postDelayed({
                 swipeRefreshLayout.isRefreshing = false
             }, 1000)
         }
-        */
+
 
         // Gets the data from server in to variables parkingSpots when clicked
         // and shows it in cardview
