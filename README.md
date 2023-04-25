@@ -17,15 +17,11 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 
 # Käyttö
 
-1. Aloitus
-
-    Rest API serveri päälle
-
-2. Käynnistä sovellus
+1. Käynnistä sovellus
 
     npm start
 
-3. Avaa selain ja siirry osoitteeseen http://localhost:3000
+2. Avaa selain ja siirry osoitteeseen http://localhost:3000
 
 
 # Toiminnot
@@ -108,7 +104,7 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
     node server/www.js
 
-3. Avaa selain ja siirry osoitteeseen https://localhost:4000
+3. Avaa selain ja siirry osoitteeseen https://localhost:3000
 
 # Toiminnot
 
@@ -145,4 +141,46 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 GitHub: https://github.com/RamM21
 
 \Node.js osio loppuu/
+------------------------------
+\Android-osio alkaa/
+
+# Tarvittavat asiat
+
+- Android Studio Code
+- Android puhelin debug-moodissa ja usb-yhteydessä tietokoneeseen
+- Puhelin ja kone saman LAN-yhteyden alla
+- Asennusohjeet Rest-Api kohdasta tietokantayhteyttä varten
+
+# Teknologiat
+- Kotlin-kieli
+
+# Käytetyt android-kirjastot
+
+- com.android.volley
+- javax.net.ssl
+- android.widget
+- android.view
+
+# Toiminta (Mock data)
+
+- Sovellus käynnistyy kolmen napin näkymään, jotka sisältävät API:lta luetut sijaintitiedot ja paikan tiedot.
+![Menu](https://user-images.githubusercontent.com/79058877/234205460-85808ede-57c8-46a9-8d06-2bb3aed7afbf.jpg)
+- Nappia painamalla alle tulee CardView-objecti, joka sisältää API:lta saadut parkkitiedot sijaintikohtaisesti
+![A](https://user-images.githubusercontent.com/79058877/234205817-b7db1f93-df44-4d84-beba-5d2f7e4300ab.jpg)
+- Muut napit katoavat painettaessa nappia, uudelleenpainallus ylimpään nappiin tuo takaisin menu-näkymän.
+
+# Tekijät
+
+Eliel Latvala & Lassi Tihinen
+
+Lassi Tihinen
+
+- Sovelluksen ulkoasun suunnittelu, nappien suunnittelu, parkkipaikkanäkymän suunnittelu, pääosin xml-tiedostot jotka muokkaavat sovellusnäkymää.
+- Alkuperäinen mock-data versio josta siirryttiin nykyiseen näkymään
+
+Eliel Latvala
+
+- Sovelluksen logiikan ja datan käsittely, pääosin MainActivity.kt
+
+\Android-osio loppuu/
 ------------------------------
