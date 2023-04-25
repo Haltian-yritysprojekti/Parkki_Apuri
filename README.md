@@ -4,6 +4,9 @@
 
 Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia websovelluksen eri osista selaimessa.
 
+## Web-sovelluksen suora linkki
+https://parkkiapuri.onrender.com/
+
 
 ## Asennus
 
