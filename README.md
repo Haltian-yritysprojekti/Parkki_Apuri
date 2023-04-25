@@ -171,6 +171,7 @@ GitHub: https://github.com/RamM21
 - Nappia painamalla alle tulee CardView-objecti, joka sisältää API:lta saadut parkkitiedot sijaintikohtaisesti
 ![A](https://user-images.githubusercontent.com/79058877/234205817-b7db1f93-df44-4d84-beba-5d2f7e4300ab.jpg)
 - Muut napit katoavat painettaessa nappia, uudelleenpainallus ylimpään nappiin tuo takaisin menu-näkymän.
+- Näkymän voi päivittää vetämällä ylhäältä alaspäin.
 
 ## Tekijät
 
