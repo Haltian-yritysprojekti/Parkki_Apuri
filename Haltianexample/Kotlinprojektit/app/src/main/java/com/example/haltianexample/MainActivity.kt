@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private var isCardViewBVisible = false
     private var isCardViewCVisible = false
 
-    private var url = "https://your_ip_adress:3000/"
+    private var url = "https://13.51.255.38:3000/"
     private val originalUrl = url
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "A"
-                url = "https://your_ip_adress:3000/sijainti%20A"
+                url = "https://13.51.255.38:3000/sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutB.visibility = View.GONE
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "B"
-                url = "https://your_ip_adress:3000/sijainti%20B"
+                url = "https://13.51.255.38:3000/sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutA.visibility = View.GONE
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
-                url = "https://your_ip_adress:3000/sijainti%20C"
+                url = "https://13.51.255.38:3000/sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myClickLayoutA.visibility = View.GONE
                 myClickLayoutB.visibility = View.GONE
