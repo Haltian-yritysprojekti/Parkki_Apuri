@@ -1,10 +1,11 @@
 # Parkki_Apuri
-\React.js frontend-osio alkaa/
+
+## React.js frontend-osio alkaa
 
 Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia websovelluksen eri osista selaimessa.
 
 
-# Asennus
+## Asennus
 
 1. Kloonaa repositorio
 
@@ -15,7 +16,7 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
     npm install
 
 
-# Käyttö
+## Käyttö
 
 1. Käynnistä sovellus
 
