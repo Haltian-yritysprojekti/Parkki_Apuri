@@ -96,15 +96,15 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
 1. Tarvittavat osat
 
-    -Server kansioon lisättävä sertifikaatti ja avain
-    -MQTT tiedostolle antaa tarvittavat sertifikaatit ja avaimet suojattuun MQTT yhdistämiseen
-    -Luoda db.json tiedosto jossa tarvittavat käyttäjä ja salasana tietokannan yhdistämiseen
+    - Server kansioon lisättävä sertifikaatti ja avain
+    - MQTT tiedostolle antaa tarvittavat sertifikaatit ja avaimet suojattuun MQTT yhdistämiseen
+    - Luoda db.json tiedosto jossa tarvittavat käyttäjä ja salasana tietokannan yhdistämiseen
 
 2. Käynnistäminen
 
     node server/www.js
 
-3. Avaa selain ja siirry osoitteeseen http://localhost:3000
+3. Avaa selain ja siirry osoitteeseen https://localhost:3000
 
 # Toiminnot
 
@@ -113,7 +113,7 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 - Hae käyttäjän varaukset rekisterillä
 - Hae parkkihallin parkkien tila
 - Varaa parkki ruutu
-- Tarkistaa käytttämättömien varausten poistamisen
+- Tarkistaa käyttämättömien varausten poistamisen
 - Rekisteröi käyttäjä
 - Kirjaudu sisään käyttäjällä
 
