@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var isCardViewBVisible = false
     private var isCardViewCVisible = false
 
-    private var url = "https://13.51.255.38:3000/"
+    private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-locations.json"
     private val originalUrl = url
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "A"
-                url = "https://13.51.255.38:3000/sijainti%20A"
+                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutB.visibility = View.GONE
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "B"
-                url = "https://13.51.255.38:3000/sijainti%20B"
+                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutA.visibility = View.GONE
@@ -141,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                 val myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
-                url = "https://13.51.255.38:3000/sijainti%20C"
+                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myClickLayoutA.visibility = View.GONE
                 myClickLayoutB.visibility = View.GONE
@@ -167,7 +168,6 @@ class MainActivity : AppCompatActivity() {
 
     // This function handles jsoRequest to ge the data
 private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
-    var isFree = false
     // Create a trust manager that does not validate certificate chains
     // This method is not secure, and should be used only testing!
     val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
@@ -192,22 +192,26 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
     HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
 
     // Makes the request based on url
-    val request = JsonArrayRequest(
+    val request = JsonObjectRequest(
         Request.Method.GET, url, null,
         { response ->
             try {
+                val resultArray = response.getJSONArray("result")
+
                 if(url==originalUrl) {
-                    for (i in 0 until response.length()) {
-                        val jsonObject = response.getJSONObject(i)
+                    for (i in 0 until resultArray.length()) {
+                        val jsonObject = resultArray.getJSONObject(i)
                         textViews[i].text = jsonObject.getString("sijainti")
-                        textViews1[i].text = jsonObject.getString("vapaa")
+                        textViews1[i].text = jsonObject.getString("count(varattu)")
                     }
                 }
                 else{
-                    for(i in 0 until response.length()){
-                        val jsonObject = response.getJSONObject(i)
+                    var isFree = false
+                    for(i in 0 until resultArray.length()){
+                        val jsonObject = resultArray.getJSONObject(i)
                         parkingSpots[i].text=jsonObject.getString("idParkit")
                         isFree = jsonObject.getBoolean("vapaa")
+                        Log.d(isFree.toString(), "Value of isFree")
                         if(isFree){
                             parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
                         }

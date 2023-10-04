@@ -57,4 +57,3 @@ outTmp/
 /test.output
 /kotlin-native/dist
 kotlin-ide/
-.idea/workspace.xml

@@ -9,13 +9,13 @@
 
 
     <EditText
-        android:id="@+id/fullName"
+        android:id="@+id/registerPlate"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="250dp"
         android:ems="10"
-        android:hint="Etunimi ja sukunimi"
+        android:hint="Rekisteritunnus"
         android:inputType="textPersonName"
         tools:textStyle="bold" />
 
