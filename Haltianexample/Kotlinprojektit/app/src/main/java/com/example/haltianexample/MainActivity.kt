@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity() {
 private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
     // Create a trust manager that does not validate certificate chains
     // This method is not secure, and should be used only testing!
+        /*
     val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
         override fun getAcceptedIssuers(): Array<X509Certificate> {
             return arrayOf()
@@ -190,7 +191,7 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
     // Create an ssl socket factory with our all-trusting manager
     val hostnameVerifier = HostnameVerifier { _, _ -> true }
     HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
-
+*/
     // Makes the request based on url
     val request = JsonObjectRequest(
         Request.Method.GET, url, null,

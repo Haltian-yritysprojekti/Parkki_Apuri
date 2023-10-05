@@ -13,7 +13,7 @@ class LoginActivity : ComponentActivity() {
         val registerButton: TextView = findViewById(R.id.register)
 
         registerButton.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }
