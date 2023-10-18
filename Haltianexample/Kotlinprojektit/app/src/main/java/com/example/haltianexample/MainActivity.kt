@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // This function handles jsoRequest to ge the data
-private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:MutableList<TextView>, textViews:MutableList<TextView>) {
+private fun makeJsonRequest(parkingSpots:MutableList<TextView>, freeParkingSpots:MutableList<TextView>, parkingLocation:MutableList<TextView>) {
     // Create a trust manager that does not validate certificate chains
     // This method is not secure, and should be used only testing!
         /*
@@ -202,8 +202,8 @@ private fun makeJsonRequest(parkingSpots:MutableList<TextView>, textViews1:Mutab
                 if(url==originalUrl) {
                     for (i in 0 until resultArray.length()) {
                         val jsonObject = resultArray.getJSONObject(i)
-                        textViews[i].text = jsonObject.getString("sijainti")
-                        textViews1[i].text = jsonObject.getString("count(varattu)")
+                        parkingLocation[i].text = jsonObject.getString("sijainti")
+                        freeParkingSpots[i].text = jsonObject.getString("varattu")
                     }
                 }
                 else{

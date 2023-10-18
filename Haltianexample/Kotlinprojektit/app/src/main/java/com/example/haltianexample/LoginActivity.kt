@@ -24,8 +24,7 @@ class LoginActivity : ComponentActivity() {
     private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/login-user.json"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_layout)
-        //val button: Button = findViewById(R.id.register)
+        setContentView(R.layout.activity_login)
         val registerButton: TextView = findViewById(R.id.register)
         val loginButton: Button = findViewById(R.id.login)
 
@@ -74,22 +73,23 @@ class LoginActivity : ComponentActivity() {
             Request.Method.POST, url, jsonObject,
             { response ->
                 try {
-                    if (response.has("error")) {
-                        // Handle error responses
-                        val errorMessage = response.getString("error")
-                        Toast.makeText(this, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // Handle successful login response
-                        // You can extract additional information if needed
-                        Toast.makeText(this, "Response: $response", Toast.LENGTH_LONG).show()
+
+                    if (response.has("email") && response.has("rekisteri") && response.has("userid")) {
+                        Toast.makeText(this, "Logged in successfully!", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     }
+                    else if (response.has("result")) {
+                        val result = response.get("result")
+                        Toast.makeText(this, "Error: $result", Toast.LENGTH_LONG).show()
+                    }
+
                 } catch (e: JSONException) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                     Log.e(ContentValues.TAG, "Error parsing JSON", e)
                 }
             },
             { error ->
-                // Handle the error here
                 Toast.makeText(this, "Error sending data: ${error.message}", Toast.LENGTH_LONG).show()
                 Log.e("Error sending data", error.toString())
             }

@@ -1,6 +1,7 @@
 package com.example.haltianexample
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -46,8 +47,6 @@ class RegisterActivity : ComponentActivity() {
         val jsonObject = JSONObject()
 
         //Tsekataan onko boxeissa jotain, jos ei niin näytetään errorviesti
-
-        //Tsekataan onko boxeissa jotain, jos ei niin näytetään errorviesti
         if (registerNumber.isEmpty()) {
             userRegisterNumber.error = "Syötä rekisteritunnus!"
             userRegisterNumber.requestFocus()
@@ -67,7 +66,6 @@ class RegisterActivity : ComponentActivity() {
         }
 
         //katsotaan sisältääkö annettu sähköposti tarvittavat merkit esim @ jne.
-        //katsotaan sisältääkö annettu sähköposti tarvittavat merkit esim @ jne.
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             userEmail.error = "Sähköpostiosoite ei kelpaa!"
             userEmail.requestFocus()
@@ -84,16 +82,26 @@ class RegisterActivity : ComponentActivity() {
             Request.Method.POST, url, jsonObject,
             { response ->
                 try {
-                    Toast.makeText(this, "Response: $response", Toast.LENGTH_LONG).show()
+
+                    val result = response.get("result")
+
+                    if (result is String) {
+                        Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG).show()
+
+                    }else if(result is JSONObject){
+                        val errorMessage = result.getString("error")
+                        Toast.makeText(this, "Error: $errorMessage", Toast.LENGTH_LONG).show()
+
+                    }
+
                 } catch (e: JSONException) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                     Log.e(TAG, "Error parsing JSON", e)
                 }
             },
             { error ->
-                // Handle the error here
                 Toast.makeText(this, "Error sending data: ${error.message}", Toast.LENGTH_LONG).show()
-                Log.e("Error sending data", error.toString())
+                Log.e("TAG", "RESPONSE IS $error")
             }
         )
 

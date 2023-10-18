@@ -7,13 +7,20 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_height="297dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parkkilogomuokattu" />
+
 
     <EditText
         android:id="@+id/email"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="Sähköpostiosoite"
         android:inputType="textPersonName"
@@ -36,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/teal_700"
         android:drawableLeft="@drawable/ic_login_icon"
         android:text="Kirjaudu sisään"
         android:textAlignment="center"
@@ -49,7 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="240dp"
         android:layout_marginTop="20dp"
-        android:drawableTint="@color/teal_200"
+        android:drawableTint="@color/teal_700"
+        android:drawableLeft="@drawable/ic_register_icon"
         android:text="Rekisteröidy"
         android:textSize="20dp"
         tools:textStyle="bold" />
