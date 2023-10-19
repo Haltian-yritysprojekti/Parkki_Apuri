@@ -51,8 +51,6 @@ class LoginActivity : ComponentActivity() {
         val email  = userEmail.text.toString()
         val password  = userPassword.text.toString()
 
-        progressbar.visibility = View.VISIBLE
-
         if (email.isEmpty()) {
             userEmail.error = "Syötä sähköpostiosoite!"
             userEmail.requestFocus()
@@ -70,6 +68,8 @@ class LoginActivity : ComponentActivity() {
             userEmail.requestFocus()
             return
         }
+
+        progressbar.visibility = View.VISIBLE
 
         val jsonObject = JSONObject()
         jsonObject.put("email", email)

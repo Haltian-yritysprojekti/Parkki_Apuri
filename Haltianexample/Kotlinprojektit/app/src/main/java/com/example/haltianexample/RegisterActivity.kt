@@ -46,8 +46,6 @@ class RegisterActivity : ComponentActivity() {
 
     private fun registerUser() {
 
-        progressbar.visibility = View.VISIBLE
-
         val registerNumber  = userRegisterNumber.text.toString()
         val email  = userEmail.text.toString()
         val password  = userPassword.text.toString()
@@ -79,6 +77,7 @@ class RegisterActivity : ComponentActivity() {
             return
         }
 
+        progressbar.visibility = View.VISIBLE
 
         jsonObject.put("email", email)
         jsonObject.put("salasana", password)
