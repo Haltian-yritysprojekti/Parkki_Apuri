@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -18,8 +20,10 @@ import org.json.JSONObject
 
 class LoginActivity : ComponentActivity() {
 
-    private lateinit var userEmail: EditText;
-    private lateinit var userPassword: EditText;
+    private lateinit var userEmail: EditText
+    private lateinit var userPassword: EditText
+
+    private lateinit var progressbar: ProgressBar
 
     private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/login-user.json"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,7 @@ class LoginActivity : ComponentActivity() {
         setContentView(R.layout.activity_login)
         val registerButton: TextView = findViewById(R.id.register)
         val loginButton: Button = findViewById(R.id.login)
-
+        progressbar = findViewById(R.id.progressBar)
         userEmail = findViewById(R.id.email)
         userPassword = findViewById(R.id.password)
 
@@ -46,6 +50,8 @@ class LoginActivity : ComponentActivity() {
 
         val email  = userEmail.text.toString()
         val password  = userPassword.text.toString()
+
+        progressbar.visibility = View.VISIBLE
 
         if (email.isEmpty()) {
             userEmail.error = "Syötä sähköpostiosoite!"
@@ -87,6 +93,8 @@ class LoginActivity : ComponentActivity() {
                 } catch (e: JSONException) {
                     Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
                     Log.e(ContentValues.TAG, "Error parsing JSON", e)
+                } finally {
+                    progressbar.visibility = View.INVISIBLE
                 }
             },
             { error ->
