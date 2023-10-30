@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReservationActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="135dp"
+        android:background="#018685"
+        android:contentDescription='@string/firmName'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parkkilogomuokattu" />
+
+    <TextView
+        android:id="@+id/tv_currentTime"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="22dp"
+        android:gravity="center"
+        android:text='@string/tv_aika'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tv_varausAika"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:text='@string/tv_aika'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_varausAikaOtsikko" />
+
+    <TextView
+        android:id="@+id/tv_varausAikaOtsikko"
+        android:layout_width="105dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="fill"
+        android:text="@string/varausAikaOtsikko"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_currentTime">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_rekisteriOtsikko"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/rekisteriOtsikko"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/bu_ResTimeAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="248dp"
+        android:layout_marginBottom="208dp"
+        android:text="@string/lisäys"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bu_ResTimeSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="208dp"
+        android:text="@string/poisto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bu_resConf"
+        style="@style/layout_buttonStyle"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/bu_confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_licensePlate"
+        android:gravity="center"
+        android:layout_width="109dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="13dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
