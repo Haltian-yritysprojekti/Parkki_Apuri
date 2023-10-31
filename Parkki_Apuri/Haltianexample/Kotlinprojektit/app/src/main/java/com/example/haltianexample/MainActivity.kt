@@ -1,6 +1,7 @@
 package com.example.haltianexample
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     private var isCardViewCVisible = false
     private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-locations.json"
     private val originalUrl = url
+    private var locationURL : String? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,9 @@ class MainActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra("userid")
         val licensePlate = intent.getStringExtra("rekisteri")
+        val electronicMail = intent.getStringExtra("email")
+
+
 
 
 
@@ -74,6 +81,21 @@ class MainActivity : AppCompatActivity() {
             }, 1000)
         }
 
+        //exports intents gathered from LoginActivity.kt
+        fun exportIntentToFile(userId: String?, licensePlate: String?, electronicMail: String?){
+            val data = "$userId\n$licensePlate\n$electronicMail"
+
+            try {
+                val fileName = "intentData.txt"
+                val fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE)
+                fileOutputStream.write(data.toByteArray())
+                fileOutputStream.close()
+            }   catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this, "Error exporting data", Toast.LENGTH_SHORT).show()
+            }
+        }
+        exportIntentToFile(userId, licensePlate, electronicMail)
 
         // Gets the data from server in to variables parkingSpots when clicked
         // and shows it in cardview
@@ -85,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "A"
                 url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20A"
+                locationURL = "sijainti A"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutB.visibility = View.GONE
@@ -114,6 +137,7 @@ class MainActivity : AppCompatActivity() {
                 var myCardViewA: CardView = findViewById(R.id.cardView_A)
                 locationId.text = "B"
                 url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20B"
+                locationURL = "sijainti B"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myCardViewA.visibility = View.VISIBLE
                 myClickLayoutA.visibility = View.GONE
@@ -142,6 +166,7 @@ class MainActivity : AppCompatActivity() {
                 locationId.text = "C"
                 myCardViewA.visibility = View.VISIBLE
                 url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20C"
+                locationURL = "sijainti C"
                 makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
                 myClickLayoutA.visibility = View.GONE
                 myClickLayoutB.visibility = View.GONE
@@ -190,6 +215,7 @@ private fun makeJsonRequest(
                     for(i in 0 until resultArray.length()){
                         val jsonObject = resultArray.getJSONObject(i)
                         parkingSpots[i].text=jsonObject.getString("idParkit")
+                        val idParkitValue = jsonObject.getString("idParkit")
                         isFree = jsonObject.getBoolean("vapaa")
                         Log.d(isFree.toString(), "Value of isFree")
                         // Check if the parking spot is free (green) and set clickability accordingly
@@ -198,8 +224,8 @@ private fun makeJsonRequest(
                             parkingSpots[i].isClickable = true
                             parkingSpots[i].setOnClickListener {
                                 val reservationIntent = Intent(this, ReservationActivity::class.java)
-                                val specPark : Int? = null
-                                reservationIntent.putExtra("idParkit", specPark)
+                                reservationIntent.putExtra("idParkit", idParkitValue)
+                                reservationIntent.putExtra("sijainti", locationURL)
                                 startActivity(reservationIntent)
                             }
                         }

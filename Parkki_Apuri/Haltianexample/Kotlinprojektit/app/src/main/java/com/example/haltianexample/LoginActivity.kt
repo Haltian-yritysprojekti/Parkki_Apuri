@@ -26,6 +26,7 @@ class LoginActivity : ComponentActivity() {
     private lateinit var progressbar: ProgressBar
     private var userId: String? = null
     private var licensePlate: String? = null
+    private var electronicMail: String? = null
 
     private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/login-user.json"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,10 +86,13 @@ class LoginActivity : ComponentActivity() {
 
                     if (response.has("email") && response.has("rekisteri") && response.has("userid")) {
                         userId = response.getString("userid")
+                        licensePlate = response.getString("rekisteri") // Get the licensePlate value
+                        electronicMail = response.getString("email") // Get the electronicMail value
                         Toast.makeText(this, "Logged in successfully!", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("userid", userId)
                         intent.putExtra("rekisteri", licensePlate)
+                        intent.putExtra("email", electronicMail)
                         startActivity(intent)
                     }
                     else if (response.has("result")) {

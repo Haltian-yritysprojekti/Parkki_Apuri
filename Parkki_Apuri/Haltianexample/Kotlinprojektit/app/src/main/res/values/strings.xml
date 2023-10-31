@@ -17,6 +17,6 @@
     <string name="lisäys">+10</string>
     <string name="poisto">-10</string>
     <string name="rekisteriOtsikko">Rekisterikilpi</string>
-    <string name="rekisteriPlaceholder">"XXX-NNN"</string>
     <string name="varausAikaOtsikko">Varausaika</string>
+    <string name="idParkitOtsikko">Parkkipaikan id</string>
 </resources>
