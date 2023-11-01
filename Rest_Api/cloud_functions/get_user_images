@@ -1,0 +1,30 @@
+const bucketName = ;    //bucketName
+  const ibm = require('ibm-cos-sdk');
+  const config = {
+    endpoint: , //Bucket endpoint
+    apiKeyId: , //Bucket apikey
+    serviceInstanceId: //Bucket service instance id
+};
+
+async function main(params) {
+    //Getting usable profile images to users
+    const cos = new ibm.S3(config);
+    let res=[]
+    return cos.listObjects(
+        {Bucket: bucketName,Prefix: /*Prefix used in bucket items */},
+    ).promise()
+    .then((data) => {
+        if (data != null && data.Contents != null) {
+            for (var i = 0; i < data.Contents.length; i++) {
+                var itemKey = data.Contents[i].Key;
+                var itemSize = data.Contents[i].Size;
+                res.push({key:{/*Bucket public url before bucket item key*/}+data.Contents[i].Key})
+                console.log(`Item: ${itemKey} (${itemSize} bytes).`)
+            }
+        }
+        return ({result:res})
+    })
+    .catch((e) => {
+        console.error(`ERROR: ${e.code} - ${e.message}\n`);
+    });
+}

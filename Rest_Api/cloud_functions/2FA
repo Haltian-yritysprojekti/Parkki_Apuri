@@ -1,0 +1,124 @@
+const nodemailer = require('nodemailer');
+  const mysql = require('mysql');
+  const crypto = require('crypto');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+let transporter = nodemailer.createTransport({
+    host: ,     //Mail host
+    port:,   //Host port
+    auth: {
+      user: ,   //Email used to send authentication
+      pass:     //Email password or app password
+    },
+    tls:{
+        ciphers:'SSLv3'
+    },
+    requireTLS:true
+  });
+  
+async function main(params) {
+	if(params.password){
+        //Check authentication
+	    var res = await checkEmail(con,params.email)
+	    if(res.result.length==0){
+	        return ({result:{error:"No user with found"}})
+	    }
+	    res = await get2fa(con,params.email)
+	    if(params.password==res.result[0].authentication){
+	        await unload2fa(con,params.email)
+	        return ({result:"successful"})
+	    }else{
+	        return ({result:{error:"wrong authentication code"}})
+	    }
+	}else{
+        //Send authentication code to email
+	    var res = await checkEmail(con,params.email)
+	    if(res.result.length==0){
+	        return ({result:{error:"No user with found"}})
+	    }
+	    var authentication = crypto.randomBytes(5).toString('hex');
+	    res = await load2fa(con,authentication,params.email)
+	    res = await sendMail(transporter,params.email,authentication)
+	    return ({result:"successful"})
+	}
+}
+
+//Checking if email is valid
+async function checkEmail(db,email){
+    return new Promise((resolve,reject)=>{
+        db.query('select email from User where email=?',[email],function(err,result){
+            if(err){
+                reject({err:err})
+            }else{
+                resolve({result:result})
+            }
+        })
+    })
+}
+
+//
+async function sendMail(transporter,email,password){
+    var mailOptions = {
+    from:,  //Email used to send the mail
+    to:email,
+    subject:'Parkkiapuri authentication',
+    text:'Authentication code '+password
+    }
+     return new Promise((resolve, reject) => {
+         transporter.sendMail(mailOptions,function(err,result){
+                if(err){
+                    reject({ err: err });
+                }else{
+                    console.log("done1")
+                    resolve({done:true})
+                }
+            })
+        })
+}
+
+//Putting authentication code under user email
+async function load2fa(db,password,email){
+    return new Promise((resolve,reject)=>{
+        db.query('update User set authentication=? where email=?',[password,email],function(err,result){
+            if(err){
+                reject({err:err})
+            }else{
+                resolve({result:result})
+            }
+        })
+    })
+}
+
+//Getting the authentication code from email
+async function get2fa(db,email){
+    return new Promise((resolve,reject)=>{
+        db.query('select authentication from User where email=?',[email],function(err,result){
+            if(err){
+                reject({err:err})
+            }else{
+                resolve({result:result})
+            }
+        })
+    })
+}
+
+//When authentication code used successfully, remove code
+async function unload2fa(db,email){
+    return new Promise((resolve,reject)=>{
+        db.query('update User set authentication=null where email=?',[email],function(err,result){
+            if(err){
+                reject({err:err})
+            }else{
+                resolve({result:result})
+            }
+        })
+    })
+}

@@ -1,0 +1,34 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    
+    var res = await getLocations(con)
+    for(x of res.result){
+        x.varattu = x.all-(x.varattu+x.käytössä)
+    }
+    
+    return res
+}
+
+async function getLocations(con){
+    //Getting all locations data
+    return new Promise(function(resolve,reject){
+        con.query('select  count(if(etaisyys < 3000 && varattu = 0,1,null)) "käytössä",count(if(varattu = 1,1,null)) "varattu",count(varattu) "all",sijainti,osoite,puhelin,image from ParkkiTalo join Parkit on ParkkiTalo.id=Parkit.ParkkiTalo_id group by sijainti',function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}

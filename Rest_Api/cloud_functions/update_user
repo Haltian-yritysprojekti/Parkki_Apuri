@@ -1,0 +1,51 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    //Checking for empty params and valid register
+    if(params.email.length==0 || params.salasana.length==0 || params.rekisteri.length==0){
+        return ({result:{error:"Can't have empty email, password or register"}})
+    }
+    if(!/^([a-z]{3}-[0-9]{3})$/.test(params.rekisteri)){
+        return ({result:{error:"Invalid register"}})
+    }
+    
+    var res = await getUser(con,params.userid)
+    if(res.result.length>0){
+        //Updating user data
+        return new Promise(function(resolve,reject){
+        con.query('update User set email=?, rekisteri=?, salasana=? where userid=?',[params.email,params.rekisteri,params.salasana,params.userid],function(err,result){
+            if(err){
+                reject({error:err})
+            }
+            else{
+                resolve({result:"successful"})
+            }
+        })
+     })
+    }else{
+        return ({result:{error:"user with id not found"}})
+    }
+}
+
+//Getting user data
+async function getUser(con,id){
+    return new Promise(function(resolve,reject){
+        con.query('select * from User where userid=?',[id],function(err,result){
+            if(err){
+                reject({error:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}

@@ -1,0 +1,107 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    
+    var time = new Date()
+    var timeNow = time.getHours()+3+":"+time.getMinutes()+":"+time.getSeconds()
+    var res = await checkStart(con,timeNow)
+    for(x of res.result){
+        //Starting reservation and changing parking slot data to reserved
+        var slot = await getSlot(con,x.parkki)
+        if(slot.result[0].varattu==0){
+            new Promise(function(resolve,reject){
+                con.query('update Parkit set varattu="1",rekisteri=? where idParkit=?',[x.rekisteri,x.parkki],function(err,result){
+                    if(err){
+                        reject({reject:err})
+                    }
+                    else{
+                        resolve({result})
+                    }
+                })
+            })
+        }
+    }
+    res = await checkEnd(con,timeNow)
+    if(res.result.length>0){
+        for(x of res.result){
+            //Ending reservation and changing parking slot data to free
+            var slot = await getSlot(con,x.parkki)
+            if(slot.result[0].varattu==1){
+                new Promise(function(resolve,reject){
+                    con.query('update Parkit set varattu="0",rekisteri=null where idParkit=?',[x.parkki],function(err,result){
+                        if(err){
+                            reject({reject:err})
+                        }
+                        else{
+                            resolve({result})
+                        }
+                    })
+                })
+            }
+            //Deleting ended reservations
+            new Promise(function(resolve,reject){
+                con.query('delete from Varaukset where id=?',[x.id],function(err,result){
+                    if(err){
+                        reject({reject:err})
+                    }
+                    else{
+                        resolve({result})
+                    }
+                })
+            })
+        }
+    }
+    
+    return ({result:"done"})
+}
+
+//Getting slots to check if there are reservations made
+async function getSlot(db,id){
+    return new Promise(function(resolve,reject){
+        db.query('select * from Parkit where idParkit=?',[id],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
+
+//Getting reservations that are to start
+async function checkStart(db,time){
+    return new Promise(function(resolve,reject){
+        db.query('select * from Varaukset where startTime<? and endTime>?',[time,time],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
+
+//Getting reservations 
+async function checkEnd(db,time){
+    return new Promise(function(resolve,reject){
+        db.query('select * from Varaukset where endTime<?',[time],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}

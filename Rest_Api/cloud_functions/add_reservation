@@ -1,0 +1,76 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    
+    var res = await getSlot(con,params.idParkit)
+    console.log(res.result.length)
+    if(res.result.length>0){
+        console.log("here")
+        //Making the reservation if reservation times don't overlap
+        var reservations = await checkTime(con,params.idParkit,params.startTime,params.endTime)
+        if(reservations.result.length>0){
+            return ({result:{error:"Reservation cannot be made over other reservation"}})
+        }else{
+            return new Promise(function(resolve,reject){
+                con.query('insert into Varaukset values(null,?,?,?,?,?,?)',[params.userid,params.idParkit,params.startTime,params.endTime,params.rekisteri,params.sijainti],function(err,result){
+                    if(err){
+                        reject({reject:err})
+                    }
+                    else{
+                        resolve({result:"successful"})
+                    }
+                })
+            })
+        }
+    }else{
+        console.log("here2")
+        //Making reservation
+        return new Promise(function(resolve,reject){
+            con.query('insert into Varaukset values(null,?,?,?,?,?,?)',[params.userid,params.idParkit,params.startTime,params.endTime,params.rekisteri,params.sijainti],function(err,result){
+                if(err){
+                    reject({reject:err})
+                }
+                else{
+                    resolve({result:"successful"})
+                }
+            })
+        })
+    }
+}
+
+//Checking if slot has a reservation already
+async function getSlot(db,id){
+    return new Promise(function(resolve,reject){
+        db.query('select * from Varaukset where parkki=?',[id],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
+
+//Checking if reservation time goes over other reservation times
+async function checkTime(db,id,startTime,endTime){
+    return new Promise(function(resolve,reject){
+        db.query('select startTime, endTime from Varaukset where parkki=? and (? between startTime and endTime or ? between startTime and endTime)',[id,startTime,endTime],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
