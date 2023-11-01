@@ -1,11 +1,17 @@
 package com.example.haltianexample
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.coroutines.*
-import org.w3c.dom.Text
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -18,7 +24,6 @@ class ReservationActivity : AppCompatActivity() {
     private var currentTimeJob: Job? = null
     private var userId: String? = null
     private var licensePlate: String? = null
-
     private var electronicMail : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +38,6 @@ class ReservationActivity : AppCompatActivity() {
             licensePlate = exportedData[1]
             electronicMail = exportedData[2]
         }
-
-
 
 
         //Specific references to UI components
@@ -95,10 +98,74 @@ class ReservationActivity : AppCompatActivity() {
         }
 
 
-        confirmButton.setOnClickListener{
 
+        fun sendReservationToServer() {
+            // Get the current time and reservation time
+            val reaaliAika = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().time)
+            val reservationTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(vaihtelevaAika.time)
+
+            // Create a JSON object with the required structure
+            val reservationObject = JSONObject()
+            reservationObject.put("userid", userId)
+            reservationObject.put("idParkit", idParkitIntent)
+            reservationObject.put("startTime", reaaliAika)
+            reservationObject.put("endTime", reservationTime)
+            reservationObject.put("rekisteri", licensePlate)
+            reservationObject.put("sijainti", sijainti)
+
+            val serverUrl = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/add-reservation.json"
+
+            val requestQueue = Volley.newRequestQueue(this)
+
+            val request = JsonObjectRequest(Request.Method.POST, serverUrl, reservationObject,
+                { response ->
+                    // Handle the response here
+                    try {
+                        when (response.getString("result")) {
+                            "successful" -> {
+                                val confirmIntent = Intent(applicationContext, ReservationConfirm::class.java)
+                                confirmIntent.putExtra("idParkit", idParkitIntent)
+                                confirmIntent.putExtra("startTime", reaaliAika)
+                                confirmIntent.putExtra("endTime", reservationTime)
+                                confirmIntent.putExtra("rekisteri", licensePlate)
+                                confirmIntent.putExtra("sijainti", sijainti)
+                                startActivity(confirmIntent)
+
+                                // Show a success toast
+                                Toast.makeText(applicationContext, "Reservation successful", Toast.LENGTH_SHORT).show()
+                            }
+                            "spot reserved already" -> {
+                                val errorObject = response.getJSONObject("result")
+                                val errorMessage = errorObject.getString("error")
+                                // Reservation failed with a specific error message
+                                Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                // Reservation failed with an unknown error
+                                Toast.makeText(applicationContext, "Reservation failed with an error", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: JSONException) {
+                        // Handle JSON parsing error
+                        Toast.makeText(applicationContext, "Failed to parse server response", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                { error ->
+                    // Handle the request error
+                    Toast.makeText(applicationContext, "Reservation request failed", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+            // Add the request to the request queue
+            requestQueue.add(request)
+        }
+
+        confirmButton.setOnClickListener{
+            sendReservationToServer()
         }
     }
+
+
 
     override fun onStop() {
         currentTimeJob?.cancel()
@@ -131,6 +198,8 @@ class ReservationActivity : AppCompatActivity() {
 
 
 }
+
+
 
 
 

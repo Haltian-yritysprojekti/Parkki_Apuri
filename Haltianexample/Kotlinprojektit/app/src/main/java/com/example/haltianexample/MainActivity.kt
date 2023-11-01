@@ -37,10 +37,6 @@ class MainActivity : AppCompatActivity() {
         val licensePlate = intent.getStringExtra("rekisteri")
         val electronicMail = intent.getStringExtra("email")
 
-
-
-
-
         supportActionBar?.hide()
         val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
