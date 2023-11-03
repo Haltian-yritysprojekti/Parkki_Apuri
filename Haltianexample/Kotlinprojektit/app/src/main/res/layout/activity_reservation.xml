@@ -17,137 +17,163 @@
         app:srcCompat="@drawable/parkkilogomuokattu" />
 
     <TextView
-        android:id="@+id/tv_currentTime"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="22dp"
-        android:gravity="center"
-        android:text='@string/tv_aika'
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/tv_varausAika"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
-        android:text='@string/tv_aika'
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_varausAikaOtsikko" />
-
-    <TextView
         android:id="@+id/tv_varausAikaOtsikko"
-        android:layout_width="105dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="fill"
+        android:layout_width="150dp"
+        tools:textStyle="bold"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="end"
         android:text="@string/varausAikaOtsikko"
+        android:textSize="30sp"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_currentTime">
 
     </TextView>
 
     <TextView
-        android:id="@+id/tv_rekisteriOtsikko"
+        android:id="@+id/tv_varausAika"
+        tools:textStyle="bold"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/rekisteriOtsikko"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/tv_idParkitOtsikko"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="112dp"
-        android:text="@string/idParkitOtsikko"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-    </TextView>
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
+        android:layout_height="37dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="end"
+        android:text='@string/tv_aika'
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_varausAikaOtsikko" />
 
     <Button
         android:id="@+id/bu_ResTimeAdd"
+        tools:textStyle="bold"
+        style="@style/layout_buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginBottom="208dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="124dp"
         android:text="@string/lisäys"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bu_ResTimeSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="208dp"
-        android:text="@string/poisto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/bu_resConf"
+        tools:textStyle="bold"
         style="@style/layout_buttonStyle"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="118dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/bu_confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/tv_currentTime"
+        tools:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
+        android:gravity="end"
+        android:text='@string/tv_aika'
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/bu_ResTimeSub"
+        tools:textStyle="bold"
+        style="@style/whitebutton"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="124dp"
+        android:text="@string/poisto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/tv_licensePlate"
+        tools:textStyle="bold"
+        android:layout_width="123dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
         android:gravity="center"
-        android:layout_width="109dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="13dp"
-        android:text=""
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko" />
+
+    <TextView
+        android:id="@+id/tv_rekisteriOtsikko"
+        tools:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
+        android:text="@string/rekisteriOtsikko"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+    </TextView>
 
     <TextView
         android:id="@+id/tv_idParkit"
-        android:layout_width="109dp"
+        tools:textStyle="bold"
+        android:layout_width="38dp"
         android:layout_height="46dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="116dp"
-        android:gravity="center"
-        android:text=""
+        android:layout_marginStart="68dp"
+        android:gravity="start"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_idParkitOtsikko" />
 
     <TextView
-        android:id="@+id/tv_email"
-        android:layout_width="109dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="212dp"
-        android:gravity="center"
+        android:id="@+id/tv_idParkitOtsikko"
+        android:layout_width="153dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="208dp"
+        android:shadowColor="@color/parkkiapuri"
+        android:text="@string/idParkitOtsikko"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:textStyle="bold">
+
+    </TextView>
 
     <TextView
         android:id="@+id/tv_location"
-        android:layout_width="109dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="212dp"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="104dp"
+        android:shadowColor="@color/parkkiapuri"
+        android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko" />
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

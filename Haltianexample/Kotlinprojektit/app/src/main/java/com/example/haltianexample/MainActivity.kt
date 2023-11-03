@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -16,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
         val myClickLayoutC : LinearLayout = findViewById(R.id.clickableLayout3)
 
+        val emailTV : TextView = findViewById(R.id.tv_loggedEmail)
+        emailTV.text = electronicMail
+        val reservationIcon : ImageView = findViewById(R.id.bu_varaukset)
         val textView1: TextView = findViewById(R.id.tv_sA)
         val textView2: TextView = findViewById(R.id.tv_free_A)
         val textView3: TextView = findViewById(R.id.tv_sB)
@@ -77,6 +82,11 @@ class MainActivity : AppCompatActivity() {
             }, 1000)
         }
 
+        reservationIcon.setOnClickListener{
+            val resIntent = Intent(this, ReservationsView::class.java)
+            startActivity(resIntent)
+            resIntent.putExtra("userid", userId)
+        }
         //exports intents gathered from LoginActivity.kt
         fun exportIntentToFile(userId: String?, licensePlate: String?, electronicMail: String?){
             val data = "$userId\n$licensePlate\n$electronicMail"
@@ -186,7 +196,79 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // This function handles jsoRequest to ge the data
+    // This function handles jsonRequest to ge the data
+    private fun makeJsonRequest(parkingSpots: MutableList<TextView>, freeParkingSpots: MutableList<TextView>, parkingLocation: MutableList<TextView>)
+    {
+        val request = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                try {
+                    val resultArray = response.getJSONArray("result")
+
+                    if (url == originalUrl) {
+                        for (i in 0 until resultArray.length()) {
+                            val jsonObject = resultArray.getJSONObject(i)
+                            parkingLocation[i].text = jsonObject.getString("sijainti")
+                            freeParkingSpots[i].text = jsonObject.getString("varattu")
+                        }
+                    } else {
+                        for (i in 0 until resultArray.length()) {
+                            val jsonObject = resultArray.getJSONObject(i)
+                            parkingSpots[i].text = jsonObject.getString("idParkit")
+                            val idParkitValue = jsonObject.getString("idParkit")
+                            val isFree = jsonObject.getBoolean("vapaa")
+                            val tolppa = jsonObject.getInt("tolppa")
+
+                            // Check if the parking spot is free or an electric spot
+                            if (isFree) {
+                                if (tolppa == 1) {
+                                    // The spot is for electric cars and is free, set the electric green drawable
+                                    parkingSpots[i].setBackgroundResource(R.drawable.parking_green_e)
+                                } else {
+                                    // The spot is not for electric cars but is free, set the regular green drawable
+                                    parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
+                                }
+                                parkingSpots[i].isClickable = true
+                                parkingSpots[i].setOnClickListener {
+                                    val reservationIntent = Intent(this, ReservationActivity::class.java)
+                                    reservationIntent.putExtra("idParkit", idParkitValue)
+                                    reservationIntent.putExtra("sijainti", locationURL)
+                                    startActivity(reservationIntent)
+                                }
+                            } else {
+                                // The spot is not free, set the red drawable and disable clickability
+                                parkingSpots[i].setBackgroundResource(R.drawable.parking_red)
+                                parkingSpots[i].isClickable = false
+                                parkingSpots[i].setOnClickListener { null }
+                                if (tolppa == 1) {
+                                    // The spot is for electric cars and not free, set a specific electric occupied drawable
+                                    parkingSpots[i].setBackgroundResource(R.drawable.parking_red_e)
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Error message", e)
+                }
+            },
+            { error ->
+                Toast.makeText(this, "Error retrieving data: ${error.message}", Toast.LENGTH_LONG).show()
+                Log.e("Error retrieving data", error.toString())
+            }
+        )
+        // Add the request to the request queue
+        Volley.newRequestQueue(this).add(request)
+    }
+
+
+
+
+}
+
+//  parkingSpots[i].text=jsonObject.getString("tolppa")
+
+/*vanha toimiva koodi alkaa tästä
 private fun makeJsonRequest(
         parkingSpots:MutableList<TextView>,
         freeParkingSpots:MutableList<TextView>,
@@ -245,12 +327,34 @@ private fun makeJsonRequest(
             Log.e("Error retrieving data", error.toString())
         }
     )
-    Volley.newRequestQueue(this).add(request)
-
-}
+ja loppuu tähän */
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

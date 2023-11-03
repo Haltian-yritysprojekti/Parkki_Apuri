@@ -29,6 +29,8 @@ class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
+
+        supportActionBar?.hide()
         val idParkitIntent: String? = intent.getStringExtra("idParkit")
         var sijainti: String? = intent.getStringExtra("sijainti")
         val exportedData = readExportedData()
@@ -48,11 +50,9 @@ class ReservationActivity : AppCompatActivity() {
         val confirmButton: Button = findViewById(R.id.bu_resConf)
         val rekkariTV: TextView = findViewById(R.id.tv_licensePlate)
         val idTV : TextView = findViewById(R.id.tv_idParkit)
-        val emailTV: TextView = findViewById(R.id.tv_email)
         val locationTV: TextView = findViewById(R.id.tv_location)
         var vaihtelevaAika = Calendar.getInstance()
 
-        emailTV.text = electronicMail
         rekkariTV.text = licensePlate
         idTV.text = idParkitIntent
         locationTV.text = sijainti
@@ -74,19 +74,17 @@ class ReservationActivity : AppCompatActivity() {
 
 
         //function to update reservation time display
-
         fun updateVarausAika(){
             val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
             varausAika.text = sdf.format(vaihtelevaAika.time)
         }
-
+        //Adding and removing time inside OnClickListeners
         ajanLisays.setOnClickListener{
             vaihtelevaAika.add(Calendar.MINUTE,10)
             updateVarausAika()
         }
 
         ajanPoisto.setOnClickListener {
-            // Round up to the nearest minute
             val currTime = Calendar.getInstance()
             val minVarausAika = Calendar.getInstance()
             minVarausAika.add(Calendar.MINUTE, 10)
@@ -130,8 +128,8 @@ class ReservationActivity : AppCompatActivity() {
                                 confirmIntent.putExtra("rekisteri", licensePlate)
                                 confirmIntent.putExtra("sijainti", sijainti)
                                 startActivity(confirmIntent)
-
-                                // Show a success toast
+                                //finish closes the ReservationActivity
+                                finish()
                                 Toast.makeText(applicationContext, "Reservation successful", Toast.LENGTH_SHORT).show()
                             }
                             "spot reserved already" -> {

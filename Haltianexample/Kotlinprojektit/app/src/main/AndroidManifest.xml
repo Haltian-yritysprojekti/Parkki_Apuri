@@ -8,11 +8,14 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_parkkiapuri_foreground"
         android:label="Parkkiapuri"
         android:supportsRtl="true"
         android:theme="@style/Theme.Haltianexample"
         tools:targetApi="31">
+        <activity
+            android:name=".ReservationsView"
+            android:exported="false" />
         <activity
             android:name=".ReservationConfirm"
             android:exported="false" />

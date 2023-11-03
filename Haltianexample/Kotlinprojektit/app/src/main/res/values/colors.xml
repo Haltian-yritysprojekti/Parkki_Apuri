@@ -5,8 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="parkkiapuri">#018685</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="parking_green">#009000</color>
     <color name="parking_red">#CC0000</color>
+    <color name="gray">#CACACA</color>
 </resources>

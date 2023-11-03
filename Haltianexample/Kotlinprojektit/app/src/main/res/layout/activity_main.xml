@@ -12,8 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:statusBarColor="#009688">
+        android:statusBarColor="#009688"
+        tools:context=".MainActivity">
 
         <ImageView
             android:id="@+id/logoView"
@@ -101,7 +101,7 @@
                         android:layout_gravity="center"
                         android:text="@string/a"
                         android:textAlignment="center"
-                        android:textSize="50sp" />
+                        android:textSize="45sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -154,16 +154,16 @@
             <TextView
                 android:id="@+id/tv_sA"
                 style="@style/clickable_tvLocStyle"
-                android:text="Parkki A"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Parkki A" />
 
             <TextView
                 android:id="@+id/tv_free_A"
                 style="@style/clickable_tvFreeStyle"
-                android:text="5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
 
         <LinearLayout
@@ -171,22 +171,21 @@
             style="@style/layout_buttonStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clickableLayout1"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/clickableLayout1">
 
             <TextView
                 android:id="@+id/tv_sB"
                 style="@style/clickable_tvLocStyle"
-                android:text="Parkki B"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Parkki B" />
 
             <TextView
                 android:id="@+id/tv_free_B"
                 style="@style/clickable_tvFreeStyle"
-                android:text="5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,17 +198,40 @@
             <TextView
                 android:id="@+id/tv_sC"
                 style="@style/clickable_tvLocStyle"
-                android:text="Parkki C"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Parkki C" />
 
             <TextView
                 android:id="@+id/tv_free_C"
                 style="@style/clickable_tvFreeStyle"
-                android:text="2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="2" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_loggedEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="108dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bu_varaukset"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/twotone_fact_check_24" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

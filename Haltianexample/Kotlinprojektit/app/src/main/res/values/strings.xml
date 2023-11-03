@@ -9,7 +9,7 @@
     <string name="a">A</string>
     <string name="b">B</string>
     <string name="c">C</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Parkkiapuri</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="bu_confirm">Tee varaus</string>
     <string name="tv_aika">HH:mm:ss</string>
@@ -18,5 +18,8 @@
     <string name="poisto">-10</string>
     <string name="rekisteriOtsikko">Rekisterikilpi</string>
     <string name="varausAikaOtsikko">Varausaika</string>
-    <string name="idParkitOtsikko">Parkkipaikan id</string>
+    <string name="idParkitOtsikko">Valittu parkkipaikka</string>
+    <string name="bu_resConfirm">Palaa sijaintinäkymään</string>
+    <string name="greeting">Varauksesi</string>
+    <string name="varaukset">Varaukset</string>
 </resources>

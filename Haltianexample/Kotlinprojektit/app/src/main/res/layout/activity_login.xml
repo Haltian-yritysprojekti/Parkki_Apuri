@@ -48,6 +48,7 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/teal_700"
             android:drawableLeft="@drawable/ic_login_icon"
+            android:textColor="@color/white"
             android:text="Kirjaudu sisään"
             android:textAlignment="center"
             tools:textStyle="bold" />
