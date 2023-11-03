@@ -92,8 +92,8 @@ Rest API kansiossa MQTT Client hakee sensorien datat, cloud funktiot jotka hakev
 
 2. Asenna tarvittavat riippuvuudet
 
-    siirry REST API kansioon
-    npm install
+    - siirry REST API kansioon
+    - npm install
 
 3. Lisää jokainen Cloud funktio omaan IBM funktioihin ja lisää web toiminnallisuus niille
 
@@ -109,8 +109,8 @@ Rest API kansiossa MQTT Client hakee sensorien datat, cloud funktiot jotka hakev
 
 2. Käynnistäminen
 
-    aja tietokanta cloudissa tai locaalisti
-    node mqtt.js
+    - aja tietokanta cloudissa tai locaalisti
+    - aja MQTT client cloudissa tai locaalisti komennolla node mqtt.js
 
 3. Testaa IBM Cloud funktiot selaimessa tai POSTMAN sovelluksessa
 
