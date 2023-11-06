@@ -61,13 +61,14 @@ class ReservationsView : AppCompatActivity() {
                     for (i in 0 until resultArray.length()) {
                         val reservationData = resultArray.getJSONObject(i)
 
+                        val id = reservationData.getInt("id")
                         val startTime = reservationData.getString("startTime")
                         val endTime = reservationData.getString("endTime")
                         val parkki = reservationData.getInt("parkki")
                         val rekisteri = reservationData.getString("rekisteri")
                         val sijainti = reservationData.getString("sijainti")
 
-                        val reservation = Reservation(i + 1, startTime, endTime, parkki, rekisteri, sijainti)
+                        val reservation = Reservation(id, startTime, endTime, parkki, rekisteri, sijainti)
                         reservations.add(reservation)
                     }
 
@@ -92,7 +93,7 @@ class ReservationsView : AppCompatActivity() {
 
     // Data class for storing reservation information
     data class Reservation(
-        val number: Int,
+        val id: Int,
         val startTime: String,
         val endTime: String,
         val parkki: Int,
@@ -124,7 +125,7 @@ class ReservationsView : AppCompatActivity() {
         override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
             val currentReservation = reservations[position]
 
-            holder.numberTextView.text = "Varaus ${currentReservation.number}"
+            holder.numberTextView.text = "Varaus ${currentReservation.id}"
             holder.startTimeTextView.text = "Varaus alkoi: ${currentReservation.startTime}"
             holder.endTimeTextView.text = "Varaus loppui: ${currentReservation.endTime}"
             holder.parkkiTextView.text = "Parkkipaikka: ${currentReservation.parkki}"

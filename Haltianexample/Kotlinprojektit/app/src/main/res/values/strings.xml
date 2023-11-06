@@ -22,4 +22,5 @@
     <string name="bu_resConfirm">Palaa sijaintinäkymään</string>
     <string name="greeting">Varauksesi</string>
     <string name="varaukset">Varaukset</string>
+    <string name="varausPoisto">Poista varaus</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -50,4 +51,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="Sijainti: " />
+
+    <Button
+        android:layout_width="123dp"
+        android:layout_height="26dp"
+        android:background="@drawable/cornersred"
+        android:focusableInTouchMode="true"
+        android:text="@string/varausPoisto"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
 </LinearLayout>
