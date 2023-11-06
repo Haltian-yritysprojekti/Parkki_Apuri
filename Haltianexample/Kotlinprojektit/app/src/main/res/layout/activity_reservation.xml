@@ -137,7 +137,7 @@
         android:id="@+id/tv_licensePlate"
         android:layout_width="123dp"
         android:layout_height="47dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="26dp"
         android:gravity="center"
         android:shadowColor="@color/parkkiapuri"
@@ -163,6 +163,7 @@
 
     <TextView
         android:id="@+id/tv_location"
+        android:hint="Sijainti X"
         android:layout_width="190dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -173,7 +174,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:textStyle="italic"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 

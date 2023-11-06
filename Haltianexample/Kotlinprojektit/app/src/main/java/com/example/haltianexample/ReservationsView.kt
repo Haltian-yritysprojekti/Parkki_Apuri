@@ -1,6 +1,8 @@
 package com.example.haltianexample
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -113,6 +116,22 @@ class ReservationsView : AppCompatActivity() {
             val parkkiTextView: TextView = itemView.findViewById(R.id.parkkiTextView)
             val rekisteriTextView: TextView = itemView.findViewById(R.id.rekisteriTextView)
             val sijaintiTextView: TextView = itemView.findViewById(R.id.sijaintiTextView)
+
+            val deleteButton : Button = itemView.findViewById(R.id.bu_deleteButton)
+
+            init {
+                deleteButton.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val reservationToDelete = reservations[position]
+                        val reservationId = reservationToDelete.id
+                        Log.d("DeleteButton", "Button clicked for reservation ID: $reservationId")
+                        // Call a function to delete the reservation
+                        deleteReservation(itemView.context, reservationId, position)
+                    }
+                }
+            }
+
         }
 
         // Create a new ViewHolder
@@ -127,7 +146,7 @@ class ReservationsView : AppCompatActivity() {
 
             holder.numberTextView.text = "Varaus ${currentReservation.id}"
             holder.startTimeTextView.text = "Varaus alkoi: ${currentReservation.startTime}"
-            holder.endTimeTextView.text = "Varaus loppui: ${currentReservation.endTime}"
+            holder.endTimeTextView.text = "Varaus loppuu: ${currentReservation.endTime}"
             holder.parkkiTextView.text = "Parkkipaikka: ${currentReservation.parkki}"
             holder.rekisteriTextView.text = "Rekisteri: ${currentReservation.rekisteri}"
             holder.sijaintiTextView.text = "Sijainti: ${currentReservation.sijainti}"
@@ -140,9 +159,73 @@ class ReservationsView : AppCompatActivity() {
 
         // Function to update reservation data
         fun updateReservations(newReservations: List<Reservation>) {
+            val sizeBefore = reservations.size
+
+            // Calculate differences in the data
+            val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+                override fun getOldListSize(): Int {
+                    return sizeBefore
+                }
+
+                override fun getNewListSize(): Int {
+                    return newReservations.size
+                }
+
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    return reservations[oldItemPosition].id == newReservations[newItemPosition].id
+                }
+
+                override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    return reservations[oldItemPosition] == newReservations[newItemPosition]
+                }
+            })
+
+            // Update the data
             reservations.clear()
             reservations.addAll(newReservations)
-            notifyDataSetChanged()
+
+            // Dispatch specific change events
+            diffResult.dispatchUpdatesTo(this)
         }
+
+        private fun deleteReservation(context: Context, reservationId: Int, position: Int) {
+            val url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/delete-reservation.json"
+
+            // Create a JSON object with the reservation ID to send to the server for deletion
+            val jsonObject = JSONObject().apply {
+                put("id", reservationId)
+            }
+
+            // Create a request to delete the reservation
+            val request = JsonObjectRequest(
+                Request.Method.POST, url, jsonObject,
+                { response ->
+                    try {
+                        val success = response.getBoolean("success")
+                        if (success) {
+                            // Successful deletion
+                            reservations.removeAt(position)
+                            notifyItemRemoved(position)
+                        } else {
+                            // Handle the case where deletion was not successful
+                            val errorMessage = response.optString("message", "Deletion failed")
+                            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Toast.makeText(context, "Error parsing JSON response", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                { error ->
+                    // Handle network request error
+                    error.printStackTrace()
+                    Toast.makeText(context, "Network request error: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            )
+
+            // Add the request to the request queue
+            Volley.newRequestQueue(context).add(request)
+        }
+
     }
 }

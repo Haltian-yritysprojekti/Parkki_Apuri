@@ -94,6 +94,7 @@ class LoginActivity : ComponentActivity() {
                         intent.putExtra("rekisteri", licensePlate)
                         intent.putExtra("email", electronicMail)
                         startActivity(intent)
+                        finish()
                     }
                     else if (response.has("result")) {
                         val result = response.get("result")

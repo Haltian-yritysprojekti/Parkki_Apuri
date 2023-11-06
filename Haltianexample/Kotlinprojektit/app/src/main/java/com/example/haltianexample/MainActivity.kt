@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -262,9 +263,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onBackPressed() {
+        // Show exit Dialog
+            showExitConfirmationDialog()
+        }
 
-
+    private fun showExitConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Varmistus")
+        builder.setMessage("Oletko varma että haluat poistua?")
+        builder.setPositiveButton("Kyllä") { dialog, which ->
+            finish() // Finish the activity and exit the app
+        }
+        builder.setNegativeButton("Ei") { dialog, which ->
+            dialog.dismiss() // Dismiss the dialog and stay in the activity
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
 }
+
+
 
 //  parkingSpots[i].text=jsonObject.getString("tolppa")
 
