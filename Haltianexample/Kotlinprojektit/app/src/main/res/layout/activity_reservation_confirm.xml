@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView_logo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="135dp"
         android:background="#018685"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Parkkipaikka"
+                android:text="Varaus alkoi"
                 android:textAlignment="viewEnd"
                 android:textSize="27sp"
                 tools:ignore="NestedWeights,RtlCompat" />
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Rekisterinumero"
+                android:text="Varaus loppuu"
                 android:textAlignment="viewEnd"
                 android:textSize="27sp"
                 tools:ignore="RtlCompat" />
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Varaus alkoi"
+                android:text="Parkkipaikka"
                 android:textAlignment="viewEnd"
                 android:textSize="27sp"
                 tools:ignore="RtlCompat" />
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Varaus loppuu"
+                android:text="Rekisterinumero"
                 android:textAlignment="viewEnd"
                 android:textSize="27sp"
                 tools:ignore="RtlCompat" />

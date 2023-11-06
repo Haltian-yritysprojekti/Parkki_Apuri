@@ -3,6 +3,5 @@
     <item android:drawable="@drawable/parking_red" />
     <item
         android:drawable="@drawable/tolppa_icon"
-        android:gravity="end"
-        android:inset="20dp"/>
+        android:gravity="end" />
 </layer-list>

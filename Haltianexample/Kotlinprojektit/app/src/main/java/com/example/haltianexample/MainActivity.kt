@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity() {
 
         reservationIcon.setOnClickListener{
             val resIntent = Intent(this, ReservationsView::class.java)
-            startActivity(resIntent)
             resIntent.putExtra("userid", userId)
+            startActivity(resIntent)
         }
         //exports intents gathered from LoginActivity.kt
         fun exportIntentToFile(userId: String?, licensePlate: String?, electronicMail: String?){

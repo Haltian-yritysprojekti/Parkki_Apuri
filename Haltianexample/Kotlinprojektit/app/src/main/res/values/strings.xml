@@ -16,7 +16,7 @@
     <string name="firmName">Parkkiapuri</string>
     <string name="lisäys">+10</string>
     <string name="poisto">-10</string>
-    <string name="rekisteriOtsikko">Rekisterikilpi</string>
+    <string name="rekisteriOtsikko">Rekisterinumero</string>
     <string name="varausAikaOtsikko">Varausaika</string>
     <string name="idParkitOtsikko">Valittu parkkipaikka</string>
     <string name="bu_resConfirm">Palaa sijaintinäkymään</string>

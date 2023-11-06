@@ -25,14 +25,15 @@ class ReservationConfirm : AppCompatActivity() {
         val endTime = intent.getStringExtra("endTime")
         val sijainti = intent.getStringExtra("sijainti")
 
-        val tvparkkipaikka : TextView = findViewById(R.id.tv_06)
-        tvparkkipaikka.text = idParkit
-        val tvrekisteri : TextView = findViewById(R.id.tv_07)
-        tvrekisteri.text = rekisteri
-        val tvStartTime : TextView = findViewById(R.id.tv_08)
+
+        val tvStartTime : TextView = findViewById(R.id.tv_06)
         tvStartTime.text = startTime
-        val tvEndTime : TextView = findViewById(R.id.tv_09)
+        val tvEndTime : TextView = findViewById(R.id.tv_07)
         tvEndTime.text = endTime
+        val tvparkkipaikka : TextView = findViewById(R.id.tv_08)
+        tvparkkipaikka.text = idParkit
+        val tvrekisteri : TextView = findViewById(R.id.tv_09)
+        tvrekisteri.text = rekisteri
         val tvsijainti : TextView = findViewById(R.id.tv_10)
         tvsijainti.text = sijainti
         val returnButton : Button = findViewById(R.id.bu_return)
