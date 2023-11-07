@@ -35,12 +35,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         val userId = intent.getStringExtra("userid")
         val licensePlate = intent.getStringExtra("rekisteri")
         val electronicMail = intent.getStringExtra("email")
+        val salasana = intent.getStringExtra("salasana")
 
-        supportActionBar?.hide()
+
         val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
         val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         val emailTV : TextView = findViewById(R.id.tv_loggedEmail)
         emailTV.text = electronicMail
         val reservationIcon : ImageView = findViewById(R.id.bu_varaukset)
+        val editUserInfoIcon : ImageView = findViewById(R.id.bu_kayttajaMuokkaus)
         val textView1: TextView = findViewById(R.id.tv_sA)
         val textView2: TextView = findViewById(R.id.tv_free_A)
         val textView3: TextView = findViewById(R.id.tv_sB)
@@ -81,6 +84,15 @@ class MainActivity : AppCompatActivity() {
             swipeRefreshLayout.postDelayed({
                 swipeRefreshLayout.isRefreshing = false
             }, 1000)
+        }
+
+        editUserInfoIcon.setOnClickListener{
+            val editIntent = Intent(this, EditUserActivity::class.java)
+            editIntent.putExtra("userid", userId)
+            editIntent.putExtra("rekisteri", licensePlate)
+            editIntent.putExtra("email", electronicMail)
+            editIntent.putExtra("salasana", salasana)
+            startActivity(editIntent)
         }
 
         reservationIcon.setOnClickListener{
@@ -264,7 +276,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        // Show exit Dialog
             showExitConfirmationDialog()
         }
 
@@ -273,10 +284,10 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Varmistus")
         builder.setMessage("Oletko varma että haluat poistua?")
         builder.setPositiveButton("Kyllä") { dialog, which ->
-            finish() // Finish the activity and exit the app
+            finish()
         }
         builder.setNegativeButton("Ei") { dialog, which ->
-            dialog.dismiss() // Dismiss the dialog and stay in the activity
+            dialog.dismiss()
         }
         val dialog = builder.create()
         dialog.show()
