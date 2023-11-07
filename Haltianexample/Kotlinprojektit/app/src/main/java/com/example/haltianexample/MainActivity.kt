@@ -50,12 +50,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         val userId = intent.getStringExtra("userid")
         val licensePlate = intent.getStringExtra("rekisteri")
         val electronicMail = intent.getStringExtra("email")
+        val salasana = intent.getStringExtra("salasana")
 
-        supportActionBar?.hide()
+
         val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
         //val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
@@ -65,16 +67,8 @@ class MainActivity : AppCompatActivity() {
         val emailTV : TextView = findViewById(R.id.tv_loggedEmail)
         emailTV.text = electronicMail
         val reservationIcon : ImageView = findViewById(R.id.bu_varaukset)
-/*
-        val textView1: TextView = findViewById(R.id.tv_sA)
-        val textView2: TextView = findViewById(R.id.tv_free_A)
-        val textView3: TextView = findViewById(R.id.tv_sB)
-        val textView4: TextView = findViewById(R.id.tv_free_B)
-        val textView5: TextView = findViewById(R.id.tv_sC)
-        val textView6: TextView = findViewById(R.id.tv_free_C)
+        val editUserInfoIcon : ImageView = findViewById(R.id.bu_kayttajaMuokkaus)
 
-
- */
 
         //val locationId: TextView = findViewById(R.id.textView11a)
         locationId = findViewById(R.id.textView11a)
@@ -117,6 +111,15 @@ class MainActivity : AppCompatActivity() {
             swipeRefreshLayout.postDelayed({
                 swipeRefreshLayout.isRefreshing = false
             }, 1000)
+        }
+
+        editUserInfoIcon.setOnClickListener{
+            val editIntent = Intent(this, EditUserActivity::class.java)
+            editIntent.putExtra("userid", userId)
+            editIntent.putExtra("rekisteri", licensePlate)
+            editIntent.putExtra("email", electronicMail)
+            editIntent.putExtra("salasana", salasana)
+            startActivity(editIntent)
         }
 
         reservationIcon.setOnClickListener{
@@ -248,7 +251,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        // Show exit Dialog
             showExitConfirmationDialog()
         }
 
@@ -257,10 +259,10 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Varmistus")
         builder.setMessage("Oletko varma että haluat poistua?")
         builder.setPositiveButton("Kyllä") { dialog, which ->
-            finish() // Finish the activity and exit the app
+            finish()
         }
         builder.setNegativeButton("Ei") { dialog, which ->
-            dialog.dismiss() // Dismiss the dialog and stay in the activity
+            dialog.dismiss()
         }
         val dialog = builder.create()
         dialog.show()
@@ -269,119 +271,3 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//  parkingSpots[i].text=jsonObject.getString("tolppa")
-
-/*vanha toimiva koodi alkaa tästä
-private fun makeJsonRequest(
-        parkingSpots:MutableList<TextView>,
-        freeParkingSpots:MutableList<TextView>,
-        parkingLocation:MutableList<TextView>) {
-
-    // Makes the request based on url
-    val request = JsonObjectRequest(
-        Request.Method.GET, url, null,
-        { response ->
-            try {
-                val resultArray = response.getJSONArray("result")
-
-                if(url==originalUrl) {
-                    for (i in 0 until resultArray.length()) {
-                        val jsonObject = resultArray.getJSONObject(i)
-                        parkingLocation[i].text = jsonObject.getString("sijainti")
-                        freeParkingSpots[i].text = jsonObject.getString("varattu")
-                    }
-                }
-                else{
-                    var isFree = false
-                    for(i in 0 until resultArray.length()){
-                        val jsonObject = resultArray.getJSONObject(i)
-                        parkingSpots[i].text=jsonObject.getString("idParkit")
-                        val idParkitValue = jsonObject.getString("idParkit")
-                        isFree = jsonObject.getBoolean("vapaa")
-                        Log.d(isFree.toString(), "Value of isFree")
-                        // Check if the parking spot is free (green) and set clickability accordingly
-                        if(isFree){
-                            parkingSpots[i].setBackgroundResource(R.drawable.parking_green)
-                            parkingSpots[i].isClickable = true
-                            parkingSpots[i].setOnClickListener {
-                                val reservationIntent = Intent(this, ReservationActivity::class.java)
-                                reservationIntent.putExtra("idParkit", idParkitValue)
-                                reservationIntent.putExtra("sijainti", locationURL)
-                                startActivity(reservationIntent)
-                            }
-                        }
-                        else{
-                            parkingSpots[i].setBackgroundResource(R.drawable.parking_red)
-                            parkingSpots[i].isClickable=false
-                            parkingSpots[i].setOnClickListener { null }
-                        }
-
-                    }
-                }
-
-            } catch (e: Exception) {
-                Toast.makeText(this, "Error parsing JSON", Toast.LENGTH_SHORT).show()
-                Log.e(TAG, "Error message", e)
-            }
-        },
-        { error ->
-            Toast.makeText(this, "Error retrieving data:${error.message}", Toast.LENGTH_LONG)
-                .show()
-            Log.e("Error retrieving data", error.toString())
-        }
-    )
-ja loppuu tähän */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Create a trust manager that does not validate certificate chains
-// This method is not secure, and should be used only testing!
-/*
-val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
-override fun getAcceptedIssuers(): Array<X509Certificate> {
-    return arrayOf()
-}
-
-override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
-}
-
-override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
-}
-})
-
-// Install the all-trusting trust manager
-val sslContext = SSLContext.getInstance("SSL")
-sslContext.init(null, trustAllCerts, SecureRandom())
-HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.socketFactory)
-
-// Create an ssl socket factory with our all-trusting manager
-val hostnameVerifier = HostnameVerifier { _, _ -> true }
-HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
-*/

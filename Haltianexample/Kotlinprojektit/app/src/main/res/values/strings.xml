@@ -23,4 +23,6 @@
     <string name="greeting">Varauksesi</string>
     <string name="varaukset">Varaukset</string>
     <string name="varausPoisto">Poista varaus</string>
+    <string name="xxx_123">XXX-123</string>
+    <string name="mockemail">email@email.fi</string>
 </resources>

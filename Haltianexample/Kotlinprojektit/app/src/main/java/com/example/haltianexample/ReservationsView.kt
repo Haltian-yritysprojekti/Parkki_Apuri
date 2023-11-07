@@ -1,5 +1,6 @@
 package com.example.haltianexample
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -41,7 +41,7 @@ class ReservationsView : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Create an empty adapter for Reservation items
-        val adapter = ReservationsAdapter(ArrayList<ReservationsView.Reservation>())
+        val adapter = ReservationsAdapter(ArrayList())
 
         // Fetch reservation data and create a list of Reservation objects
         fetchReservations(url) { reservations ->
@@ -117,7 +117,7 @@ class ReservationsView : AppCompatActivity() {
             val rekisteriTextView: TextView = itemView.findViewById(R.id.rekisteriTextView)
             val sijaintiTextView: TextView = itemView.findViewById(R.id.sijaintiTextView)
 
-            val deleteButton : Button = itemView.findViewById(R.id.bu_deleteButton)
+            private val deleteButton : Button = itemView.findViewById(R.id.bu_deleteButton)
 
             init {
                 deleteButton.setOnClickListener {
@@ -141,6 +141,7 @@ class ReservationsView : AppCompatActivity() {
         }
 
         // Set data for a ViewHolder
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
             val currentReservation = reservations[position]
 

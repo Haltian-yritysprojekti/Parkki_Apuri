@@ -72,7 +72,6 @@ class LoginActivity : ComponentActivity() {
             userEmail.requestFocus()
             return
         }
-
         progressbar.visibility = View.VISIBLE
 
         val jsonObject = JSONObject()
@@ -93,6 +92,7 @@ class LoginActivity : ComponentActivity() {
                         intent.putExtra("userid", userId)
                         intent.putExtra("rekisteri", licensePlate)
                         intent.putExtra("email", electronicMail)
+                        intent.putExtra("salasana", password)
                         startActivity(intent)
                         finish()
                     }
