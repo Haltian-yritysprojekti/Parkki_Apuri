@@ -7,6 +7,7 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 ## Web-sovelluksen suora linkki
 https://parkkiapuri.onrender.com/
 
+Demovideo: https://youtu.be/UxRKTGM9GoA
 
 ## Asennus
 
