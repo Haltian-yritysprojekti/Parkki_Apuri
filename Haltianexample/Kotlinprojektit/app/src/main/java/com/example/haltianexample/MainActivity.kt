@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,17 +19,31 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var isCardViewAVisible = false
-    private var isCardViewBVisible = false
-    private var isCardViewCVisible = false
     private var url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-locations.json"
     private val originalUrl = url
     private var locationURL : String? = null
+
+    private lateinit var p1: TextView
+    private lateinit var p2: TextView
+    private lateinit var p3: TextView
+    private lateinit var p4: TextView
+    private lateinit var p5: TextView
+    private lateinit var p6: TextView
+    private lateinit var p7: TextView
+    private lateinit var p8: TextView
+    private lateinit var p9: TextView
+    private lateinit var p10:TextView
+
+    private lateinit var parkingSpots: List<TextView>
+    //private lateinit var parkingLocation: List<TextView>
+    //private lateinit var freeParkingSpots: List<TextView>
+    private lateinit var locationId: TextView
+
+    private val combinedList = mutableListOf<String>()
 
 
 
@@ -43,41 +58,62 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
-        val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
-        val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
-        val myClickLayoutC : LinearLayout = findViewById(R.id.clickableLayout3)
+        //val myClickLayoutA : LinearLayout = findViewById(R.id.clickableLayout1)
+        //val myClickLayoutB : LinearLayout = findViewById(R.id.clickableLayout2)
+        //val myClickLayoutC : LinearLayout = findViewById(R.id.clickableLayout3)
 
         val emailTV : TextView = findViewById(R.id.tv_loggedEmail)
         emailTV.text = electronicMail
         val reservationIcon : ImageView = findViewById(R.id.bu_varaukset)
+/*
         val textView1: TextView = findViewById(R.id.tv_sA)
         val textView2: TextView = findViewById(R.id.tv_free_A)
         val textView3: TextView = findViewById(R.id.tv_sB)
         val textView4: TextView = findViewById(R.id.tv_free_B)
         val textView5: TextView = findViewById(R.id.tv_sC)
         val textView6: TextView = findViewById(R.id.tv_free_C)
-        val locationId: TextView = findViewById(R.id.textView11a)
-        val p1:TextView = findViewById(R.id.tv_1a)
-        val p2:TextView = findViewById(R.id.tv_2a)
-        val p3:TextView = findViewById(R.id.tv_3a)
-        val p4:TextView = findViewById(R.id.tv_4a)
-        val p5:TextView = findViewById(R.id.tv_5a)
-        val p6:TextView = findViewById(R.id.tv_6a)
-        val p7:TextView = findViewById(R.id.tv_7a)
-        val p8:TextView = findViewById(R.id.tv_8a)
-        val p9:TextView = findViewById(R.id.tv_9a)
-        val p10:TextView = findViewById(R.id.tv_10a)
-        val parkingLocation = mutableListOf<TextView>(textView1, textView3, textView5)
-        val freeParkingSpots= mutableListOf<TextView>(textView2, textView4, textView6)
-        val parkingSpots = mutableListOf<TextView>(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10)
 
-        makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+
+ */
+
+        //val locationId: TextView = findViewById(R.id.textView11a)
+        locationId = findViewById(R.id.textView11a)
+        p1 = findViewById(R.id.tv_1a)
+        p2 = findViewById(R.id.tv_2a)
+        p3 = findViewById(R.id.tv_3a)
+        p4 = findViewById(R.id.tv_4a)
+        p5 = findViewById(R.id.tv_5a)
+        p6 = findViewById(R.id.tv_6a)
+        p7 = findViewById(R.id.tv_7a)
+        p8 = findViewById(R.id.tv_8a)
+        p9 = findViewById(R.id.tv_9a)
+        p10 = findViewById(R.id.tv_10a)
+        parkingSpots = listOf(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+        //freeParkingSpots = listOf(textView1,textView3, textView5)
+        //parkingLocation = listOf(textView2, textView4, textView6)
+
+        //val languages = resources.getStringArray(R.array.locations)
+
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, combinedList)
+
+        val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+
+        autocompleteTV.setAdapter(arrayAdapter)
+
+        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+            val selectedLocation = parent?.getItemAtPosition(position).toString()
+            Log.d("Selected Location", selectedLocation)
+            getParkingSpots(selectedLocation)
+        }
+
+
+        makeJsonRequest(parkingSpots)
 
         // Swipe refresh to refresh data in freeParkingSpots
 
         swipeRefreshLayout.setOnRefreshListener {
             url=originalUrl
-            makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
+            makeJsonRequest(parkingSpots)
             swipeRefreshLayout.postDelayed({
                 swipeRefreshLayout.isRefreshing = false
             }, 1000)
@@ -104,101 +140,44 @@ class MainActivity : AppCompatActivity() {
         }
         exportIntentToFile(userId, licensePlate, electronicMail)
 
-        // Gets the data from server in to variables parkingSpots when clicked
-        // and shows it in cardview
-        myClickLayoutA.setOnClickListener {
-            isCardViewAVisible = !isCardViewAVisible
-
-            if (isCardViewAVisible) {
-                Log.i("if A isCardViewAVisible", isCardViewAVisible.toString())
-                var myCardViewA: CardView = findViewById(R.id.cardView_A)
-                locationId.text = "A"
-                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20A"
-                locationURL = "sijainti A"
-                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
-                myCardViewA.visibility = View.VISIBLE
-                myClickLayoutB.visibility = View.GONE
-                myClickLayoutC.visibility = View.GONE
-
-                val topToBottomCardViewA = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewA.topToBottom = R.id.clickableLayout1
-                myCardViewA.layoutParams = topToBottomCardViewA
-            }
-            else {
-                Log.i("else A isCardViewAVisible", isCardViewAVisible.toString())
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                myCardViewA.visibility = View.GONE
-                myClickLayoutB.visibility = View.VISIBLE
-                myClickLayoutC.visibility = View.VISIBLE
-
-                val topToBottomCardViewA = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewA.topToBottom = R.id.clickableLayout3
-                myCardViewA.layoutParams = topToBottomCardViewA
-            }
-        }
-
-        myClickLayoutB.setOnClickListener {
-            isCardViewBVisible = !isCardViewBVisible
-            if (isCardViewBVisible) {
-                Log.i(" if B isCardViewAVisible", isCardViewBVisible.toString())
-                var myCardViewA: CardView = findViewById(R.id.cardView_A)
-                locationId.text = "B"
-                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20B"
-                locationURL = "sijainti B"
-                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
-                myCardViewA.visibility = View.VISIBLE
-                myClickLayoutA.visibility = View.GONE
-                myClickLayoutC.visibility = View.GONE
-
-                val topToBottomCardViewB = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewB.topToBottom = R.id.logoView
-                myCardViewA.layoutParams = topToBottomCardViewB
-            }
-            else {
-                Log.i("else B isCardViewAVisible", isCardViewBVisible.toString())
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                myCardViewA.visibility = View.GONE
-                myClickLayoutA.visibility = View.VISIBLE
-                myClickLayoutC.visibility = View.VISIBLE
-
-                val topToBottomCardViewB = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewB.topToBottom = R.id.clickableLayout1
-                myCardViewA.layoutParams = topToBottomCardViewB
-            }
-        }
-        myClickLayoutC.setOnClickListener {
-            isCardViewCVisible = !isCardViewCVisible
-            if (isCardViewCVisible) {
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                locationId.text = "C"
-                myCardViewA.visibility = View.VISIBLE
-                url = "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20C"
-                locationURL = "sijainti C"
-                makeJsonRequest(parkingSpots,freeParkingSpots, parkingLocation)
-                myClickLayoutA.visibility = View.GONE
-                myClickLayoutB.visibility = View.GONE
-
-                val topToBottomCardViewC = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewC.topToBottom = R.id.logoView
-                myCardViewA.layoutParams = topToBottomCardViewC
-            }
-
-            else {
-                val myCardViewA: CardView = findViewById(R.id.cardView_A)
-                myCardViewA.visibility = View.GONE
-                myClickLayoutA.visibility = View.VISIBLE
-                myClickLayoutB.visibility = View.VISIBLE
-
-                val topToBottomCardViewC = myCardViewA.layoutParams as ConstraintLayout.LayoutParams
-                topToBottomCardViewC.topToBottom = R.id.clickableLayout2
-                myCardViewA.layoutParams = topToBottomCardViewC
-            }
-        }
-
     }
 
+    private fun getParkingSpots(selectedLocation: String) {
+        val regex = Regex("sijainti [A-Z]")
+        val match = regex.find(selectedLocation)
+        val locationValue = match?.value ?: "Default Value"
+        locationURL = locationValue
+
+        url = when (locationValue) {
+
+            "sijainti A" -> {
+                locationId.text = "A"
+                "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20A"
+            }
+            "sijainti B" -> {
+                locationId.text = "B"
+                "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20B"
+            }
+            "sijainti C" -> {
+                locationId.text = "C"
+                "https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=sijainti%20C"
+            }
+            else -> ({
+                url = originalUrl
+            }).toString()
+        }
+        makeJsonRequest(parkingSpots)
+        var cardViewA: CardView = findViewById(R.id.cardView_A)
+        cardViewA.visibility = View.VISIBLE
+        val topToBottomCardViewA = cardViewA.layoutParams as ConstraintLayout.LayoutParams
+        topToBottomCardViewA.topToBottom = R.id.textInputLayout
+        cardViewA.layoutParams = topToBottomCardViewA
+    }
+
+
+
     // This function handles jsonRequest to ge the data
-    private fun makeJsonRequest(parkingSpots: MutableList<TextView>, freeParkingSpots: MutableList<TextView>, parkingLocation: MutableList<TextView>)
+    private fun makeJsonRequest(parkingSpots: List<TextView>)
     {
         val request = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -207,10 +186,15 @@ class MainActivity : AppCompatActivity() {
                     val resultArray = response.getJSONArray("result")
 
                     if (url == originalUrl) {
+                        combinedList.clear()
                         for (i in 0 until resultArray.length()) {
                             val jsonObject = resultArray.getJSONObject(i)
-                            parkingLocation[i].text = jsonObject.getString("sijainti")
-                            freeParkingSpots[i].text = jsonObject.getString("varattu")
+                            val location = jsonObject.getString("sijainti")
+                            val availableSpots = jsonObject.getString("varattu")
+
+                            val combinedItem = "$location - Vapaana $availableSpots paikkaa"
+                            combinedList.add(combinedItem)
+
                         }
                     } else {
                         for (i in 0 until resultArray.length()) {
