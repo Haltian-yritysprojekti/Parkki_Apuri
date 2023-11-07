@@ -202,16 +202,18 @@ class ReservationsView : AppCompatActivity() {
                 Request.Method.POST, url, jsonObject,
                 { response ->
                     try {
-                        val success = response.getBoolean("success")
-                        if (success) {
+                        if (response.has("result") && response.getString("result") == "successful") {
                             // Successful deletion
                             reservations.removeAt(position)
                             notifyItemRemoved(position)
+                            Toast.makeText(context, "Varaus poistettu!", Toast.LENGTH_SHORT).show()
+
                         } else {
                             // Handle the case where deletion was not successful
                             val errorMessage = response.optString("message", "Deletion failed")
                             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                         }
+
                     } catch (e: JSONException) {
                         e.printStackTrace()
                         Toast.makeText(context, "Error parsing JSON response", Toast.LENGTH_SHORT).show()
