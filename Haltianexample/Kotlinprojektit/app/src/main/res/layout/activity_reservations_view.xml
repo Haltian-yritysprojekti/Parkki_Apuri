@@ -9,10 +9,13 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/bu_palaa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_varaukset">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_reservation"
@@ -36,5 +39,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_varaukset"
+        android:layout_width="264dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/varauksesi"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
