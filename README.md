@@ -233,9 +233,9 @@ GitHub: https://github.com/RamM21
 
 Eliel Latvala & Lassi Tihinen
 
-https://github.com/elielll &
+https://github.com/elielll & https://github.com/LassiTihinen
 
-Lassi Tihinen
+# Lassi Tihinen
 
 - Muiden kuin Login ja Register aktiviteettien tyylitys
 - MainActivity.kt korttinäkymässä näkyvät parkkipaikkatiedot ja niiden tyylitys
@@ -243,7 +243,8 @@ Lassi Tihinen
 - ReservationActivity.kt - Varauksien teko, varaukseen tarvittavien tietojen lähetys eri aktiviteeteista
 - ReservationConfirm.kt - Varauksen tietojen varmistus
 - ReservationsView.kt - Omien varauksien tarkastelu
-Eliel Latvala
+
+# Eliel Latvala
 
 - MainActivity.kt logiikka, alasvetovalikko
 - LoginActivity.kt, tyylitys - Kirjautuminen
