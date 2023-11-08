@@ -233,6 +233,8 @@ GitHub: https://github.com/RamM21
 
 Eliel Latvala & Lassi Tihinen
 
+https://github.com/elielll &
+
 Lassi Tihinen
 
 - Muiden kuin Login ja Register aktiviteettien tyylitys
