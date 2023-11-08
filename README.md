@@ -2,10 +2,11 @@
 
 # React.js frontend-osio
 
-Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Web-pohjaisessa sovelluksessa pystyy lisäksi luoda käyttäjän (SignUp.js), kirjautua käyttäjälle (Login.js) ja varata paikkoja (Reservation.js). Lopussa kuvia websovelluksen eri osista selaimessa.
+Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellukset, jossa hyödynnettiin Haltianin sensoreita. Valitsimme tähän siten kaksi Beam -sensoria, joilla loimme parkkisovelluksen. Sovelluksessa voi tarkistaa eri sijainteja ja niiden autopaikkojen saatavutta. Websovelluksessa ensimmäinen sivu on aloitussivu (StartPage.js). Siitä pääsee kirjautumiseen (Login.js) ja rekisteröitymiseen (SignUp.js). Kirjautumisen jälkeen päästään etusivulle (Home.js), josta voi selata eri parkkihalleja, niiden parkkipaikkoja ja saatavuutta. Käyttäjätietojen muokkaussivulla (EditUser.js) pystyy muokkaamaan käyttäjän tietoja. Lopuksi, varaussivulta (Reservation.js) voi varata paikkoja halutulla ajalla. Lopussa kuvia websovelluksen eri osista selaimessa.
 
 ## Web-sovelluksen suora linkki
 https://parkkiapuri.onrender.com/
+
 
 
 ## Asennus
@@ -62,22 +63,39 @@ Aleksi Lehtola. GitHub: https://github.com/Alenkaara
 
 ## Kuvia sovelluksen eri osista
 
+- StartPage.js: Aloitussivu.
+
+![startpage](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/b87034b8-a267-4076-95fa-c11cd3edb5de)
+
+
 - Home.js: Sovelluksen pääsivu.
 
-![pa](https://user-images.githubusercontent.com/78751694/234013390-cec99419-1b9d-48cd-9a41-20da5e7ac669.png)
+![home](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/9c3aae45-e00d-478f-8cdd-68e7a266473b)
+
 
 - Login.js: Käyttäjän kirjautumissivu.
 
-![ks](https://user-images.githubusercontent.com/78751694/234013523-29fa54f6-4b4b-4ae7-b9a2-e9a96c7dc239.png)
+![login](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/b984aa74-51f6-4234-a430-a936af1cef9f)
+
 
 - SignUp.js: Käyttäjän rekisteröitymissivu.
+  
+![signup](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/06361953-e29d-49f4-8f31-6c7318281f8b)
 
-![rk](https://user-images.githubusercontent.com/78751694/234013582-47779849-151d-4d0a-9a82-b6b75ad8776a.png)
+
+- EditUser.js: Käyttäjätietojen muokkaussivu.
+
+![edituser](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/6764f11d-13a5-4d30-b261-b507b394449d)
+
 
 - Reservation.js: Parkkipaikan varaussivu.
 
-![va](https://user-images.githubusercontent.com/78751694/234013654-ce179947-c300-4b55-915f-8febc7ff66c0.png)
+![reservation](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/76eceeae-0afe-416f-8aa1-a9b61bf36135)
 
+
+- UKK & Ongelmatilannesivu.
+
+![ukk](https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/78751694/6c5f9a05-54c4-4390-b975-7d71ce807516)
 
 ------------------------------
 # Rest API osio
