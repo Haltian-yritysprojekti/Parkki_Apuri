@@ -16,12 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/parkkilogomuokattu" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bu_return"
-        style="@style/layout_buttonStyle"
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_marginBottom="30dp"
+        android:textSize="15sp"
+        android:backgroundTint="@color/parkkiapuri"
         android:text="@string/bu_resConfirm"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -29,167 +30,190 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        app:layout_constraintBottom_toTopOf="@+id/bu_return"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_logo">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tv_01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Varaus alkoi"
-                android:textAlignment="viewEnd"
-                android:textSize="27sp"
-                tools:ignore="NestedWeights,RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Varaus loppuu"
-                android:textAlignment="viewEnd"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_03"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Parkkipaikka"
-                android:textAlignment="viewEnd"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Rekisterinumero"
-                android:textAlignment="viewEnd"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_05"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Parkkialue"
-                android:textAlignment="viewEnd"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tv_06"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:textAlignment="viewStart"
-                android:textSize="27sp"
-                tools:ignore="NestedWeights,RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_07"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:textAlignment="viewStart"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_08"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:textAlignment="viewStart"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_09"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textAlignment="viewStart"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/tv_10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textAlignment="viewStart"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:textSize="27sp"
-                tools:ignore="RtlCompat" />
-        </LinearLayout>
-    </LinearLayout>
-
     <TextView
         android:id="@+id/tv_greeting"
         android:layout_width="220dp"
         android:layout_height="49dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/corners"
         android:gravity="center"
         android:text="@string/greeting"
-        android:textColor="@color/white"
-        android:textSize="37sp"
+        android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/varausCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_logo" />
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/varausCardView"
+        app:cardElevation="10dp"
+        android:layout_width="409dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_greeting">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="409dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/bu_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_logo">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Varaus alkoi"
+                    android:textAlignment="viewEnd"
+                    android:textSize="27sp"
+                    tools:ignore="NestedWeights,RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Varaus loppuu"
+                    android:textAlignment="viewEnd"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_idParkitOtsikko"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Parkkipaikka"
+                    android:textAlignment="viewEnd"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_rekisteriOtsikko"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Rekisterinumero"
+                    android:textAlignment="viewEnd"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Parkkialue"
+                    android:textAlignment="viewEnd"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_varausAika"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="27sp"
+                    tools:ignore="NestedWeights,RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_licensePlate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_08"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_09"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textAlignment="viewStart"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textAlignment="viewStart"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

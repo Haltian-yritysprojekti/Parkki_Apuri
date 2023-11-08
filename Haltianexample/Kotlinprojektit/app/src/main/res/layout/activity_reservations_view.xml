@@ -23,16 +23,16 @@
 
     </ScrollView>
 
-    <Button
-        android:textStyle="bold"
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bu_palaa"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        android:layout_width="252dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/corners"
+        android:backgroundTint="@color/parkkiapuri"
         android:text="@string/bu_resConfirm"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

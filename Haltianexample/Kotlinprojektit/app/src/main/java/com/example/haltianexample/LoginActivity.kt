@@ -87,7 +87,7 @@ class LoginActivity : ComponentActivity() {
                         userId = response.getString("userid")
                         licensePlate = response.getString("rekisteri") // Get the licensePlate value
                         electronicMail = response.getString("email") // Get the electronicMail value
-                        Toast.makeText(this, "Logged in successfully!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Kirjautuminen onnistui!", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("userid", userId)
                         intent.putExtra("rekisteri", licensePlate)
@@ -109,7 +109,7 @@ class LoginActivity : ComponentActivity() {
                 }
             },
             { error ->
-                Toast.makeText(this, "Error sending data: ${error.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Ongelma datan lähetyksessä: ${error.message}", Toast.LENGTH_LONG).show()
                 Log.e("Error sending data", error.toString())
             }
         )

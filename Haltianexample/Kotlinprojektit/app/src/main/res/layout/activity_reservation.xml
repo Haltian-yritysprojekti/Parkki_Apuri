@@ -17,166 +17,194 @@
         app:srcCompat="@drawable/parkkilogomuokattu" />
 
     <TextView
-        android:id="@+id/tv_varausAikaOtsikko"
-        android:layout_width="150dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:gravity="end"
-        android:shadowColor="@color/parkkiapuri"
-        android:text="@string/varausAikaOtsikko"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_location"
-        tools:textStyle="bold">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/tv_varausAika"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_marginEnd="28dp"
-        android:gravity="end"
-        android:shadowColor="@color/parkkiapuri"
-        android:text='@string/tv_aika'
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_currentTime"
-        tools:textStyle="bold" />
-
-    <Button
-        android:id="@+id/bu_ResTimeAdd"
-        tools:textStyle="bold"
-        style="@style/layout_buttonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="124dp"
-        android:text="@string/lisäys"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/bu_resConf"
-        tools:textStyle="bold"
-        style="@style/layout_buttonStyle"
-        android:layout_width="118dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/bu_confirm"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_currentTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="28dp"
-        android:gravity="end"
-        android:shadowColor="@color/parkkiapuri"
-        android:text='@string/tv_aika'
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:textStyle="bold" />
-
-    <Button
-        android:id="@+id/bu_ResTimeSub"
-        tools:textStyle="bold"
-        style="@style/whitebutton"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="124dp"
-        android:text="@string/poisto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_rekisteriOtsikko"
-        android:layout_width="227dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:shadowColor="@color/parkkiapuri"
-        android:text="@string/rekisteriOtsikko"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_varausAikaOtsikko"
-        tools:textStyle="bold">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/tv_idParkitOtsikko"
-        android:layout_width="273dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:shadowColor="@color/parkkiapuri"
-        android:text="@string/idParkitOtsikko"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_rekisteriOtsikko"
-        tools:textStyle="bold">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/tv_licensePlate"
-        android:layout_width="123dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="26dp"
-        android:gravity="center"
-        android:shadowColor="@color/parkkiapuri"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_varausAika"
-        tools:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_idParkit"
-        android:layout_width="38dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="62dp"
-        android:gravity="start"
-        android:shadowColor="@color/parkkiapuri"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_licensePlate"
-        tools:textStyle="bold" />
-
-    <TextView
         android:id="@+id/tv_location"
-        android:hint="Sijainti X"
         android:layout_width="190dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="192dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/corners"
         android:gravity="center"
+        android:hint="Sijainti X"
         android:shadowColor="@color/parkkiapuri"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tv_currentTime"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:textAlignment="center"
+        android:text="@string/tv_aika"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_location"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:elevation="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location"
+        tools:layout_editor_absoluteX="1dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/bu_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_logo">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/twotone_access_time_24"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Varausaika"
+                    android:textAlignment="viewStart"
+                    android:textSize="25sp"
+                    tools:ignore="NestedWeights,RtlCompat,RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/tv_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/baseline_directions_car_24"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Rekisterinumero"
+                    android:textAlignment="viewStart"
+                    android:textSize="18sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_idParkitOtsikko"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/baseline_exit_to_app_24"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Valittu parkkipaikka"
+                    android:textAlignment="viewStart"
+                    android:textSize="22sp"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_varausAika"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="@string/tv_aika"
+                    android:textAlignment="center"
+                    android:textSize="27sp"
+                    tools:ignore="NestedWeights,RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_licensePlate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="XML-232"
+
+                    android:textAlignment="center"
+                    android:textSize="27sp"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    android:id="@+id/tv_idParkit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="4"
+
+                    android:textAlignment="center"
+                    android:textSize="23sp"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bu_ResTimeSub"
+        style="@style/whitebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="110dp"
+        android:text="@string/poisto"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bu_ResTimeAdd"
+        style="@style/layout_buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="110dp"
+        android:text="@string/lisäys"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bu_resConf"
+        style="@style/layout_buttonStyle"
+        android:layout_width="141dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableEnd="@drawable/twotone_fact_check_24"
+        android:drawableTint="@color/white"
+        android:text="@string/bu_confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingEnd="15dp"
+        tools:textStyle="bold" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,7 +40,7 @@
             android:inputType="textPassword"
             tools:textStyle="bold" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="260dp"
+            android:layout_marginLeft="250dp"
             android:layout_marginTop="20dp"
             android:drawableTint="@color/teal_700"
             android:drawableLeft="@drawable/ic_register_icon"

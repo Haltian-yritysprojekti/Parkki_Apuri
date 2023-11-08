@@ -88,30 +88,32 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bu_editInformation"
-            android:layout_marginTop="10dp"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corners"
+            android:drawableStart="@drawable/ic_register_icon"
             android:text="Vaihda tietosi"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:background="@color/parkkiapuri"
-            android:textStyle="bold"
-            android:drawableLeft="@drawable/ic_register_icon"
-            android:layout_gravity="center_horizontal"/>
+            android:paddingStart="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/bu_palaaMA"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:clickable="true"
-            android:focusable="true"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="end"
             android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:srcCompat="@drawable/twotone_arrow_circle_left_24" />
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/twotone_arrow_circle_left_24"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </LinearLayout>

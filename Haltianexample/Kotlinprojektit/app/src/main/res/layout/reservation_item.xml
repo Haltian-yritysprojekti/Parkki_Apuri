@@ -52,11 +52,12 @@
         android:textColor="@color/black"
         android:text="Sijainti: " />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bu_deleteButton"
         android:layout_width="123dp"
-        android:layout_height="26dp"
+        android:layout_height="30dp"
         android:background="@drawable/cornersred"
+        android:layout_marginTop="5dp"
         android:text="@string/varausPoisto"
         android:textAlignment="center"
         android:textColor="@color/white"

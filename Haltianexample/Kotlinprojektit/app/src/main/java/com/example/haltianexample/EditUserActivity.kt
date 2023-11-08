@@ -91,7 +91,7 @@ class EditUserActivity : AppCompatActivity() {
                                     // Handle the case where 'result' key is not found
                                     Toast.makeText(
                                         this,
-                                        "No 'result' found in the server response",
+                                        "Palvelin ei lähetä arvoa 'result'",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -112,7 +112,7 @@ class EditUserActivity : AppCompatActivity() {
                     // Add the request to the request queue
                     Volley.newRequestQueue(this).add(request)
                 } else {
-                    Toast.makeText(this, "Current password does not match!", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Kirjautumissalasana ei täsmää", Toast.LENGTH_SHORT)
                         .show()
                 }
             }

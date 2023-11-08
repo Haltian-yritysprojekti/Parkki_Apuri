@@ -19,7 +19,7 @@
     <string name="rekisteriOtsikko">Rekisterinumero</string>
     <string name="varausAikaOtsikko">Varausaika</string>
     <string name="idParkitOtsikko">Valittu parkkipaikka</string>
-    <string name="bu_resConfirm">Palaa sijaintinäkymään</string>
+    <string name="bu_resConfirm">Palaa päänäkymään</string>
     <string name="greeting">Varauksesi</string>
     <string name="varaukset">Varaukset</string>
     <string name="varausPoisto">Poista varaus</string>
