@@ -1,0 +1,48 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    if(params.id && params.Authentication){
+        var res = await getAdmin(con,params.id)
+        console.log(res)
+        //Deleting parking slot
+        if(res.result[0].Authentication==params.Authentication){
+            return new Promise(function(resolve,reject){
+            con.query('delete from Parkit where idParkit=?',[params.idParkit],function(err,result){
+                if(err){
+                    reject({reject:err})
+                }
+                else{
+                    resolve({result:"successful"})
+                }
+            })
+        })
+        }else{
+            return ({result:{error:"Access not authorized"}})
+        }
+    }else{
+        return ({result:{error:"Access not authorized"}})
+    }
+}
+
+//Checking admin for authentication
+async function getAdmin(con,id){
+    return new Promise(function(resolve,reject){
+        con.query('select Authentication from Admin where id=?',[id],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result:result})
+            }
+        })
+    })
+}

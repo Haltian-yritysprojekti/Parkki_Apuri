@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 const cert = require('./db.json')
+//making connection to database
 const connection = mysql.createPool({
     host:'parkkiapuri.c8b4oczahqbe.eu-north-1.rds.amazonaws.com',
     user:cert.user,

@@ -1,0 +1,26 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+function main(params) {
+    var time = new Date()
+    var timeNow = time.getHours()+3+":"+time.getMinutes()+":"+time.getSeconds()
+    //Deleting reservation made by users
+	return new Promise(function(resolve,reject){
+        con.query('update Varaukset set endTime=? where id=?',[timeNow,params.id],function(err,result){
+            if(err){
+                reject({reject:"error in deleting reservation"})
+            }
+            else{
+                resolve({result:"successful"})
+            }
+        })
+    })
+}

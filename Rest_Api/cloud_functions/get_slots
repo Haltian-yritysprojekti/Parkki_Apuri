@@ -1,0 +1,35 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+function main(params) {
+    //Getting location parking slot data
+    return new Promise(function(resolve,reject){
+        con.query('select idParkit,etaisyys,varattu,rekisteri,tolppa from Parkit join ParkkiTalo on Parkit.ParkkiTalo_id=ParkkiTalo.id where sijainti=?',[params.id],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                res=result
+                for (let i = 0; i < result.length; i++) {
+                if(result[i].etaisyys<500){
+                    res[i].vapaa=false
+                }else if(res[i].varattu==1){
+                    res[i].vapaa=false
+                }else{
+                    res[i].vapaa=true
+                }
+                }
+                result=res
+                resolve({result})
+            }
+        })
+    })
+}

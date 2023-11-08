@@ -1,0 +1,24 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    //Setting user profile image
+    return new Promise(function(resolve,reject){
+        con.query('update User set image=`? where userid=?',[params.image,params.userid],function(err,result){
+            if(err){
+                reject({error:err})
+            }
+            else{
+                resolve({result:"successful"})
+            }
+        })
+     })
+}

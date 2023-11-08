@@ -1,0 +1,65 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    //Admin login
+    if(params.email.includes("Admin")){
+        var res = await adminLogin(con,params.email)
+        if(res.result.length==0){
+            return ({result:{error:"Admin not found"}})
+        }
+        if(res.result[0].password==params.salasana){
+            return({id:res.result[0].id,email:res.result[0].email,ParkkiTalo_id:res.result[0].ParkkiTalo_id,Authentication:res.result[0].Authentication})
+        }else{
+            return ({result:{error:"Wrong password"}})
+        }
+    }
+    //User login
+    var res = await login(con,params.email)
+    if(res.result.length>0){
+        if(res.result[0].salasana==params.salasana){
+            return ({email:res.result[0].email,rekisteri:res.result[0].rekisteri,userid:res.result[0].userid})
+        }else{
+            return ({result:{error:"Wrong password"}})
+        }
+    }else{
+        return ({result:{error:"User not found"}})
+    }
+    
+}
+
+//Getting user data with email
+async function login(db,email){
+    return new Promise(function(resolve,reject){
+        db.query('select * from User where email=?',[email],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
+
+//Getting admin data with email
+async function adminLogin(db,email){
+    return new Promise(function(resolve,reject){
+        db.query('select * from Admin where email=?',[email],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}

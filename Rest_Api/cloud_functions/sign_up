@@ -1,0 +1,60 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+async function main(params) {
+    var res = await getUser(con)
+    //Checking if user already exists
+    for(let i=0; i<res.result.length ;i++){
+                if(res.result[i].email==params.email){
+                    return ({result:{error:"User with email already exists"}})
+                }
+                if(res.result[i].rekisteri==params.rekisteri){
+                    return ({result:{error:"User with register already exists"}})
+                }
+    }
+    //Checking for empty params and valid register and email
+    if(params.email.length>0 && params.salasana.length>0 && params.rekisteri.length>0){
+        if(!/^([a-zA-Z]{3}-[0-9]{3})$/.test(params.rekisteri)){
+            return ({result:{error:"Invalid register"}})
+        }
+        if(params.email.includes("Admin")){
+            return ({result:{error:"Invalid email"}})
+        }
+        //Creating user account
+        return new Promise(function(resolve,reject){
+        con.query('insert into User values(?,?,?,null,null,null)',[params.email,params.salasana,params.rekisteri],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result:"successful"})
+            }
+        })
+    })
+    }else{
+        return ({result:{error:"Can't have empty email, password or register"}})
+    }
+    
+}
+
+//Getting all user data
+async function getUser(db){
+    return new Promise(function(resolve,reject){
+        db.query('select * from User',function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}

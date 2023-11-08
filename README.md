@@ -7,7 +7,6 @@ Parkkiapuri -projektissa loimme neljän miehen ryhmässä web -ja mobiilisovellu
 ## Web-sovelluksen suora linkki
 https://parkkiapuri.onrender.com/
 
-Demovideo: https://youtu.be/UxRKTGM9GoA
 
 ## Asennus
 
@@ -83,8 +82,7 @@ Aleksi Lehtola. GitHub: https://github.com/Alenkaara
 ------------------------------
 # Rest API osio
 
-Rest API hallitsee liikenteen frontend applikaatioille tietokannasta ja päivittää uusia tietoa tietokantaan sensoreista saaduista viesteistä MQTT protokollaa käyttäen.
-Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taulu. Parkkitalo sisältää tiedot parkkihalleista, parkit sisältävät tietoa parkki ruutujen tilanteesta ja siihen kuuluvasta sensorista, varaukset pitää sisällään varattujen paikkojen tietoja ja käyttäjä taulussa on rekisteröidyn käyttäjän tiedot.
+Rest API kansiossa MQTT Client hakee sensorien datat, cloud funktiot jotka hakevat ja muokkaavat tietokannan tiedot ja SQL model tauluista johon tiedot tallennetaan.
 
 ## Asennus
 
@@ -94,41 +92,55 @@ Tietokannasta tauluina löytyy parkkitalo, parkit, varaukset ja käyttäjä taul
 
 2. Asenna tarvittavat riippuvuudet
 
-    npm install
+    - siirry REST API kansioon
+    - npm install
+
+3. Lisää jokainen Cloud funktio omaan IBM funktioihin ja lisää web toiminnallisuus niille
+
+4. Luo SQL tietokanta cloudiin tai locaalisti annetulla model tiedostolla
     
 ## Käyttö
 
 1. Tarvittavat osat
 
-    - Server kansioon lisättävä sertifikaatti ja avain
     - MQTT tiedostolle antaa tarvittavat sertifikaatit ja avaimet suojattuun MQTT yhdistämiseen
     - Luoda db.json tiedosto jossa tarvittavat käyttäjä ja salasana tietokannan yhdistämiseen
+    - muuttaa tarvittavat tietokannan, email ja IBM bucket tiedot cloud funktioihin
 
 2. Käynnistäminen
 
-    node server/www.js
+    - aja tietokanta cloudissa tai locaalisti
+    - aja MQTT client cloudissa tai locaalisti komennolla node mqtt.js
 
-3. Avaa selain ja siirry osoitteeseen https://localhost:3000
+3. Testaa IBM Cloud funktiot selaimessa tai POSTMAN sovelluksessa
 
 ## Toiminnot
 
 - Kontrolloi tietokantaa POSTMAN pyyntöjen avulla
 - Hae parkkihallien tiedot ja avointen paikkojen määrä
-- Hae käyttäjän varaukset rekisterillä
+- Hae käyttäjän varaukset
 - Hae parkkihallin parkkien tila
-- Varaa parkki ruutu
-- Tarkistaa käyttämättömien varausten poistamisen
+- Varaa parkki ruutu tietylle aika välille
+- Varauksien ajan seuranta automaattisesti
+- Vapautta varatun ajan
+- Admin poistaa, muuttaa, hakee ja lisää uusia paikkoja, parkkeja, varauksia
 - Rekisteröi käyttäjä
-- Kirjaudu sisään käyttäjällä
+- Lisää kuva käyttäjälle valmiiksi olevista kuvista
+- Muuta käyttäjän tietoja
+- Kirjaudu sisään käyttäjällä tai adminilla
+- 2FA kirjautuminen
 
 ## Teknologiat
 
 - JavaScript
+- Node.js
+- SQL
+- IBM Cloud funktiot
+- IBM Cloud Bucket
+- AWS SQL tietokanta
 
 ## Käytetyt Node.js kirjastot
 
-- Body-parser
-- Cors
 - Debug
 - Express
 - MQTT

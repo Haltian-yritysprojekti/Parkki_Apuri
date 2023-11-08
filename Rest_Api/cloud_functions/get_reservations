@@ -1,0 +1,24 @@
+const mysql = require('mysql');
+  
+  //Creating database connection
+  const con = mysql.createPool({
+  host     : ,  //Host url
+  user     : ,  //Username
+  password : ,  //Password
+  port     : ,  //Port
+  database :    //Database name
+});
+
+function main(params) {
+    //Getting users reservations
+    return new Promise(function(resolve,reject){
+        con.query('select * from Varaukset where User_userid=?',[params.userid],function(err,result){
+            if(err){
+                reject({reject:err})
+            }
+            else{
+                resolve({result})
+            }
+        })
+    })
+}
