@@ -1,120 +1,230 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Reservation.css';
+import parkkilogomuokattu from './images/parkkilogomuokattu.png';
 
-export default function Reservation () {
+export default function Reservation() {
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [availableSpots, setAvailableSpots] = useState([]);
+  const [selectedSpot, setSelectedSpot] = useState('');
+  const [reservationTime, setReservationTime] = useState(0);
+  const [userReservations, setUserReservations] = useState([]);
+  const [parkingSpot, setParkingSpot] = useState('');
+  const [error, setError] = useState(null);
 
-  let navigate = useNavigate();
+  // Hakee parkkisijainnit sivun ladatessa
+  useEffect(() => {
+    axios.get('https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-locations.json')
+      .then((response) => {
+        setLocations(response.data.result);
+      })
+      .catch((error) => {
+        setError('Error fetching parking locations: ' + error.message);
+      });
+  }, []);
 
-  const [ parkingSpot, setParkingSpot ] = useState('');
-  const [ currentPage, setCurrentPage ] = useState(1);
-  const [ spots, setSpots ] = useState(Array(30).fill(false));
-  const [ selectedSpot, setSelectedSpot ] = useState('');
-
-  const handleSpotClick = (spotNumber) => {
-    setParkingSpot(spotNumber);
-    setSelectedSpot(spotNumber);
-  };
-
-  // handlePageChange säätelee nykyistä sivua, mistä valita paikka
-  const handlePageChange = (direction) => {
-    if (direction === 'prev' && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    } else if (direction === 'next' && currentPage < 3) {
-      setCurrentPage(currentPage + 1);
+  // Hakee parkkipaikat kun nappia painetaan sivulla
+  useEffect(() => {
+    if (selectedLocation) {
+      axios.get(`https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-slots.json?id=${selectedLocation}`)
+        .then((response) => {
+          setAvailableSpots(response.data.result);
+        })
+        .catch((error) => {
+          setError('Error fetching available spots: ' + error.message);
+        });
     }
+  }, [selectedLocation]);
+
+  // Hakee käyttäjän varaukset
+  useEffect(() => {
+    const userId = localStorage.getItem("userid");
+    if (userId) {
+      axios.get(`https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-reservation.json?userid=${userId}`)
+        .then((response) => {
+          setUserReservations(response.data.result);
+        })
+        .catch((error) => {
+          setError('Error fetching user reservations: ' + error.message);
+        });
+    }
+  }, []);
+
+  const handleLocationClick = (location) => {
+    setSelectedLocation(location);
+    setSelectedSpot('');
   };
 
-  // reserve ottaa parametrit 'id' sekä 'rekisteri' ja syöttää ne.
-  const reserve = () => {
+  const handleSpotClick = (spot) => {
+    setParkingSpot(spot);
+    setSelectedSpot(spot);
+  };
+
+  // Luo varauksen
+  const makeReservation = () => {
+    if (!parkingSpot || !reservationTime) {
+      setError('Please select a parking spot and reservation time.');
+      return;
+    }
+  
+    const userId = localStorage.getItem("userid");
+    const idParkit = parkingSpot;
+
+      const startTime = new Date();
+      startTime.setHours(startTime.getHours() + 2);
+      const formattedStartTime = startTime.toISOString().substr(11, 8);
+    
+    const endTime = new Date();
+    endTime.setHours(endTime.getHours() + parseInt(reservationTime) + 2);
+    const formattedEndTime = `${endTime.toISOString().substr(11, 8)}`;
+  
     const rekisteri = localStorage.getItem("rekisteri");
-    axios({
-        method: "put",
-        data: {
-            id: parkingSpot,
-            rekisteri: rekisteri,
-        },
-        url: "https://13.51.255.38:3000/",
+    const sijainti = selectedLocation;
+  
+    axios.post('https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/add-reservation.json', {
+      userid: userId,
+      idParkit: idParkit,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
+      rekisteri: rekisteri,
+      sijainti: sijainti,
     })
-    .then((res) => {
-        localStorage.setItem("id", parkingSpot);
-        navigate('/');
-    });
+      .then((response) => {
+        if (response.data.result === 'successful') {
+          // Onnistunut varaus
+          updateUserReservations();
+          setError(null);
+          setParkingSpot('');
+          setSelectedSpot('');
+        } else {
+          setError('Reservation failed. Spot might be already reserved.');
+        }
+      })
+      .catch((error) => {
+        setError('Error making reservation: ' + error.message);
+      });
   };
 
-  const renderSpots = () => {
-    let spotsPerPage = 10;
-    let start = (currentPage - 1) * spotsPerPage;
-    let end = start + spotsPerPage;
-    let spotsToRender = spots.slice(start, end);
+  const updateUserReservations = () => {
+    const userId = localStorage.getItem("userid");
+    axios.get(`https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/get-reservation.json?userid=${userId}`)
+      .then((response) => {
+        setUserReservations(response.data.result);
+      })
+      .catch((error) => {
+        setError('Error updating user reservations: ' + error.message);
+      });
+  };
 
-    return spotsToRender.map((isReserved, index) => {
-      let spotNumber = start + index + 1;
-      let spotClass = isReserved ? 'reservedSpot' : 'freeSpot';
-      if (selectedSpot === spotNumber) {
-        spotClass += ' selectedSpot';
-      }
-      let spotText = isReserved ? 'Varattu' : spotNumber;
+  const handleReservationDelete = (reservationId) => {
+    axios.post('https://eu-de.functions.appdomain.cloud/api/v1/web/ff38d0f2-e12e-497f-a5ea-d8452b7b4737/Parkki-apuri/delete-reservation.json', {
+      id: reservationId,
+    })
+      .then((response) => {
+        if (response.data.result === 'successful') {
+          console.log("Onnistuneesti poistettiin varaus")
+          // Poistettu varaus onnistuneesti
+          updateUserReservations();
+          setError(null);
+          window.location.reload();
+        } else {
+          setError('Error deleting reservation.');
+          console.log("Varauksen poisto epäonnistui.")
+        }
+      })
+      .catch((error) => {
+        setError('Error deleting reservation: ' + error.message);
+      });
+  };
 
-      return (
-        <div
-          className={`spotBox ${spotClass}`}
-          key={`spot-${spotNumber}`}
-          onClick={() => handleSpotClick(spotNumber)}
-        >
-          {spotText}
-        </div>
-      );
-    });
+  const handleDecreaseHour = () => {
+    setReservationTime((prevTime) => Math.max(prevTime - 1, 0));
   };
   
+  const handleIncreaseHour = () => {
+    setReservationTime((prevTime) => Math.min(prevTime + 1, 24));
+  };
 
   return (
-    <div className="reservationContainer">
-      <div className="spotListContainer">
-        <div className="spotListTitle">Valitse autopaikka:</div>
-        <div className="spotList">
-          <div className="hallSelector">
-            <div
-              className={`hallArrow ${currentPage === 1 ? 'disabled' : ''}`}
-              onClick={() => handlePageChange('prev')}
-            >
-              &lt;
-            </div>
-            <div className={`hallNumber ${currentPage === 1 ? 'selectedHallNumber' : ''}`}>
-              1
-            </div>
-            <div
-              className={`hallNumber ${currentPage === 2 ? 'selectedHallNumber' : ''}`}
-            >
-              2
-            </div>
-            <div
-              className={`hallNumber ${currentPage === 3 ? 'selectedHallNumber' : ''}`}
-            >
-              3
-            </div>
-            <div
-              className={`hallArrow ${currentPage === 3 ? 'disabled' : ''}`}
-              onClick={() => handlePageChange('next')}
-            >
-              &gt;
-            </div>
-          </div>
-          <div className="spotsContainer">{renderSpots()}</div>
+    <div className="reservation-container">
+      <div className="reservation-top-right-button-container">
+      </div>
+      <img className="reservation-background-image" />
+      <div className="reservation-location-container">
+        <h2>Parkkihallit:</h2>
+        <ul>
+          {locations.map((location) => (
+            <li key={location.sijainti}>
+              <button
+                onClick={() => handleLocationClick(location.sijainti)}
+                className={location.sijainti === selectedLocation ? 'selected' : ''}
+              >
+                {location.sijainti}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="reservation-spot-container">
+        <h2>Vapaat paikat:</h2>
+        <ul>
+          {availableSpots.map((spot) => (
+            <li key={spot.idParkit}>
+              {spot.vapaa ? (
+                <button
+                  onClick={() => handleSpotClick(spot.idParkit)}
+                  className={spot.idParkit === selectedSpot ? 'selected' : ''}
+                >
+                  {spot.idParkit}
+                </button>
+              ) : (
+                <span className="reservation-unavailable-spot">{spot.idParkit}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="reservation-time-container">
+        <h2>Varauksen kesto:</h2>
+        <div className="reservation-time-controls">
+          <button onClick={handleDecreaseHour}>-1 Tunti</button>
+          <button onClick={handleIncreaseHour}>+1 Tunti</button>
+        </div>
+        <div className="reservation-selected-time">
+          {reservationTime > 0 && (
+            <p>Valittu aika: {reservationTime} Tunti(a)</p>
+          )}
         </div>
       </div>
-      <div className="reserveButtonContainer">
+      <div className="reservation-reserve-button-container">
         <button
-          onClick={reserve}
-          disabled={!parkingSpot}
-          className={`reserveButton ${!parkingSpot ? 'disabled' : ''}`}
+          onClick={makeReservation}
+          disabled={!parkingSpot || !reservationTime}
+          className={`reservation-reserve-button ${(!parkingSpot || !reservationTime) ? 'disabled' : ''}`}
         >
-          Varaa
+          Luo varaus
         </button>
+        {error && <div className="reservation-error-message">{error}</div>}
+      </div>
+      <div className="reservation-user-reservations">
+        <h2>Sinun varaukset:</h2>
+        <ul>
+          {userReservations.map((reservation) => (
+            <li key={reservation.id}>
+              <div className="reservation-details">
+                <p>Parkkihalli: {reservation.sijainti}</p>
+                <p>Parkkipaikka: {reservation.parkki}</p>
+                <p>Auto: {reservation.rekisteri}</p>
+                <p>Varaus alkoi: {reservation.startTime}</p>
+                <p>Varaus loppuu: {reservation.endTime}</p>
+                <button className="reservation-deleteButton" onClick={() => handleReservationDelete(reservation.id)}>poista varaus</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
-  
 }
