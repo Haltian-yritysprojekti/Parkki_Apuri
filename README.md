@@ -183,29 +183,51 @@ GitHub: https://github.com/RamM21
 
 ## Tarvittavat asiat
 
-- Android Studio Code
-- Android puhelin debug-moodissa ja usb-yhteydessä tietokoneeseen
-- Puhelin ja kone saman LAN-yhteyden alla
-- Asennusohjeet Rest-Api kohdasta tietokantayhteyttä varten
+- Android Studio
+- Jotta puhelimeen voi asentaa sovellus, puhelimen on oltava debug-moodissa ja usb-yhteydessä tietokoneeseen. Sovellus asentuu kun se ajetaan Android Studion sisällä.
+- Sovelluksen asennuksen jälkeen sovellusta voi käyttää kuten normaalia sovellusta.
 
 ## Teknologiat
 - Kotlin-kieli
 
 ## Käytetyt android-kirjastot
 
-- com.android.volley
-- javax.net.ssl
-- android.widget
-- android.view
+- volley
+- widget
+- androidx
+- kotlinx.coroutines
+- java
 
-## Toiminta (Mock data)
+## Toiminta 
 
-- Sovellus käynnistyy kolmen napin näkymään, jotka sisältävät API:lta luetut sijaintitiedot ja paikan tiedot.
-![Menu](https://user-images.githubusercontent.com/79058877/234205460-85808ede-57c8-46a9-8d06-2bb3aed7afbf.jpg)
-- Nappia painamalla alle tulee CardView-objecti, joka sisältää API:lta saadut parkkitiedot sijaintikohtaisesti
-![A](https://user-images.githubusercontent.com/79058877/234205817-b7db1f93-df44-4d84-beba-5d2f7e4300ab.jpg)
-- Muut napit katoavat painettaessa nappia, uudelleenpainallus ylimpään nappiin tuo takaisin menu-näkymän.
-- Näkymän voi päivittää vetämällä ylhäältä alaspäin.
+- Sovellus käynnistyy kirjautumisnäkymään, josta voidaan siirtyä rekisteröintiin tai kirjautua sisään.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/534fd017-ca3e-4950-83dd-63fe442bade8" width="270" height="585">
+
+- Käyttäjän valitessa rekisteröinnin, hän näkee rekisteröintisivun.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/345fd1c4-8c7a-4465-b9cf-0f4c7f06f693" width="270" height="585">
+
+- Jos käyttäjä on jo rekisteröitynyt, hän kirjautuu sisään aikaisemmasta kirjautumisnäkymästä. Hän saapuu päänäkymään. Päänäkymässä näkyy alasvetovalikko, kaksi kuviota ja käyttäjän sähköposti. Päänäkymää voi päivittää vetämällä näyttöä alhaalta ylöspäin.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/4d69bb29-fb0e-4810-af0c-dd8e4e9b4b80" width="270" height="585">
+
+- Käyttäjän valitessa parkkialueen alasvetovalikosta hänelle esitetään parkkipaikat valitusta parkkialueesta, paikat ovat eritelty varatuiksi, vapaiksi ja sähköpaikoiksi.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/79021fa9-d05f-4996-9892-7ce196f6fc59" width="270" height="585">
+
+- Käyttäjän valitessa vapaan parkkipaikan, hänelle avautuu varausnäkymä.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/76a20a18-ba1f-433c-aa25-2dd96abb1c23" width="270" height="585">
+
+- Käyttäjän tehdessä varauksen hän näkee varausvahvistuksen uudessa ikkunassa.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/4489e668-4b7f-4d4c-9f70-b792cccf48a1" width="270" height="585">
+
+- Käyttäjä palaa päänäkymään josta hän voi valita kahden kuvion väliltä meneekö hän katsomaan hänen tehtyjä varauksia vai päivittämään käyttäjätietojaan. 
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/21b3098a-3fad-4ffb-a57d-7023537d5f4f" width="270" height="585">
+
+- Tehtyjen varauksien näkymässä käyttäjä voi nähdä tekemänsä varaukset, ja palata päänäkymään.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/d210b290-36a8-4f76-a774-9fdfe8091990" width="270" height="585">
+
+- Käyttäjätietojen päivitysnäkymässä käyttäjälle näytetään hänen sähköposti ja rekisterinumero. Käyttäjä voi vaihtaa omia tietojaan syöttämällä uuden sähköpostin, salasanan ja rekisterinumeron. Häneltä kysytään salasana varmistuksena siitä, että hän on salasanan haltija. Päänäkymään palatessa käyttäjän sähköpostitiedot päivittyvät päänäkymän sähköpostiosioon.
+<img src="https://github.com/Haltian-yritysprojekti/Parkki_Apuri/assets/79058877/e6da08ec-8084-4719-8a01-58fbaa750b6d" width="270" height="585">
+
+
 
 ## Tekijät
 
@@ -213,11 +235,17 @@ Eliel Latvala & Lassi Tihinen
 
 Lassi Tihinen
 
-- Sovelluksen ulkoasun suunnittelu, nappien suunnittelu, parkkipaikkanäkymän suunnittelu, pääosin xml-tiedostot jotka muokkaavat sovellusnäkymää.
-- Alkuperäinen mock-data versio josta siirryttiin nykyiseen näkymään
-
+- Muiden kuin Login ja Register aktiviteettien tyylitys
+- MainActivity.kt korttinäkymässä näkyvät parkkipaikkatiedot ja niiden tyylitys
+- EditUserActivity.kt - Käyttäjätietojen päivitys
+- ReservationActivity.kt - Varauksien teko, varaukseen tarvittavien tietojen lähetys eri aktiviteeteista
+- ReservationConfirm.kt - Varauksen tietojen varmistus
+- ReservationsView.kt - Omien varauksien tarkastelu
 Eliel Latvala
 
-- Sovelluksen logiikan ja datan käsittely, pääosin MainActivity.kt
+- MainActivity.kt logiikka, alasvetovalikko
+- LoginActivity.kt, tyylitys - Kirjautuminen
+- ReservationsView.kt autettu logiikan kanssa
+- RegisterActivity.kt, tyylitys - Rekisteröinti
 
 -----------------------------
