@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Haltianexample</string>
+    <string name="bu_sijaintiA">Parkit A</string>
+    <string name="bu_sijaintiB">Parkit B</string>
+    <string name="bu_sijaintiC">Parkit C</string>
+    <string name="tv_sijaintiA">Sijainti A</string>
+    <string name="tv_sijaintiB">Sijainti B</string>
+    <string name="tv_sijaintiC">Sijainti C</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="title_activity_login">Parkkiapuri</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="bu_confirm">Tee varaus</string>
+    <string name="tv_aika">HH:mm:ss</string>
+    <string name="firmName">Parkkiapuri</string>
+    <string name="lisäys">+10</string>
+    <string name="poisto">-10</string>
+    <string name="rekisteriOtsikko">Rekisterinumero</string>
+    <string name="varausAikaOtsikko">Varausaika</string>
+    <string name="idParkitOtsikko">Valittu parkkipaikka</string>
+    <string name="bu_resConfirm">Palaa päänäkymään</string>
+    <string name="greeting">Varauksesi</string>
+    <string name="varaukset">Varaukset</string>
+    <string name="varausPoisto">Poista varaus</string>
+    <string name="xxx_123">XXX-123</string>
+    <string name="mockemail">email@email.fi</string>
+</resources>
