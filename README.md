@@ -31,11 +31,14 @@ https://parkkiapuri.onrender.com/
 
 ## Toiminnot
 
-- Valitse jokin kolmesta parkkihallista
-- Selaa eri hallien autopaikkoja (10 per sijainti)
+- Aloita aloitussivulta
+- Valitse jokin parkkihalli etusivulla
+- Selaa eri hallien autopaikkoja
 - Luo käyttäjä
 - Kirjaudu sisään käyttäjälle
-- Luo varaus halutusta paikasta
+- Muokkaa käyttäjätietoja
+- Luo varaus halutusta paikasta halutulla ajalla
+- Tarkista ongelmatilannesivu
 - Kirjaudu ulos käyttäjältä
 
 
