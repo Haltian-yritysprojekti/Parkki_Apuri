@@ -1,6 +1,8 @@
 package com.example.haltianexample
 
+import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
@@ -39,9 +42,13 @@ class EditUserActivity : AppCompatActivity() {
         val rekisteriEditText: EditText = findViewById(R.id.et_register)
         val passwordEditText: EditText = findViewById(R.id.et_password)
 
+        var updatedEmail = "empty"
+        val resultIntent = Intent()
+
         palausButton.setOnClickListener{
             finish()
         }
+
 
         val editButton: Button = findViewById(R.id.bu_editInformation)
         editButton.setOnClickListener {
@@ -74,7 +81,11 @@ class EditUserActivity : AppCompatActivity() {
                                 if (response.has("result")) {
                                     val result = response.getString("result")
                                     if (result == "successful") {
-                                        // Handle the success case
+                                        //send updated email to mainactivity
+                                        updatedEmail = emailEditText.text.toString()
+                                        resultIntent.putExtra("updatedEmail", updatedEmail)
+                                        setResult(Activity.RESULT_OK, resultIntent)
+
                                         Toast.makeText(
                                             this,
                                             "Käyttäjätiedot päivitetty onnistuneesti!",

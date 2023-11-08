@@ -1,9 +1,9 @@
 package com.example.haltianexample
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,13 +12,16 @@ import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import androidx.activity.result.contract.ActivityResultContracts
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var parkingLocation: List<TextView>
     //private lateinit var freeParkingSpots: List<TextView>
     private lateinit var locationId: TextView
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     private val combinedList = mutableListOf<String>()
 
@@ -54,9 +58,8 @@ class MainActivity : AppCompatActivity() {
 
         val userId = intent.getStringExtra("userid")
         val licensePlate = intent.getStringExtra("rekisteri")
-        val electronicMail = intent.getStringExtra("email")
+        var electronicMail = intent.getStringExtra("email")
         val salasana = intent.getStringExtra("salasana")
-
 
         val swipeRefreshLayout: SwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
 
@@ -100,6 +103,18 @@ class MainActivity : AppCompatActivity() {
             getParkingSpots(selectedLocation)
         }
 
+        //setting up ActivityResultLauncher to get result as updatedEmail from EditUserActivity
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val updatedEmail = data?.getStringExtra("updatedEmail")
+                if (updatedEmail != null) {
+                    emailTV.text = updatedEmail
+                    electronicMail = updatedEmail
+                }
+            }
+        }
+
 
         makeJsonRequest(parkingSpots)
 
@@ -119,8 +134,9 @@ class MainActivity : AppCompatActivity() {
             editIntent.putExtra("rekisteri", licensePlate)
             editIntent.putExtra("email", electronicMail)
             editIntent.putExtra("salasana", salasana)
-            startActivity(editIntent)
+            launcher.launch(editIntent)
         }
+
 
         reservationIcon.setOnClickListener{
             val resIntent = Intent(this, ReservationsView::class.java)
@@ -144,6 +160,8 @@ class MainActivity : AppCompatActivity() {
         exportIntentToFile(userId, licensePlate, electronicMail)
 
     }
+
+
 
     private fun getParkingSpots(selectedLocation: String) {
         val regex = Regex("sijainti [A-Z]")
