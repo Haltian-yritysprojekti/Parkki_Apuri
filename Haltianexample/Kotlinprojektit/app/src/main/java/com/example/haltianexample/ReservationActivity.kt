@@ -25,6 +25,7 @@ class ReservationActivity : AppCompatActivity() {
     private var userId: String? = null
     private var licensePlate: String? = null
     private var electronicMail : String? = null
+    private var hack: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +83,7 @@ class ReservationActivity : AppCompatActivity() {
         ajanLisays.setOnClickListener{
             vaihtelevaAika.add(Calendar.MINUTE,10)
             updateVarausAika()
+            hack = true
         }
 
         ajanPoisto.setOnClickListener {
@@ -117,7 +119,7 @@ class ReservationActivity : AppCompatActivity() {
 
             val request = JsonObjectRequest(Request.Method.POST, serverUrl, reservationObject,
                 { response ->
-                    // Handle the response here
+
                     try {
                         when (response.getString("result")) {
                             "successful" -> {
@@ -128,37 +130,39 @@ class ReservationActivity : AppCompatActivity() {
                                 confirmIntent.putExtra("rekisteri", licensePlate)
                                 confirmIntent.putExtra("sijainti", sijainti)
                                 startActivity(confirmIntent)
-                                //finish closes the ReservationActivity
                                 finish()
                                 Toast.makeText(applicationContext, "Reservation successful", Toast.LENGTH_SHORT).show()
                             }
                             "spot reserved already" -> {
                                 val errorObject = response.getJSONObject("result")
                                 val errorMessage = errorObject.getString("error")
-                                // Reservation failed with a specific error message
+
                                 Toast.makeText(applicationContext, errorMessage, Toast.LENGTH_SHORT).show()
                             }
                             else -> {
-                                // Reservation failed with an unknown error
+
                                 Toast.makeText(applicationContext, "Reservation failed with an error", Toast.LENGTH_SHORT).show()
                             }
                         }
                     } catch (e: JSONException) {
-                        // Handle JSON parsing error
+
                         Toast.makeText(applicationContext, "Failed to parse server response", Toast.LENGTH_SHORT).show()
                     }
                 },
                 { error ->
-                    // Handle the request error
+
                     Toast.makeText(applicationContext, "Reservation request failed", Toast.LENGTH_SHORT).show()
                 }
             )
 
-            // Add the request to the request queue
             requestQueue.add(request)
         }
 
         confirmButton.setOnClickListener{
+            if (!hack){
+                Toast.makeText(applicationContext, "Muista lisätä varausaikaa!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             sendReservationToServer()
         }
     }
@@ -188,7 +192,6 @@ class ReservationActivity : AppCompatActivity() {
             return lines
         } catch (e: Exception) {
             e.printStackTrace()
-            // Handle errors if necessary
         }
 
         return null
@@ -204,14 +207,3 @@ class ReservationActivity : AppCompatActivity() {
 
 
 
-/*
-          data class Reservation(
-            val userid: String,
-            val idParkit: Int,
-            val startTime: Long,
-            val endTime: Long,
-            val rekisteri: String,
-            val sijainti: String
-        )
-
- */
